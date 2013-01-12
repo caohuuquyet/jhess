@@ -9,4 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>ontology</param-name>
+    <param-value>/rdf/hess.ttl</param-value>
+  </context-param>
+  <context-param>
+    <param-name>rules</param-name>
+    <param-value>/rules/hess.rules</param-value>
+  </context-param>
+  <listener>
+    <listener-class>eu.tsp.hess.SmartHomeContextListener</listener-class>
+  </listener>
 </web-app>
