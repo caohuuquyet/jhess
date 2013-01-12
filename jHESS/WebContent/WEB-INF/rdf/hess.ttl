@@ -1,0 +1,138 @@
+@prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@base <http://www.hess.tsp.eu/2013/1/Maisel.owl> .
+
+<http://www.hess.tsp.eu/2013/1/Maisel.owl> rdf:type owl:Ontology ;
+                                               rdfs:comment "The Smart Homes Ontology (MAISEL building)"^^xsd:string ;
+                                               owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+### Location 
+:Location rdf:type owl:Class; rdfs:subClassOf owl:Thing.
+
+### Resident
+:Resident rdf:type owl:Class; rdfs:subClassOf owl:Thing.
+
+### TemporalMeasurement
+:TemporalMeasurement rdf:type owl:Class; rdfs:subClassOf owl:Thing.
+
+### Device
+:Device rdf:type owl:Class; rdfs:subClassOf owl:Thing.
+
+### Meter
+:Meter rdf:type owl:Class ; rdfs:subClassOf :Device.
+
+### Refrigerator
+:Refrigerator rdf:type owl:Class ; rdfs:subClassOf :Device.
+
+### HeatingDevice
+:HeatingDevice rdf:type owl:Class ; rdfs:subClassOf :Device.
+
+### ComputingDevice
+:ComputingDevice rdf:type owl:Class ; rdfs:subClassOf :Device.
+
+### LightingDevice
+:LightingDevice rdf:type owl:Class ; rdfs:subClassOf :Device.
+
+### Sensor
+:Sensor rdf:type owl:Class ; rdfs:subClassOf :Device.
+
+### TemperatureSensor
+:TemperatureSensor rdf:type owl:Class ; rdfs:subClassOf :Sensor.
+
+### PresenceSensor
+:PresenceSensor rdf:type owl:Class ; rdfs:subClassOf :Sensor.
+
+### LightSensor
+:LightSensor rdf:type owl:Class ; rdfs:subClassOf :Sensor.
+
+################################################################# 
+#    Properties
+#################################################################
+
+### hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Device
+                                     :Location
+									 :Resident
+                                   )
+                     ] .
+
+### hasUnit
+:hasUnit rdf:type owl:DatatypeProperty;
+		  rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Device
+                                     :Location
+									 :Resident
+                                   )
+                     ] .
+
+### hasValue
+:hasValue rdf:type owl:DatatypeProperty;
+		  rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Device
+                                     :Location
+									 :Resident
+                                   )
+                     ] .
+### locatedAt
+:locatedAt rdf:type owl:ObjectProperty; rdfs:domain :Device; rdfs:range :Location.
+
+#################################################################
+#    Individuals
+#################################################################
+
+### Room
+:room4688 rdf:type :Location , owl:NamedIndividual;
+          :hasName "Room 4688"^^xsd:string.
+
+### Resident
+:quyet rdf:type :Resident, owl:NamedIndividual;
+		:hasName "Quyet Cao"^^xsd:string;
+		:hasValue "0"^^xsd:integer.
+
+### Meter
+:meter_1 rdf:type :Meter, owl:NamedIndividual; :locatedAt :room4688; :hasValue "0"^^xsd:integer.
+	   
+### Refrigerator
+:refrigerator_1 rdf:type :Refrigerator, owl:NamedIndividual; :locatedAt :room4688 ; :hasValue "OFF"^^xsd:string.
+
+### HeatingDevice
+:heating_1 rdf:type :HeatingDevice, owl:NamedIndividual; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+:heating_2 rdf:type :HeatingDevice, owl:NamedIndividual; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+
+### ComputingDevice
+:labtop_1 rdf:type :ComputingDevice, owl:NamedIndividual; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+:ipad_1 rdf:type :ComputingDevice, owl:NamedIndividual; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+
+### LightingDevice
+:lamp_1 rdf:type :LightingDevice, owl:NamedIndividual; :hasName "Sleep Light"; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+:lamp_2 rdf:type :LightingDevice, owl:NamedIndividual; :hasName "Study Light"; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+:lamp_3 rdf:type :LightingDevice, owl:NamedIndividual; :hasName "Bathroom Light"; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+:lamp_4 rdf:type :LightingDevice, owl:NamedIndividual; :hasName "Enter Light"; :locatedAt :room4688; :hasValue "OFF"^^xsd:string.
+
+### TemperatureSensor
+:temperatureSensor_1 rdf:type :TemperatureSensor, owl:NamedIndividual; :locatedAt :room4688; :hasValue "0"^^xsd:integer; :hasUnit "Degree Celsius"^^xsd:string .
+
+### PresenceSensor
+:presenceSensor_1 rdf:type :PresenceSensor, owl:NamedIndividual; :locatedAt :room4688; :hasValue "0"^^xsd:integer; :hasUnit "People"^^xsd:string .
+
+### LightSensor
+:lightSensor_1 rdf:type :LightSensor, owl:NamedIndividual; :locatedAt :room4688; :hasValue "Low"^^xsd:string.
+
+#################################################################
+# General axioms
+#################################################################
+
+###  Generated by the OWL API (version 3.3.1957) http://owlapi.sourceforge.net
+

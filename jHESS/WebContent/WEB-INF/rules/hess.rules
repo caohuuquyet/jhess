@@ -1,0 +1,19 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+
+
+@prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
+
+
+[LightOFF:
+	( ?lamp	rdf:type 	:LightingDevice )
+	( ?lamp	:hasValue	"OFF"^^xsd:string )
+	noValue(?c :ruleFiredFor :SemanticWeb)
+->
+	remove(1)
+	(?lamp :hasValue	"ON"^^xsd:string )
+	(?c :ruleFiredFor :SemanticWeb)
+	hide(:ruleFiredFor)			
+]
