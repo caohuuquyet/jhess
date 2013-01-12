@@ -7,6 +7,8 @@
 <title>jHESS index</title>
 </head>
 <body>
-jHESS index
+jHESS index <br/>
+
+Click <a href="SmartHomeAction">here</a> to forward!
 </body>
 </html>
