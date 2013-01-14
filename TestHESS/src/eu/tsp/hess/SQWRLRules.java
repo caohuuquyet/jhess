@@ -1,5 +1,6 @@
 package eu.tsp.hess;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 import com.hp.hpl.jena.rdf.model.InfModel;
@@ -23,26 +24,33 @@ import org.protege.swrltab.p3.P3SWRLRuleEngineFactory;
 import edu.stanford.smi.protegex.owl.ProtegeOWL;
 import edu.stanford.smi.protegex.owl.jena.JenaOWLModel;
 import edu.stanford.smi.protegex.owl.model.OWLModel;
+import edu.stanford.smi.protegex.owl.repository.impl.LocalFolderRepository;
 
 public class SQWRLRules {
 
 	public static void main(String[] args) { 
 
-		String sqwrl = "Location(?l) -> sqwrl:select(?l)";
+		String sqwrl = "Location(?p)-> sqwrl:select(?p)";
+		
+		 String uri = "file:/C:/Users/quyet_ca.MICRO.000/workspace/TestHESS/rdf/hess2.ttl";
+			  
 
-		String uri = "C:/Users/quyet_ca.MICRO.000/workspace/TestHESS/rdf/hess2.ttl"; 
-
-		try {
-			FileInputStream is;
-            
-            is = new FileInputStream(uri);
-           
-            JenaOWLModel owlModel = ProtegeOWL.createJenaOWLModelFromInputStream(is);
-			System.out.print("D" + owlModel);
+		
+		try {       
+			OWLModel owlModel = ProtegeOWL.createJenaOWLModelFromURI(uri);
+			LocalFolderRepository rep = new LocalFolderRepository(new
+			File("C://Users//quyet_ca.MICRO.000//workspace//TestHESS//rdf"),true);
+			owlModel.getRepositoryManager().addGlobalRepository(rep);
+			owlModel.getNamespaceManager().setDefaultNamespace(uri);
+		
+              
+			System.out.print("D:" + owlModel);
 			
 			SQWRLQueryEngine queryEngine = P3SQWRLQueryEngineFactory.create(owlModel);
+			
+			queryEngine.createSQWRLQuery("Query-1",sqwrl);
 
-			Result result = queryEngine.runSQWRLQuery("Query-1",sqwrl);
+			Result result = queryEngine.runSQWRLQuery("Query-1");
 
 			while (result.hasNext()) {
 				LiteralValue nameValue = result.getLiteralValue("?l");
@@ -53,6 +61,7 @@ public class SQWRLRules {
 				result.next();
 			}
 		} catch (Exception e) {
+			System.out.print(e.getMessage());
 
 		}
 
