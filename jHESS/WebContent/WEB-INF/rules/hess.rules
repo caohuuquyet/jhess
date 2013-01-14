@@ -6,14 +6,14 @@
 
 @prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
 
-
-[LightOFF:
-	( ?lamp	rdf:type 	:LightingDevice )
-	( ?lamp	:hasValue	"OFF"^^xsd:string )
-	noValue(?c :ruleFiredFor :SemanticWeb)
+[VentOFF:
+	( ?humidity	rdf:type :HumiditySensor )
+	( ?humidity	:hasCurrentHumidityValue ?value )
+	greaterThan(?value, 0)
+	( ?vent	rdf:type :Vent )
+	( ?vent	:hasCurrentDeviceStatus "ON"^^xsd:string )
+	
 ->
-	remove(1)
-	(?lamp :hasValue	"ON"^^xsd:string )
-	(?c :ruleFiredFor :SemanticWeb)
-	hide(:ruleFiredFor)			
+	(?vent	:hasCurrentDeviceStatus "OFF"^^xsd:string )
+	
 ]
