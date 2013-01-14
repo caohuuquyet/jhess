@@ -1,0 +1,33 @@
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+
+@prefix dc:     <http://purl.org/dc/elements/1.1/> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+
+@prefix ex:	 <http://www.example.org/> .
+@prefix act:	<http://www.activity.com/> .
+
+
+ex:bill		foaf:name	"Bill" .
+ex:john		foaf:name	"John" .
+ex:sara		foaf:name	"Sara" .
+ex:mark		foaf:name	"Mark" .
+
+ex:bill		act:hasChild	ex:john .
+ex:john		act:hasWife	ex:sara .
+ex:sara		act:hasChild	ex:mark .
+ex:john		act:hasChild	ex:mark .
+
+ex:bill		act:read	ex:harryPotter .
+
+ex:harryPotter	dc:title	"Harry Potter and bla bla bla" ;
+		dc:creator	ex:jk_rowling .
+
+ex:narnia	dc:title	"Narnia" ;
+		dc:creator	ex:cs_lewis .
+
+act:hasChild	rdf:type	owl:ObjectProperty .
+act:hasParent	rdf:type	owl:ObjectProperty .
+act:hasChild	owl:inverseOf	act:hasParent .
+act:hasParent	owl:inverseOf	act:hasChild .

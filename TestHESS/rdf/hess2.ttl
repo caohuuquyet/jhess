@@ -1,0 +1,342 @@
+@prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@base <http://www.hess.tsp.eu/2013/1/Maisel.owl> .
+
+<http://www.hess.tsp.eu/2013/1/Maisel.owl> rdf:type owl:Ontology ;
+                                               rdfs:comment "The Smart Homes Ontology (MAISEL building)"^^xsd:string ;
+                                               owl:versionInfo "1.0"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+### Device
+:Device a owl:Class.
+
+:Meter rdfs:subClassOf :Device.
+
+:Sensor rdfs:subClassOf :Device.
+:PresenceSensor rdfs:subClassOf :Sensor. 
+:HumiditySensor rdfs:subClassOf :Sensor.
+:TemperatureSensor rdfs:subClassOf :Sensor.
+
+:LightingDevice rdfs:subClassOf :Device.
+
+:Vent rdfs:subClassOf :Device.
+
+:HeatingDevice rdfs:subClassOf :Device.
+
+:ComputingDevice rdfs:subClassOf :Device.
+:Laptop rdfs:subClassOf :ComputingDevice.
+:iPad rdfs:subClassOf :ComputingDevice.
+
+:Refrigerator rdfs:subClassOf :Device.
+
+### Location
+:Location a owl:Class.
+ 
+### Resident
+:Resident a owl:Class.
+
+### CloudOfData
+:DataCloud a owl:Class. 
+
+################################################################# 
+#    Properties
+#################################################################
+# for devices
+:hasLocation a owl:ObjectProperty ;                   
+        rdfs:domain :Device;
+        rdfs:range :Location.
+		
+:hasInputPower a owl:DatatypeProperty;
+	    rdfs:domain :Device;
+		rdfs:range xsd:int.
+		
+:hasInputPowerUnit a owl:DatatypeProperty;
+	    rdfs:domain :Device;
+		rdfs:range xsd:string.
+
+:hasCurrentDeviceStatus a owl:DatatypeProperty;
+	    rdfs:domain :Device;
+		rdfs:range xsd:string.
+		
+:hasStatusStartTime a owl:DatatypeProperty;
+	    rdfs:domain :Device;
+		rdfs:range xsd:dateTime.
+
+:hasHistoryData a owl:ObjectProperty ;                   
+        rdfs:domain :Device;
+        rdfs:range :CloudOfData.
+
+# for meters
+:hasCurrentMeasureValue a owl:DatatypeProperty;
+	    rdfs:domain :Meter;
+		rdfs:range xsd:int.
+	
+:hasMeasureUnit a owl:DatatypeProperty;
+	    rdfs:domain :Meter;
+		rdfs:range xsd:string.
+		
+:isMeasuringFor a owl:ObjectProperty ;                   
+        rdfs:domain :Meter;
+        rdfs:range :Resident.
+		
+:hasMeasureStartTime a owl:DatatypeProperty ;                   
+        rdfs:domain :Meter;
+        rdfs:range xsd:dateTime.
+		
+# for temperature sensors
+:hasCurrentTemperatureValue a owl:DatatypeProperty ;                   
+        rdfs:domain :TemperatureSensor;
+        rdfs:range xsd:int.
+		
+:hasTemperatureUnit a owl:DatatypeProperty ;                   
+        rdfs:domain :TemperatureSensor;
+        rdfs:range xsd:string.		
+
+# for humidity sensors
+:hasCurrentHumidityValue a owl:DatatypeProperty ;                   
+        rdfs:domain :HumiditySensor;	
+		rdfs:range xsd:int.	
+
+:hasHumidityUnit a owl:DatatypeProperty;
+	    rdfs:domain :HumiditySensor;
+		rdfs:range xsd:string.
+		
+# for presence sensors
+:hasCurrentPresenceValue a owl:DatatypeProperty ;                 
+        rdfs:domain :PresenceSensor;
+		rdfs:range xsd:boolean.	   
+
+# for locations
+:isLocatedIn a owl:ObjectProperty ;                   
+        rdfs:domain :Location;
+        rdfs:range :Location.
+:hasTemperature a owl:ObjectProperty ;                   
+        rdfs:domain :Location;
+        rdfs:range :TemperatureSensor.
+:hasHumidity a owl:ObjectProperty ;                   
+        rdfs:domain :Location;
+        rdfs:range :HumiditySensor.
+:hasPresence a owl:ObjectProperty ;                   
+        rdfs:domain :Location;
+        rdfs:range :PresenceSensor.
+		
+#################################################################
+#    Individuals
+#################################################################
+### Current Devices 
+:d01_meter_4688 a :Meter, owl:NamedIndividual;
+       :hasLocation :4688_room;
+       :hasInputPower 10;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   :hasCurrentMeasureValue 100;
+	   :hasMeasureUnit "W"^^xsd:string;
+	   :isMeasuringFor :quyet;
+	   :hasMeasureStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   :hasHistoryData :cloud_of_data.
+	
+:d02_lightfitting_entrance a :LightingDevice, owl:NamedIndividual;
+       :hasLocation :4688_room_entrance;
+	   :hasInputPower 10;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+	   
+:d03_vent_bathroom a :Vent, owl:NamedIndividual;
+       :hasLocation :4688_room_bathroom;
+	   :hasInputPower 20;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+
+:d04_lightfitting_bathroom a :LightingDevice, owl:NamedIndividual;
+       :hasLocation :4688_room_bathroom;
+	   :hasInputPower 30;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+
+:d05_heating_bathroom a :HeatingDevice, owl:NamedIndividual;
+       :hasLocation :4688_room_bathroom;
+	   :hasInputPower 20;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+	   	   
+:d06_iPad_bedroom a :iPad, owl:NamedIndividual;
+       :hasLocation :4688_room_bedroom;
+	   :hasInputPower 110;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+	   
+
+:d07_lightfitting_bedroom a :LightingDevice, owl:NamedIndividual;
+       :hasLocation :4688_room_bedroom;
+	   :hasInputPower 10;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+	   
+
+:d08_laptop_livingroom a :Laptop, owl:NamedIndividual;
+       :hasLocation :4688_room_livingroom;
+	   :hasInputPower 110;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+	   
+
+:d09_desklamp_livingroom a :LightingDevice, owl:NamedIndividual;
+       :hasLocation :4688_room_livingroom;
+	   :hasInputPower 11;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+   
+
+:d10_refrigerator_kitchenette a :Refrigerator, owl:NamedIndividual;
+       :hasLocation :4688_room_kitchenette;
+	   :hasInputPower 110;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+	   
+
+:d11_heating_kitchenette a :HeatingDevice, owl:NamedIndividual;
+       :hasLocation :4688_room_kitchenette;
+	   :hasInputPower 10;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   :hasHistoryData :cloud_of_data.
+	   
+
+### Current Locations
+:4688_room a :Location, owl:NamedIndividual;
+	   :hasTemperature :d12_sensor_temperature.
+	   
+:4688_room_entrance a :Location, owl:NamedIndividual;
+	   :isLocatedIn :4688_room;
+	   :hasPresence :d13_sensor_presence.
+
+:4688_room_bathroom a :Location, owl:NamedIndividual;
+	   :isLocatedIn :4688_room;
+	   :hasHumidity :d14_sensor_humidity.
+	   
+:4688_room_bedroom a :Location, owl:NamedIndividual;
+	   :isLocatedIn :4688_room.
+	   
+:4688_room_livingroom a :Location, owl:NamedIndividual;
+	   :isLocatedIn :4688_room.
+	   
+:4688_room_kitchentte a :Location, owl:NamedIndividual;
+	   :isLocatedIn :4688_room.
+
+### Current Sensors
+:d12_sensor_temperature a :TemperatureSensor, owl:NamedIndividual;
+	   :hasLocation :4688_room;
+	   :hasInputPower 10;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   :hasCurrentTemperatureValue 10;
+	   :hasTemperatureUnit "C"^^xsd:string;
+	   
+	   :hasHistoryData :cloud_of_data.
+	   
+	   
+:d13_sensor_presence a :PresenceSensor, owl:NamedIndividual;
+	   :hasLocation :4688_room_entrance;
+	   :hasInputPower 10;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   :hasCurrentPresenceValue "false"^^xsd:boolean;
+	   
+	   :hasHistoryData :cloud_of_data.
+	   
+:d14_sensor_humidity a :HumiditySensor, owl:NamedIndividual;
+	   :hasLocation :4688_room_bathroom;
+	   :hasInputPower 10;
+	   :hasInputPowerUnit "W"^^xsd:string;
+	   :hasCurrentDeviceStatus "ON"^^xsd:string;
+	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   :hasCurrentHumidityValue 10;
+	   :hasHumidityUnit "%"^^xsd:string;
+	   
+	   :hasHistoryData :cloud_of_data.
+	   
+:cloud_of_data a :DataCloud, owl:NamedIndividual.	
+:quyet a :Resident, owl:NamedIndividual.
+
+#################################################################
+# SPARQL
+#################################################################
+
+#1.
+#PREFIX : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> 
+#PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+#SELECT ?id ?ip ?status
+#WHERE { 
+#?id a :Device.
+#?id :hasInputPower ?ip.
+#?id :hasCurrentDeviceStatus ?status
+#}
+#ORDER BY ASC(?id)
+
+#2.
+#SELECT (SUM(?consumption) AS ?total)
+#WHERE 
+#{ 
+#?name a :Device. 
+#?name :hasCurrentDeviceStatus "ON"^^xsd:string.
+#?name :hasInputPower ?consumption.
+#}
+
+#3.
+#SELECT ?id ?name ?status ?location ?inputpower ?sensor ?sensor_value
+#WHERE 
+#{ 
+#?name a :Device. ?name :hasID ?id. ?name :hasLocation ?location. ?name :hasInputPower ?inputpower. 
+#OPTIONAL {?name :hasCurrentDeviceStatus ?status.}
+#OPTIONAL {?location :hasSensor ?sensor. ?sensor :hasValue ?sensor_value.}
+#FILTER (?inputpower > 1)
+#}
+#ORDER BY ASC(?id)
+
+#################################################################
+# SQWRL, SWRL
+#################################################################
+
+#################################################################
+# JenaRules
+#################################################################
+
+
+
+###  Generated by the OWL API (version 3.3.1957) http://owlapi.sourceforge.net
+

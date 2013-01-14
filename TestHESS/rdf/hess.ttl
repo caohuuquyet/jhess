@@ -1,0 +1,382 @@
+@prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@base <http://www.hess.tsp.eu/2013/1/Maisel.owl> .
+
+<http://www.hess.tsp.eu/2013/1/Maisel.owl> rdf:type owl:Ontology ;
+                                           
+                                           rdfs:comment "The Smart Homes Ontology (MAISEL building)"^^xsd:string ;
+                                           
+                                           owl:versionInfo "1.0"@en .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#locatedAt
+
+:locatedAt rdf:type owl:ObjectProperty ;
+           
+           rdfs:domain :Device ;
+           
+           rdfs:range :Location .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#hasName
+
+:hasName rdf:type owl:DatatypeProperty ;
+         
+         rdfs:domain [ rdf:type owl:Class ;
+                       owl:unionOf ( :Device
+                                     :Location
+                                     :Resident
+                                   )
+                     ] .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#hasUnit
+
+:hasUnit rdf:type owl:DatatypeProperty .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#hasValue
+
+:hasValue rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#ComputingDevice
+
+:ComputingDevice rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :Device .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#Device
+
+:Device rdf:type owl:Class ;
+        
+        rdfs:subClassOf owl:Thing .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#HeatingDevice
+
+:HeatingDevice rdf:type owl:Class ;
+               
+               rdfs:subClassOf :Device .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#LightSensor
+
+:LightSensor rdf:type owl:Class ;
+             
+             rdfs:subClassOf :Sensor .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#LightingDevice
+
+:LightingDevice rdf:type owl:Class ;
+                
+                rdfs:subClassOf :Device .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#Location
+
+:Location rdf:type owl:Class ;
+          
+          rdfs:subClassOf owl:Thing .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#Meter
+
+:Meter rdf:type owl:Class ;
+       
+       rdfs:subClassOf :Device .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#PresenceSensor
+
+:PresenceSensor rdf:type owl:Class ;
+                
+                rdfs:subClassOf :Sensor .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#Refrigerator
+
+:Refrigerator rdf:type owl:Class ;
+              
+              rdfs:subClassOf :Device .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#Resident
+
+:Resident rdf:type owl:Class ;
+          
+          rdfs:subClassOf owl:Thing .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#Sensor
+
+:Sensor rdf:type owl:Class ;
+        
+        rdfs:subClassOf :Device .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#TemperatureSensor
+
+:TemperatureSensor rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf :Sensor .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#TemporalMeasurement
+
+:TemporalMeasurement rdf:type owl:Class ;
+                     
+                     rdfs:subClassOf owl:Thing .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#heating_1
+
+:heating_1 rdf:type :HeatingDevice ,
+                    owl:NamedIndividual ;
+           
+           :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#heating_2
+
+:heating_2 rdf:type :HeatingDevice ,
+                    owl:NamedIndividual ;
+           
+           :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#ipad_1
+
+:ipad_1 rdf:type :ComputingDevice ,
+                 owl:NamedIndividual ;
+        
+        :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#labtop_1
+
+:labtop_1 rdf:type :ComputingDevice ,
+                   owl:NamedIndividual ;
+          
+          :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#lamp_1
+
+:lamp_1 rdf:type :LightingDevice ,
+                 owl:NamedIndividual ;
+        
+        :hasName "Sleep Light" ;
+        
+        :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#lamp_2
+
+:lamp_2 rdf:type :LightingDevice ,
+                 owl:NamedIndividual ;
+        
+        :hasName "Study Light" ;
+        
+        :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#lamp_3
+
+:lamp_3 rdf:type :LightingDevice ,
+                 owl:NamedIndividual ;
+        
+        :hasName "Bathroom Light" ;
+        
+        :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#lamp_4
+
+:lamp_4 rdf:type :LightingDevice ,
+                 owl:NamedIndividual ;
+        
+        :hasName "Enter Light" ;
+        
+        :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#lightSensor_1
+
+:lightSensor_1 rdf:type :LightSensor ,
+                        owl:NamedIndividual ;
+               
+               :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#meter_1
+
+:meter_1 rdf:type :Meter ,
+                  owl:NamedIndividual ;
+         
+         :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#presenceSensor_1
+
+:presenceSensor_1 rdf:type :PresenceSensor ,
+                           owl:NamedIndividual ;
+                  
+                  :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#quyet
+
+:quyet rdf:type :Resident ,
+                owl:NamedIndividual ;
+       
+       :hasName "Quyet Cao"^^xsd:string .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#refrigerator_1
+
+:refrigerator_1 rdf:type :Refrigerator ,
+                         owl:NamedIndividual ;
+                
+                :locatedAt :room4688 .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#room4688
+
+:room4688 rdf:type :Location ,
+                   owl:NamedIndividual ;
+          
+          :hasName "Room 4688"^^xsd:string .
+
+
+
+###  http://www.hess.tsp.eu/2013/1/Maisel.owl#temperatureSensor_1
+
+:temperatureSensor_1 rdf:type :TemperatureSensor ,
+                              owl:NamedIndividual ;
+                     
+                     :locatedAt :room4688 .
+
+
+
+
+
+#################################################################
+#
+#    Rules
+#
+#################################################################
+
+
+<urn:swrl#lamp> rdf:type swrl:Variable .
+[ rdf:type swrl:Imp ;
+  swrl:head [ rdf:type swrl:AtomList ;
+              rdf:rest rdf:nil ;
+              rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                          swrl:argument2 "ON" ;
+                          swrl:propertyPredicate :hasName ;
+                          swrl:argument1 <urn:swrl#lamp>
+                        ]
+            ] ;
+  swrl:body [ rdf:type swrl:AtomList ;
+              rdf:rest rdf:nil ;
+              rdf:first [ rdf:type swrl:ClassAtom ;
+                          swrl:classPredicate :LightingDevice ;
+                          swrl:argument1 <urn:swrl#lamp>
+                        ]
+            ]
+] .
+
+###  Generated by the OWL API (version 3.3.1957) http://owlapi.sourceforge.net
+

@@ -1,0 +1,30 @@
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+
+@prefix dc:     <http://purl.org/dc/elements/1.1/> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+
+@prefix ex:	 <http://www.example.org/> .
+@prefix act:	<http://www.activity.com/> .
+
+[GrandParent:
+	(	?a	act:hasChild		?b	)
+	(	?b	act:hasChild		?c	)
+->
+	(	?a	act:hasGrandChild		?c	)
+]
+
+[Book:
+	(	?x	act:read		?y	)
+->
+	(	?y	rdf:typeOf		ex:Book	)
+]
+
+
+[Writer:
+	(	?book	dc:creator		?x	)
+->
+	(	?x	rdf:typeOf		ex:Writer	)
+]
+

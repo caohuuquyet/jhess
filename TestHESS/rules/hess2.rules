@@ -1,0 +1,33 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
+
+
+
+[VentOFF2:
+	( ?h	rdf:type :HumiditySensor )
+	( ?h	:hasCurrentHumidityValue 10 )
+	( ?vent	rdf:type :Vent )
+	( ?vent	:hasInputPower 20 )
+	
+->
+	(?vent	:hasInputPower 40 )
+	(?vent	:hasInputPowerUnit "Whh"^^xsd:string )
+	
+]
+
+
+[VentOFF:
+	( ?humidity	a :HumiditySensor )
+	( ?humidity	:hasCurrentHumidityValue 10)
+	( ?vent	a :Vent )
+	( ?vent	:hasCurrentDeviceValue "ON"^^xsd:string )
+	noValue(?c :ruleFiredFor :SemanticWeb)
+->
+	remove(4)
+	(?vent	:hasCurrentDeviceValue "OFF"^^xsd:string )
+	(?c :ruleFiredFor :SemanticWeb)
+	hide(:ruleFiredFor)			
+]
