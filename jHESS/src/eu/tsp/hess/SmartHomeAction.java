@@ -25,6 +25,20 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import com.hp.hpl.jena.util.FileUtils;
+import edu.stanford.smi.protegex.owl.ProtegeOWL;
+import edu.stanford.smi.protegex.owl.jena.*;
+import edu.stanford.smi.protegex.owl.swrl.exceptions.SWRLRuleEngineException;
+import edu.stanford.smi.protegex.owl.swrl.parser.SWRLParseException;
+import edu.stanford.smi.protegex.owl.swrl.sqwrl.DataValue;
+import edu.stanford.smi.protegex.owl.swrl.sqwrl.IndividualValue;
+import edu.stanford.smi.protegex.owl.swrl.sqwrl.SQWRLQueryEngine;
+import edu.stanford.smi.protegex.owl.swrl.sqwrl.SQWRLQueryEngineFactory;
+import edu.stanford.smi.protegex.owl.swrl.sqwrl.SQWRLResult;
+import edu.stanford.smi.protegex.owl.swrl.sqwrl.exceptions.SQWRLException;
+
 /**
  * Servlet implementation class SmartHomeAction
  */
@@ -136,7 +150,15 @@ public class SmartHomeAction extends HttpServlet {
 	}
 	
 	private void processSQWRL(PrintWriter out, HttpServletRequest request) {
-		// TODO Auto-generated method stub
+		// TODO http://protege.cim3.net/cgi-bin/wiki.pl?SQWRLQueryAPI
+		String sqwrl = "Location(?l) -> sqwrl:select(?l)";
+		//Creating a SQWRL Query Engine 
+		OWLModel owlModel = ... // Create using normal Protege-OWL mechanisms
+        SQWRLQueryEngine queryEngine = SQWRLQueryEngineFactory.create(owlModel); 
+		
+		//Creating and Running SQWRL Queries 
+		
+		//Processing SQWRL Query Results 
 		
 
 	}
