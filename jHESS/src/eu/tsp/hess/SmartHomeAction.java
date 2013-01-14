@@ -63,34 +63,17 @@ public class SmartHomeAction extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		
-		processRules(out, request);
-		// getResult(out, request);
+		// processSPARQL(out, request);
+		processJenaRules(out, request);
+		// processSWRLRules(out, request);
+		// processSQWRL(out, request);
 
 
 	}
 
-	private void processRules(PrintWriter out, HttpServletRequest request) {
-		// TODO Auto-generated method stub//String rdfFile
+	
 
-		String ruleFile = request.getSession().getServletContext()
-				.getAttribute("rules").toString();
-		Model model = ModelFactory.createDefaultModel();
-		Resource configuration = model.createResource();
-		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
-		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
-		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
-				configuration);
-
-		Object modelRDF = request.getSession().getServletContext()
-				.getAttribute("ontology");
-		InfModel infModel = ModelFactory.createInfModel(reasoner,
-				(Model) modelRDF);
-		infModel.prepare();
-		infModel.write(out, "N3");
-
-	}
-
-	private void getResult(PrintWriter out, HttpServletRequest request) {
+	private void processSPARQL(PrintWriter out, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		String queryString = ""
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
@@ -121,6 +104,40 @@ public class SmartHomeAction extends HttpServlet {
 		}
 
 		qe.close();
+
+	}
+	
+	private void processJenaRules(PrintWriter out, HttpServletRequest request) {
+		// TODO Auto-generated method stub//String rdfFile
+
+		String ruleFile = request.getSession().getServletContext()
+				.getAttribute("rules").toString();
+		Model model = ModelFactory.createDefaultModel();
+		Resource configuration = model.createResource();
+		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
+		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
+		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
+				configuration);
+
+		Object modelRDF = request.getSession().getServletContext()
+				.getAttribute("ontology");
+		InfModel infModel = ModelFactory.createInfModel(reasoner,
+				(Model) modelRDF);
+		infModel.prepare();
+		infModel.write(out, "N3");
+
+	}
+	
+	
+	private void processSWRLRules(PrintWriter out, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+
+	}
+	
+	private void processSQWRL(PrintWriter out, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
 
 	}
 
