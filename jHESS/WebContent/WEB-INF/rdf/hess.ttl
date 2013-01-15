@@ -133,7 +133,7 @@
 #################################################################
 ### Current Devices 
 :d01_meter_4688 a :Meter, owl:NamedIndividual;
-       :hasLocation :4688_room;
+       :hasLocation :room_4688;
        :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -147,7 +147,7 @@
 	   :hasHistoryData :cloud_of_data.
 	
 :d02_lightfitting_entrance a :LightingDevice, owl:NamedIndividual;
-       :hasLocation :4688_room_entrance;
+       :hasLocation :room_4688_entrance;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -155,7 +155,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   
 :d03_vent_bathroom a :Vent, owl:NamedIndividual;
-       :hasLocation :4688_room_bathroom;
+       :hasLocation :room_4688_bathroom;
 	   :hasInputPower 20;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -163,7 +163,7 @@
 	   :hasHistoryData :cloud_of_data.
 
 :d04_lightfitting_bathroom a :LightingDevice, owl:NamedIndividual;
-       :hasLocation :4688_room_bathroom;
+       :hasLocation :room_4688_bathroom;
 	   :hasInputPower 30;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -171,7 +171,7 @@
 	   :hasHistoryData :cloud_of_data.
 
 :d05_heating_bathroom a :HeatingDevice, owl:NamedIndividual;
-       :hasLocation :4688_room_bathroom;
+       :hasLocation :room_4688_bathroom;
 	   :hasInputPower 20;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -179,7 +179,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   	   
 :d06_iPad_bedroom a :iPad, owl:NamedIndividual;
-       :hasLocation :4688_room_bedroom;
+       :hasLocation :room_4688_bedroom;
 	   :hasInputPower 110;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -188,7 +188,7 @@
 	   
 
 :d07_lightfitting_bedroom a :LightingDevice, owl:NamedIndividual;
-       :hasLocation :4688_room_bedroom;
+       :hasLocation :room_4688_bedroom;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -197,7 +197,7 @@
 	   
 
 :d08_laptop_livingroom a :Laptop, owl:NamedIndividual;
-       :hasLocation :4688_room_livingroom;
+       :hasLocation :room_4688_livingroom;
 	   :hasInputPower 110;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -206,7 +206,7 @@
 	   
 
 :d09_desklamp_livingroom a :LightingDevice, owl:NamedIndividual;
-       :hasLocation :4688_room_livingroom;
+       :hasLocation :room_4688_livingroom;
 	   :hasInputPower 11;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -215,7 +215,7 @@
    
 
 :d10_refrigerator_kitchenette a :Refrigerator, owl:NamedIndividual;
-       :hasLocation :4688_room_kitchenette;
+       :hasLocation :room_4688_kitchenette;
 	   :hasInputPower 110;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -224,7 +224,7 @@
 	   
 
 :d11_heating_kitchenette a :HeatingDevice, owl:NamedIndividual;
-       :hasLocation :4688_room_kitchenette;
+       :hasLocation :room_4688_kitchenette;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -233,29 +233,29 @@
 	   
 
 ### Current Locations
-:4688_room a :Location, owl:NamedIndividual;
+:room_4688 a :Location, owl:NamedIndividual;
 	   :hasTemperature :d12_sensor_temperature.
 	   
-:4688_room_entrance a :Location, owl:NamedIndividual;
-	   :isLocatedIn :4688_room;
+:room_4688_entrance a :Location, owl:NamedIndividual;
+	   :isLocatedIn :room_4688;
 	   :hasPresence :d13_sensor_presence.
 
-:4688_room_bathroom a :Location, owl:NamedIndividual;
-	   :isLocatedIn :4688_room;
+:room_4688_bathroom a :Location, owl:NamedIndividual;
+	   :isLocatedIn :room_4688;
 	   :hasHumidity :d14_sensor_humidity.
 	   
-:4688_room_bedroom a :Location, owl:NamedIndividual;
-	   :isLocatedIn :4688_room.
+:room_4688_bedroom a :Location, owl:NamedIndividual;
+	   :isLocatedIn :room_4688.
 	   
-:4688_room_livingroom a :Location, owl:NamedIndividual;
-	   :isLocatedIn :4688_room.
+:room_4688_livingroom a :Location, owl:NamedIndividual;
+	   :isLocatedIn :room_4688.
 	   
-:4688_room_kitchentte a :Location, owl:NamedIndividual;
-	   :isLocatedIn :4688_room.
+:room_4688_kitchentte a :Location, owl:NamedIndividual;
+	   :isLocatedIn :room_4688.
 
 ### Current Sensors
 :d12_sensor_temperature a :TemperatureSensor, owl:NamedIndividual;
-	   :hasLocation :4688_room;
+	   :hasLocation :room_4688;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -268,7 +268,7 @@
 	   
 	   
 :d13_sensor_presence a :PresenceSensor, owl:NamedIndividual;
-	   :hasLocation :4688_room_entrance;
+	   :hasLocation :room_4688_entrance;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -279,7 +279,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   
 :d14_sensor_humidity a :HumiditySensor, owl:NamedIndividual;
-	   :hasLocation :4688_room_bathroom;
+	   :hasLocation :room_4688_bathroom;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;

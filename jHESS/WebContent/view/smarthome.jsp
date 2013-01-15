@@ -16,14 +16,16 @@
 	<table border="1">
 		<tr>
 			<th>ID</th>
-			<th>Status</th>
-			<th>Input Power</th>
+			<th>Location</th>
+			<th>Status (When)</th>
+			<th>Input Power (Unit)</th>
 		</tr>
 		<c:forEach var="device" items="${devices}">
 			<tr>
 				<td>${device.id}</td>
-				<td>${device.currentDeviceStatus}</td>
-				<td>${device.inputPower}</td>
+				<td>${device.location}</td>
+				<td>${device.currentDeviceStatus} </td>
+				<td>${device.inputPower} ${device.inputPowerUnit} </td>
 			</tr>
 		</c:forEach>
 	</table>

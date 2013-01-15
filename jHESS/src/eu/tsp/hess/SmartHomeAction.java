@@ -103,9 +103,12 @@ public class SmartHomeAction extends HttpServlet {
 				Device result = new Device();
 				QuerySolution binding = rs.nextSolution();
 				result.setId(binding.getResource("id").getLocalName());
+				result.setLocation(binding.getResource("location").getLocalName());
 				result.setInputPower(binding.getLiteral("inputpower").getInt());
+				result.setInputPowerUnit(binding.getLiteral("unit").getString());
 				result.setCurrentDeviceStatus(binding.getLiteral("status")
 						.getString());
+				
 				results.add(result);
 			}
 
