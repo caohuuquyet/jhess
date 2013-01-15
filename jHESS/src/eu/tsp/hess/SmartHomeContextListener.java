@@ -53,8 +53,12 @@ HttpSessionListener
 	public void contextDestroyed(ServletContextEvent sce) {
 		// TODO Destroy Ontology 
 	
-		ServletContext	sc = sce.getServletContext();  
-		sc.removeAttribute("ontology"); 
+		ServletContext	sc = sce.getServletContext(); 
+		
+		//save ontology to database
+		
+		//remove ontology in memeory
+		sc.removeAttribute("ontology"); 		
 		System.out.println("ontology Destroyed:" + sc.getAttribute("ontology") );
 		
 		

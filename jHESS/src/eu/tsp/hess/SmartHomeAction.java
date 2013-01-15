@@ -61,6 +61,7 @@ public class SmartHomeAction extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 
 		String _action = request.getParameter("act");
 		_action = (_action == null) ? "sparql" : _action;
@@ -73,9 +74,7 @@ public class SmartHomeAction extends HttpServlet {
 			processSQWRL(response, request);
 		}
 		
-		processSPARQL(response, request);
-		
-
+		processSPARQL(response, request);		
 	}
 
 	
@@ -111,10 +110,10 @@ public class SmartHomeAction extends HttpServlet {
 				
 				results.add(result);
 			}
-
+ 
 			request.setAttribute("devices", results);
 			RequestDispatcher rd = request
-					.getRequestDispatcher("/view/smarthome.jsp");
+					.getRequestDispatcher("view/smarthome.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
 
@@ -143,8 +142,7 @@ public class SmartHomeAction extends HttpServlet {
 				(Model) modelRDF);
 		infModel.prepare();
 		if (infModel != null) {
-			// update ontology
-
+			// update ontology 
 			request.getSession().getServletContext()
 					.setAttribute("ontology", infModel);
 		}

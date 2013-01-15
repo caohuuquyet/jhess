@@ -1,0 +1,269 @@
+/*1.*/
+*{
+    padding:0px;
+    margin:0px;
+}
+body{
+    font-family:Arial;
+    font-size:10pt;
+    color:#3e3e3e;
+    background-image:url(bgmid.jpg);
+    background-position:center;
+    background-repeat:repeat-y;
+    background-color:#E6E6E6;
+
+}
+
+/*2.*/
+.topmenu{
+    
+    margin:0 auto;
+    padding-top:0px;
+    background-position:center;
+    background-repeat:repeat-y;
+	position:relative;
+	width:1000px;
+}
+
+/*3.*/
+.table{
+    border-color: #cccccc;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+}
+.table td
+{
+    height:30px;
+    padding:5px;
+}
+
+.table th
+{
+    height:30px;
+    padding:5px;
+    background-image:url(bg.jpg);
+}
+
+/*4.*/
+.topmenuitem{
+    display:inline;
+    float:right;
+    padding-right:10%;
+    padding-top:0px;
+	vertical-align:middle;
+}
+.topmenuitem ul{
+    list-style:none;
+
+}
+.topmenuitem li{
+    float:right;
+    padding-top:7px;
+    padding-left:35px;
+	font-weight: bold;
+}
+.topmenuitem a{
+    color:#285C2B;
+    text-decoration:none;
+
+
+}
+
+.topmenuitem a:hover{
+    color:#B5B5B5;
+    text-decoration:none;
+
+}
+
+
+/*5.*/
+.clearfloat{
+    clear:both;
+}
+
+/*6.*/
+.header{
+    width:850px;
+    height:200px;
+    margin:0 auto;
+}
+
+/*7.*/
+.container{
+    width:850px;
+    margin:0 auto;
+    background-color:#FFFFFF;
+    padding-top:0px;
+}
+
+/*8.*/
+.leftside{
+    width:200px;
+    float:left;
+}
+
+/*9.*/
+.hkhbox{
+    margin-left:20px;
+    margin-right:20px;
+    padding:5px;
+    color:#fff;
+    text-align:center;
+
+}
+
+
+.hkhboxmenu{
+    margin-left:20px;
+    margin-top:10px;
+    margin-right:20px;
+    padding:10px;
+
+    background-color:#285C2B;
+    
+}
+.hkhboxmenu ul li
+{
+    list-style-type:none;
+    height:20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+
+}
+.hkhboxmenu ul li a{
+    color:#fff;
+    display:block;
+    background:url("icnNav.gif") no-repeat 4px 4px;
+    padding-left:20px;
+    
+}
+
+.hkhboxmenu ul li a:hover{
+    background-color:#706C69;
+    color:#fff;
+
+}
+
+
+.hkhbox2{
+    margin-left:10px;
+    margin-top:10px;
+    margin-right:0px;
+    
+    text-align:center;
+
+}
+
+.hkhbox3{
+    margin-left:20px;
+    margin-top:10px;
+    margin-right:20px;
+    padding:10px;
+    text-align:center;
+    padding-bottom:20px;
+    background-color:#fff;
+
+}
+
+/*10.*/
+.rightside{
+    width:630px;
+    float:left;
+}
+
+/*11.*/
+.servicelist{
+    padding:0px;
+    padding-top:0px;
+}
+/*12.*/
+.newsitem{
+    width:270px;
+    float:left;
+    margin-bottom:15px;
+    margin-right:10px;
+    text-align:left;
+    padding-top: 7px ;
+    padding-left: 3px ;
+    padding-right: 3px;
+    padding-bottom: 7px;
+}
+
+/*13.*/
+.viewmore{
+    font-size:0.9em;
+    font-weight:bold;
+    color:#ea4700;
+    text-decoration:underline;
+}
+
+/*14.*/
+.hkhabout{
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:20px;
+}
+
+/*15.*/
+.footer{
+    background: url(bgbottom.jpg) bottom no-repeat;
+    /*width:820px;*/
+    margin:0 auto;
+    text-align:center;
+    padding-top:10px;
+    font-size:95%;
+    color:#ffffff;
+    height:31px;
+
+}
+
+/*16.*/
+.thumb{
+    float:left;
+    margin-right:10px;
+    padding: 8px;
+    border:  0px solid rgb(100,100,100);
+    background-color: #F7F8FC;
+    width: 113px;
+    height: 78px;
+    top:  0;
+    left: 0;
+	opacity: 1;
+
+}
+
+.thumb:hover{
+    background-color: #285C2B;
+
+}
+
+
+/*17.*/
+.title
+{
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#285C2B;
+    font-size: 120%;
+    font-weight:bold;
+
+}
+
+/*18.*/
+a
+{
+    font-size:12px;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+
+a:hover
+{
+    color:#EA3034;
+}
+

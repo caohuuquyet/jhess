@@ -132,8 +132,8 @@
 #    Individuals
 #################################################################
 ### Current Devices 
-:d01_meter_4688 a :Meter, owl:NamedIndividual;
-       :hasLocation :room_4688;
+:d01_meter_entrance a :Meter, owl:NamedIndividual;
+       :hasLocation :room_4688_entrance;
        :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
 	   :hasCurrentDeviceStatus "ON"^^xsd:string;
@@ -141,7 +141,7 @@
 	   
 	   :hasCurrentMeasureValue 100;
 	   :hasMeasureUnit "W"^^xsd:string;
-	   :isMeasuringFor :quyet;
+	   :isMeasuringFor :hess;
 	   :hasMeasureStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   
 	   :hasHistoryData :cloud_of_data.
@@ -187,7 +187,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   
 
-:d07_lightfitting_bedroom a :LightingDevice, owl:NamedIndividual;
+:d07_walllight_bedroom a :LightingDevice, owl:NamedIndividual;
        :hasLocation :room_4688_bedroom;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -291,7 +291,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   
 :cloud_of_data a :DataCloud, owl:NamedIndividual.	
-:quyet a :Resident, owl:NamedIndividual.
+:hess a :Resident, owl:NamedIndividual.
 
 #################################################################
 # SPARQL
