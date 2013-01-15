@@ -2,7 +2,10 @@ package eu.tsp.hess;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,20 +27,7 @@ import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
-
-/*import java.util.ArrayList;
-import java.util.Collection;
-import com.hp.hpl.jena.util.FileUtils;
-import edu.stanford.smi.protegex.owl.ProtegeOWL;
-import edu.stanford.smi.protegex.owl.jena.*;
-import edu.stanford.smi.protegex.owl.swrl.exceptions.SWRLRuleEngineException;
-import edu.stanford.smi.protegex.owl.swrl.parser.SWRLParseException;
-import edu.stanford.smi.protegex.owl.swrl.sqwrl.DataValue;
-import edu.stanford.smi.protegex.owl.swrl.sqwrl.IndividualValue;
-import edu.stanford.smi.protegex.owl.swrl.sqwrl.SQWRLQueryEngine;
-import edu.stanford.smi.protegex.owl.swrl.sqwrl.SQWRLQueryEngineFactory;
-import edu.stanford.smi.protegex.owl.swrl.sqwrl.SQWRLResult;
-import edu.stanford.smi.protegex.owl.swrl.sqwrl.exceptions.SQWRLException;*/
+import eu.tsp.hess.dto.*;
 
 /**
  * Servlet implementation class SmartHomeAction
@@ -74,54 +64,55 @@ public class SmartHomeAction extends HttpServlet {
 
 		// Define sparql query string
 
-		PrintWriter out = response.getWriter();
-
-		
-		// processSPARQL(out, request);
-		processJenaRules(out, request);
-		// processSWRLRules(out, request);
-		// processSQWRL(out, request);
-
+		processJenaRules(response, request);
+		processSPARQL(response, request);
+		// processSWRLRules(response, request);
+		// processSQWRL(response, request);
 
 	}
 
-	
-
-	private void processSPARQL(PrintWriter out, HttpServletRequest request) {
-		// TODO Auto-generated method stub
+	private void processSPARQL(HttpServletResponse response,
+			HttpServletRequest request) {
+		// TODO
 		String queryString = ""
-				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
-				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  "
-				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>  "
-				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> "
-				+ "PREFIX : <http://www.hess.tsp.eu/2013/1/Maisel.owl#>   "
-
-				+ "SELECT ?name  "
-				+ "WHERE { ?subject rdf:type :LightingDevice ."
-				+ " ?subject :hasName ?name. " + " ?subject :hasValue 'ON'. }"
-				+ "ORDER BY ASC(?name)"; 
-
+				+ "PREFIX : <http://www.hess.tsp.eu/2013/1/Maisel.owl#>"
+				+ "SELECT ?id ?location ?inputpower ?unit ?status ?startime ?datacloud"
+				+ "WHERE {"
+				+ "?id :hasLocation ?location. ?id :hasInputPower ?inputpower. ?id :hasInputPowerUnit  ?unit. ?id :hasCurrentDeviceStatus ?status.?id :hasStatusStartTime ?startime. ?id :hasHistoryData ?datacloud."
+				+ "}" + "ORDER BY ASC(?id)";
+		QueryExecution qe = null;
 		// Query
-		Object model = request.getSession().getServletContext()
-				.getAttribute("ontology");
-		Query query = QueryFactory.create(queryString);
+		try {
 
-		QueryExecution qe = QueryExecutionFactory.create(query, (Model) model);
-		ResultSet results = qe.execSelect();
+			Object model = request.getSession().getServletContext()
+					.getAttribute("ontology");
+			Query query = QueryFactory.create(queryString);
+			qe = QueryExecutionFactory.create(query, (Model) model);
+			ResultSet rs = qe.execSelect();
 
-		// Print out as a table
-		while (results.hasNext()) {
-			QuerySolution row = results.next();
-			RDFNode subject = row.get("name");
-			out.write("Lamp t: " + subject.toString() + "\n");
+			List<Device> results = new ArrayList<Device>();
+			while (rs.hasNext()) {
+				Device result = new Device();
+				QuerySolution binding = rs.nextSolution();
+				result.setId(binding.get("id").toString());
+				result.setCurrentDeviceStatus(binding.get("status").toString());
+				results.add(result);
+			}
 
+			request.setAttribute("devices", results);
+			RequestDispatcher rd = request
+					.getRequestDispatcher("/view/smarthome.jsp");
+			rd.forward(request, response);
+		} catch (Exception e) {
+
+		} finally {
+			qe.close();
 		}
 
-		qe.close();
-
 	}
-	
-	private void processJenaRules(PrintWriter out, HttpServletRequest request) {
+
+	private void processJenaRules(HttpServletResponse out,
+			HttpServletRequest request) {
 		// TODO Auto-generated method stub//String rdfFile
 
 		String ruleFile = request.getSession().getServletContext()
@@ -138,20 +129,23 @@ public class SmartHomeAction extends HttpServlet {
 		InfModel infModel = ModelFactory.createInfModel(reasoner,
 				(Model) modelRDF);
 		infModel.prepare();
-		infModel.write(out, "N3");
+		if (infModel != null) {
+			// update ontology
+
+			request.getSession().getServletContext()
+					.setAttribute("ontology", infModel);
+		}
 
 	}
-	
-	
+
 	private void processSWRLRules(PrintWriter out, HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		
 
 	}
-	
+
 	private void processSQWRL(PrintWriter out, HttpServletRequest request) {
 		// TODO http://protege.cim3.net/cgi-bin/wiki.pl?SQWRLQueryAPI
-		
+
 	}
 
 	/**

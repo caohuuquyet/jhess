@@ -72,7 +72,7 @@
 
 :hasHistoryData a owl:ObjectProperty ;                   
         rdfs:domain :Device;
-        rdfs:range :CloudOfData.
+        rdfs:range :DataCloud.
 
 # for meters
 :hasCurrentMeasureValue a owl:DatatypeProperty;
@@ -299,14 +299,15 @@
 
 #1.
 #PREFIX : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> 
-#PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-#SELECT ?id ?ip ?status
+#
+#SELECT ?id ?location ?inputpower ?unit ?status ?startime ?datacloud 
 #WHERE { 
-#?id a :Device.
-#?id :hasInputPower ?ip.
-#?id :hasCurrentDeviceStatus ?status
+#?id :hasLocation ?location. ?id :hasInputPower ?inputpower. ?id :hasInputPowerUnit  ?unit. ?id :hasCurrentDeviceStatus ?status.?id :hasStatusStartTime ?startime. ?id :hasHistoryData ?datacloud.
+#
+#FILTER (?inputpower > 0)
 #}
 #ORDER BY ASC(?id)
+
 
 #2.
 #SELECT (SUM(?consumption) AS ?total)
