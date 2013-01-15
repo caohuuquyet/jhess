@@ -62,15 +62,23 @@ public class SmartHomeAction extends HttpServlet {
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		// Define sparql query string
+		String _action = request.getParameter("act");
+		_action = (_action == null) ? "sparql" : _action;
 
-		processJenaRules(response, request);
+		if (_action.equalsIgnoreCase("jenarules")) {
+			processJenaRules(response, request);
+		} else if  (_action.equalsIgnoreCase("swrlrules")) {
+			processSWRLRules(response, request);
+		} else if  (_action.equalsIgnoreCase("swrlrules")) {
+			processSQWRL(response, request);
+		}
+		
 		processSPARQL(response, request);
-		// processSWRLRules(response, request);
-		// processSQWRL(response, request);
+		
 
 	}
 
+	
 	private void processSPARQL(HttpServletResponse response,
 			HttpServletRequest request) {
 		// TODO
@@ -94,8 +102,10 @@ public class SmartHomeAction extends HttpServlet {
 			while (rs.hasNext()) {
 				Device result = new Device();
 				QuerySolution binding = rs.nextSolution();
-				result.setId(binding.get("id").toString());
-				result.setCurrentDeviceStatus(binding.get("status").toString());
+				result.setId(binding.getResource("id").getLocalName());
+				result.setInputPower(binding.getLiteral("inputpower").getInt());
+				result.setCurrentDeviceStatus(binding.getLiteral("status")
+						.getString());
 				results.add(result);
 			}
 
@@ -138,15 +148,17 @@ public class SmartHomeAction extends HttpServlet {
 
 	}
 
-	private void processSWRLRules(PrintWriter out, HttpServletRequest request) {
+	private void processSWRLRules(HttpServletResponse response, HttpServletRequest request) {
 		// TODO Auto-generated method stub
 
 	}
 
-	private void processSQWRL(PrintWriter out, HttpServletRequest request) {
-		// TODO http://protege.cim3.net/cgi-bin/wiki.pl?SQWRLQueryAPI
-
+	private void processSQWRL(HttpServletResponse response,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
 	}
+
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
