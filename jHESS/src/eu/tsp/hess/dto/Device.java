@@ -6,6 +6,7 @@ public class Device implements Serializable {
 
 	private static long serialVersionUDI = 1L;
 	private String id;
+	private String description;
 	private Object location;
 	private int inputPower;
 	private String inputPowerUnit;
@@ -17,11 +18,12 @@ public class Device implements Serializable {
 		
     }
 	
-	public Device(String id, Object location, int inputPower,
+	public Device(String id,String description,  Object location, int inputPower,
 			String inputPowerUnit, String currentDeviceStatus,
 			String statusStartTime, Object dataCloud) {
 		super();
 		this.id = id;
+		this.description = description;				
 		this.location = location;
 		this.inputPower = inputPower;
 		this.inputPowerUnit = inputPowerUnit;
@@ -32,6 +34,11 @@ public class Device implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setLocation(Object location) {
@@ -60,6 +67,10 @@ public class Device implements Serializable {
 
 	public String getId() {
 		return id;
+	}
+	
+	public String getDescription() {
+		return description;
 	}
 
 	public Object getLocation() {
@@ -111,5 +122,7 @@ public class Device implements Serializable {
 	public String toString() {
 		return "Device[id=" + getId() + "]";
 	}
+
+	
 
 }

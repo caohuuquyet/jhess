@@ -50,6 +50,10 @@
 #    Properties
 #################################################################
 # for devices
+:hasDescription a owl:DatatypeProperty;                   
+        rdfs:domain :Device;
+        rdfs:range xsd:string.
+        
 :hasLocation a owl:ObjectProperty ;                   
         rdfs:domain :Device;
         rdfs:range :Location.
@@ -133,6 +137,7 @@
 #################################################################
 ### Current Devices 
 :d01_meter_entrance a :Meter, owl:NamedIndividual;
+	   :hasDescription "Main meter"^^xsd:string;
        :hasLocation :room_4688_entrance;
        :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -147,6 +152,7 @@
 	   :hasHistoryData :cloud_of_data.
 	
 :d02_lightfitting_entrance a :LightingDevice, owl:NamedIndividual;
+       :hasDescription "Light at entrance"^^xsd:string;
        :hasLocation :room_4688_entrance;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -155,6 +161,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   
 :d03_vent_bathroom a :Vent, owl:NamedIndividual;
+       :hasDescription "Vent in bathroom"^^xsd:string;
        :hasLocation :room_4688_bathroom;
 	   :hasInputPower 20;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -163,6 +170,7 @@
 	   :hasHistoryData :cloud_of_data.
 
 :d04_lightfitting_bathroom a :LightingDevice, owl:NamedIndividual;
+	   :hasDescription "Light in bathroom"^^xsd:string;
        :hasLocation :room_4688_bathroom;
 	   :hasInputPower 30;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -171,6 +179,7 @@
 	   :hasHistoryData :cloud_of_data.
 
 :d05_heating_bathroom a :HeatingDevice, owl:NamedIndividual;
+       :hasDescription "Heating in bathroom"^^xsd:string;
        :hasLocation :room_4688_bathroom;
 	   :hasInputPower 20;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -179,6 +188,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   	   
 :d06_iPad_bedroom a :iPad, owl:NamedIndividual;
+       :hasDescription "iPad in Bedroom"^^xsd:string;
        :hasLocation :room_4688_bedroom;
 	   :hasInputPower 110;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -188,6 +198,7 @@
 	   
 
 :d07_walllight_bedroom a :LightingDevice, owl:NamedIndividual;
+       :hasDescription "Light in Bedroom"^^xsd:string;
        :hasLocation :room_4688_bedroom;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -197,6 +208,7 @@
 	   
 
 :d08_laptop_livingroom a :Laptop, owl:NamedIndividual;
+       :hasDescription "Laptop in Livingroom"^^xsd:string;
        :hasLocation :room_4688_livingroom;
 	   :hasInputPower 110;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -206,6 +218,7 @@
 	   
 
 :d09_desklamp_livingroom a :LightingDevice, owl:NamedIndividual;
+       :hasDescription "Lamp in Livingroom"^^xsd:string;
        :hasLocation :room_4688_livingroom;
 	   :hasInputPower 11;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -215,6 +228,7 @@
    
 
 :d10_refrigerator_kitchenette a :Refrigerator, owl:NamedIndividual;
+       :hasDescription "Refrigerator in Kitchenette"^^xsd:string;
        :hasLocation :room_4688_kitchenette;
 	   :hasInputPower 110;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -224,6 +238,7 @@
 	   
 
 :d11_heating_kitchenette a :HeatingDevice, owl:NamedIndividual;
+       :hasDescription "Heating in Kitchenette"^^xsd:string;
        :hasLocation :room_4688_kitchenette;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -255,6 +270,7 @@
 
 ### Current Sensors
 :d12_sensor_temperature a :TemperatureSensor, owl:NamedIndividual;
+	   :hasDescription "Temperature Sensor"^^xsd:string;
 	   :hasLocation :room_4688;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -268,6 +284,7 @@
 	   
 	   
 :d13_sensor_presence a :PresenceSensor, owl:NamedIndividual;
+	   :hasDescription "Presence Sensor"^^xsd:string;
 	   :hasLocation :room_4688_entrance;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;
@@ -279,6 +296,7 @@
 	   :hasHistoryData :cloud_of_data.
 	   
 :d14_sensor_humidity a :HumiditySensor, owl:NamedIndividual;
+	   :hasDescription "Humidity Sensor"^^xsd:string;
 	   :hasLocation :room_4688_bathroom;
 	   :hasInputPower 10;
 	   :hasInputPowerUnit "W"^^xsd:string;

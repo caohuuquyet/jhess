@@ -29,7 +29,7 @@
         <div class="container">
             <div class="leftside">
 				<div class="hkhbox2">
-                    <img src="/jHESS/view/images/logo.jpg" border="0" align="center"/>                
+                    <img src="/jHESS/view/images/logo.jpg" border="0" />                
 			    </div>
                 <div class="hkhboxmenu">				
                     <ul id="verticalmenu" class="glossymenu">                          
@@ -49,7 +49,7 @@
 							<a href="#">
 								<img src="/jHESS/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG" alt="${device.location} " width="113" height="78" class="thumb" border="0" />
 							</a>
-							<span class="title">  ${device.inputPower} ${device.inputPowerUnit} </span> 
+							<span class="title">  ${description} </span> <b>${device.inputPower} ${device.inputPowerUnit}</b>  
 						</div>						
 					</c:forEach>			
 					

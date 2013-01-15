@@ -1,7 +1,6 @@
 package eu.tsp.hess;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +20,9 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
-import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 import eu.tsp.hess.dto.*;
 
@@ -83,9 +80,9 @@ public class SmartHomeAction extends HttpServlet {
 		// TODO
 		String queryString = ""
 				+ "PREFIX : <http://www.hess.tsp.eu/2013/1/Maisel.owl#>"
-				+ "SELECT ?id ?location ?inputpower ?unit ?status ?startime ?datacloud"
+				+ "SELECT ?id ?description ?location ?inputpower ?unit ?status ?startime ?datacloud"
 				+ "WHERE {"
-				+ "?id :hasLocation ?location. ?id :hasInputPower ?inputpower. ?id :hasInputPowerUnit  ?unit. ?id :hasCurrentDeviceStatus ?status.?id :hasStatusStartTime ?startime. ?id :hasHistoryData ?datacloud."
+				+ " ?id :hasDescription ?description. ?id :hasLocation ?location. ?id :hasInputPower ?inputpower. ?id :hasInputPowerUnit  ?unit. ?id :hasCurrentDeviceStatus ?status.?id :hasStatusStartTime ?startime. ?id :hasHistoryData ?datacloud."
 				+ "}" + "ORDER BY ASC(?id)";
 		QueryExecution qe = null;
 		// Query
@@ -102,6 +99,7 @@ public class SmartHomeAction extends HttpServlet {
 				Device result = new Device();
 				QuerySolution binding = rs.nextSolution();
 				result.setId(binding.getResource("id").getLocalName());
+				result.setDescription(binding.getLiteral("description").getString());
 				result.setLocation(binding.getResource("location").getLocalName());
 				result.setInputPower(binding.getLiteral("inputpower").getInt());
 				result.setInputPowerUnit(binding.getLiteral("unit").getString());
