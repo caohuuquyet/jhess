@@ -171,14 +171,17 @@ body{
 
 /*10.*/
 .rightside{
+	
     width:630px;
     float:left;
+    
 }
 
 /*11.*/
 .servicelist{
     padding:0px;
     padding-top:0px;
+    padding-left:30px;
 }
 /*12.*/
 .newsitem{
@@ -225,9 +228,9 @@ body{
 .thumb{
     float:left;
     margin-right:10px;
-    padding: 8px;
+    padding: 4px;
     border:  0px solid rgb(100,100,100);
-    background-color: #F7F8FC;
+    background-color: #8B8B8D;
     width: 113px;
     height: 78px;
     top:  0;

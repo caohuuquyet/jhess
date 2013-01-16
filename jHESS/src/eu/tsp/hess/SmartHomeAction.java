@@ -24,6 +24,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
+
+import edu.stanford.smi.protegex.owl.inference.dig.translator.DIGVocabulary.Response;
 import eu.tsp.hess.dto.*;
 
 /**
@@ -138,11 +140,13 @@ public class SmartHomeAction extends HttpServlet {
 		InfModel infModel = ModelFactory.createInfModel(reasoner,
 				(Model) modelRDF);
 		infModel.prepare();
-		if (infModel != null) {
+		if (infModel != null) { 
+
 			// update ontology 
 			request.getSession().getServletContext()
 					.setAttribute("ontology", infModel);
 		}
+
 
 	}
 

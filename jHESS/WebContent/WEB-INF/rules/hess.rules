@@ -9,11 +9,14 @@
 [VentOFF:
 	( ?humidity	rdf:type :HumiditySensor )
 	( ?humidity	:hasCurrentHumidityValue ?value )
-	greaterThan(?value, 0)
+	greaterThan(?value, 20)
 	( ?vent	rdf:type :Vent )
 	( ?vent	:hasCurrentDeviceStatus "ON"^^xsd:string )
-	
+	noValue(?c :ruleFiredFor :jhess)
 ->
+	remove(4)   
 	(?vent	:hasCurrentDeviceStatus "OFF"^^xsd:string )
+	(?c :ruleFiredFor :jhess)
+	hide(:ruleFiredFor)	
 	
 ]

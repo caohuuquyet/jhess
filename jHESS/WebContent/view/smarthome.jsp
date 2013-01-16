@@ -49,7 +49,7 @@
 							<a href="#">
 								<img src="/jHESS/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG" alt="${device.location} " width="113" height="78" class="thumb" border="0" />
 							</a>
-							<span class="title">${device.inputPower} ${device.inputPowerUnit} </span> <b></b>  
+							<br/>${device.description} <br/> <span class="title"> ${device.inputPower} ${device.inputPowerUnit} </span>   
 						</div>						
 					</c:forEach>			
 					
