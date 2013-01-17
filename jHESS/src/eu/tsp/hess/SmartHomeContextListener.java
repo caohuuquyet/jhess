@@ -38,7 +38,7 @@ HttpSessionListener
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		// TODO Read Ontology
-		ServletContext	sc = sce.getServletContext();
+		ServletContext	sc = sce.getServletContext(); 
 		String ontology = sc.getRealPath("/WEB-INF") + sc.getInitParameter("ontology");
 		ontology = ontology.replaceAll("\\\\+", "/");
 		String rules = sc.getRealPath("/WEB-INF") + sc.getInitParameter("rules");
@@ -47,6 +47,7 @@ HttpSessionListener
 		Model model = FileManager.get().loadModel(ontology); 
 		sc.setAttribute("ontology", model);
 		sc.setAttribute("rules", rules);
+		
 	}
 
 	@Override

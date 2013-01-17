@@ -44,7 +44,8 @@
 				<img src="/jHESS/view/images/topline.jpg" border="0" style="margin-top:10px;" align="right"/>
 				<div class="clearfloat"></div>
 				<div class="servicelist">
-					<c:forEach var="device" items="${devices}">
+					
+					<c:forEach var="device" items="${it}">
 						<div class="newsitem" >
 							<a href="#">
 								<img src="/jHESS/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG" alt="${device.location} " width="113" height="78" class="thumb" border="0" />
