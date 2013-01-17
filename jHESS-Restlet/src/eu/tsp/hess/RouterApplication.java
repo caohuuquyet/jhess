@@ -15,6 +15,8 @@ public class RouterApplication extends Application{
 		router.attach("/users", UserResource.class);
 		router.attach("/users/{uid}", UserResource.class);
 		router.attach("/users/{uid}/items", UserItemResource.class);
+		router.attach("/rdf", TestResource.class);
+		router.attach("/html", TestHTMLResource.class);
 		return router;
 	}
 }

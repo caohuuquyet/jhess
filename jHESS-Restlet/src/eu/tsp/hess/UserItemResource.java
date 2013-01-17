@@ -4,6 +4,7 @@ import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
 public class UserItemResource extends ServerResource {
+	
 	@Get
 	public String toString() {
 		String uid = (String) getRequestAttributes().get("uid");

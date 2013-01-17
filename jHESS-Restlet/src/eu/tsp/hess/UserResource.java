@@ -6,10 +6,11 @@ import org.restlet.representation.Representation;
 import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.Post;
+import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 public class UserResource extends ServerResource {
-	
+
 	@Post
 	public Representation acceptItem(Representation entity) {
 		Representation result = null;
@@ -20,7 +21,7 @@ public class UserResource extends ServerResource {
 
 		if (uid.equals("123")) { // Assume that user id 123 is existed
 			result = new StringRepresentation("User whose uid=" + uid
-					+ " is updated", MediaType.TEXT_PLAIN); 
+					+ " is updated", MediaType.TEXT_PLAIN);
 		} else { // otherwise add user
 			result = new StringRepresentation("User " + uname + " is added",
 					MediaType.TEXT_PLAIN);
@@ -28,10 +29,17 @@ public class UserResource extends ServerResource {
 
 		return result;
 	}
-
+	
 	@Get
 	public String toString() {
 		String uid = (String) getRequestAttributes().get("uid");
 		return "Information about user \"" + uid + "\" is: <nothing>";
 	}
+
+	/*
+	@Get("rdf")
+	public Representation toRdf() throws ResourceException { 
+		return null; 
+	}
+*/
 }
