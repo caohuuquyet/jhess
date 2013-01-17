@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>jHess, Java Hybrid Energy Saving Service</title> 
+        <title>Device, jHess, Java Hybrid Energy Saving Service</title> 
 		<meta name="Keywords" content="jHess, Java Hybrid Energy Saving Service">
 		<meta name="Description" content="jHess, Java Hybrid Energy Saving Service">		
         <link href="/jHESS/view/images/style.css" rel="stylesheet" type="text/css" />
@@ -33,9 +33,9 @@
 			    </div>
                 <div class="hkhboxmenu">				
                     <ul id="verticalmenu" class="glossymenu">                          
-                            <li> <a href="/jHESS/myhome"> Approach 1</a> </li>
-							<li> <a href="/jHESS/rules"> Approach 2</a> </li>
-							<li> <a href="/jHESS/learning"> Approach 3</a> </li>	
+                            <li> <a href="#"> Approach 1</a> </li>
+							<li> <a href="SmartHomeAction?act=jenarules"> Approach 2</a> </li>
+							<li> <a href="#"> Approach 3</a> </li>	
                     </ul>
                 </div>                                             
             </div>
@@ -45,14 +45,13 @@
 				<div class="clearfloat"></div>
 				<div class="servicelist">
 					
-					<c:forEach var="device" items="${it}">
-						<div class="newsitem" >
-							<a href="/jHESS/myhome/${device.id}">  
-								<img src="/jHESS/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG" alt="${device.location} " width="113" height="78" class="thumb" border="0" />
-							</a>
-							<br/>${device.description} <br/> <span class="title"> ${device.inputPower} ${device.inputPowerUnit} </span>   
-						</div>						
-					</c:forEach>			
+					<div class="newsitem" >
+						<a href="#">
+						       <img src="/jHESS/view/images/devices/${it.id}_${it.currentDeviceStatus}h.JPG" alt="${it.location} " width="113" height="78" class="thumb" border="0" />
+					    </a>
+						<h1>${it.description} </h1> <span class="title"> ${it.inputPower} ${it.inputPowerUnit} </span>   
+					</div>	
+							
 					
 				</div>
 			</div>			
