@@ -34,7 +34,7 @@
                 <div class="hkhboxmenu">				
                     <ul id="verticalmenu" class="glossymenu">                          
                             <li> <a href="/jHESS/myhome"> Approach 1</a> </li>
-							<li> <a href="/jHESS/rules"> Approach 2</a> </li>
+							<li> <a href="/jHESS/autorule"> Approach 2</a> </li>
 							<li> <a href="/jHESS/learning"> Approach 3</a> </li>	
                     </ul>
                 </div>                                             

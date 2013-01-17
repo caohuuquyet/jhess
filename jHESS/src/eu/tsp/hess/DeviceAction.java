@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,13 +19,19 @@ import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.reasoner.Reasoner;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
+import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 import com.sun.jersey.api.view.Viewable;
 import eu.tsp.hess.dto.Device;
 
 @Path("myhome")
-public class SmartHomeAction {
+public class DeviceAction {
 	@javax.ws.rs.core.Context
 	ServletContext context;
 
@@ -122,5 +130,7 @@ public class SmartHomeAction {
 
 		return Response.ok(new Viewable("/device", result)).build();
 	}
+	
+	
 
 }

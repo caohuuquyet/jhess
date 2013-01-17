@@ -2,9 +2,13 @@ package eu.tsp.hess.dto;
 
 import java.io.Serializable;
 
-public class Device implements Serializable {
+public class Device implements Serializable {  
 
-	private static long serialVersionUDI = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String id;
 	private String description;
 	private Object location;
@@ -120,7 +124,7 @@ public class Device implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Device[id=" + getId() + "]";
+		return "Device[id=" + getId() + "]" + serialVersionUID;
 	}
 
 	
