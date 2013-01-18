@@ -21,7 +21,7 @@ public class UserResource {
 
 	// initialize some resources
 	public UserResource() {
-		listUsers = new HashMap();
+		listUsers = new HashMap<String, User>();
 		listUsers.put("1", new User("1", "John"));
 		listUsers.put("2", new User("2", "Peter"));
 	}
@@ -29,7 +29,7 @@ public class UserResource {
 	// return list of users
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-	public String listOfUsersInText() {
+	public String listUsersInPlainText() {
 		String list = "";
 		for (Entry<String, User> u : listUsers.entrySet()) {
 			list += u.getValue().getName() + "\n";
@@ -58,9 +58,10 @@ public class UserResource {
 		if (listUsers.containsKey(uid)) {
 			listUsers.get(uid).setName(name);
 			return "The user is updated. Current list is: \n"
-					+ listOfUsersInText();
+					+ listUsersInPlainText();
 		}
 		listUsers.put(uid, new User(uid, name));
-		return "The user is added. Current list is: \n" + listOfUsersInText();
+		return "The user is added. Current list is: \n"
+				+ listUsersInPlainText();
 	}
 }
