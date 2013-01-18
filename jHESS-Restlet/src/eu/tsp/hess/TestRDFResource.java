@@ -8,7 +8,7 @@ import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
-public class TestResource extends ServerResource {
+public class TestRDFResource extends ServerResource {
 	
 	@Get("rdf") 
 	public Representation toRdf() throws ResourceException { 
