@@ -2,7 +2,7 @@ package eu.tsp.hess.dto;
 
 import java.io.Serializable;
 
-public class Device implements Serializable {  
+public class Device implements Serializable {   
 
 	/**
 	 * 

@@ -1,36 +1,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl:	<http://www.w3.org/2002/07/owl#>.
+@prefix jhess: <http://www.hess.tsp.eu/2013/1/Maisel.owl#>.
 
-
-@prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
-
-[VentOFF:
-	( ?humidity	rdf:type :HumiditySensor )
-	( ?humidity	:hasCurrentHumidityValue ?value )
-	greaterThan(?value, 2)
-	( ?vent	rdf:type :Vent )
-	( ?vent	:hasCurrentDeviceStatus "ON"^^xsd:string )
-	noValue(?c :ruleFiredFor :jhess)
-->
-	remove(4)
-	(?vent	:hasCurrentDeviceStatus "OFF"^^xsd:string )
-	(?c :ruleFiredFor :jhess)
-	hide(:ruleFiredFor)	
-	
-]
-[VentON:
-	( ?humidity	rdf:type :HumiditySensor )
-	( ?humidity	:hasCurrentHumidityValue ?value )
-	lessThan(?value, 2)
-	( ?vent	rdf:type :Vent )
-	( ?vent	:hasCurrentDeviceStatus "OFF"^^xsd:string )
-	noValue(?c :ruleFiredFor :jhess)
-->
-	remove(4)   
-	(?vent	:hasCurrentDeviceStatus "ON"^^xsd:string )
-	(?c :ruleFiredFor :jhess)
-	hide(:ruleFiredFor)	
-	
-]
+[r1: (jhess:d09_desklamp_livingroom jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:d09_desklamp_livingroom jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] 

@@ -1,4 +1,4 @@
-@prefix : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
+@prefix jhess: <http://www.hess.tsp.eu/2013/1/Maisel.owl#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -16,346 +16,300 @@
 #################################################################
 
 ### Device
-:Device a owl:Class.
+jhess:Device a owl:Class.
 
-:Meter rdfs:subClassOf :Device.
+jhess:Meter rdfs:subClassOf jhess:Device.
 
-:Sensor rdfs:subClassOf :Device.
-:PresenceSensor rdfs:subClassOf :Sensor. 
-:HumiditySensor rdfs:subClassOf :Sensor.
-:TemperatureSensor rdfs:subClassOf :Sensor.
+jhess:Sensor rdfs:subClassOf jhess:Device.
+jhess:PresenceSensor rdfs:subClassOf jhess:Sensor. 
+jhess:HumiditySensor rdfs:subClassOf jhess:Sensor.
+jhess:TemperatureSensor rdfs:subClassOf jhess:Sensor.
 
-:LightingDevice rdfs:subClassOf :Device.
+jhess:LightingDevice rdfs:subClassOf jhess:Device.
 
-:Vent rdfs:subClassOf :Device.
+jhess:Vent rdfs:subClassOf jhess:Device.
 
-:HeatingDevice rdfs:subClassOf :Device.
+jhess:HeatingDevice rdfs:subClassOf jhess:Device.
 
-:ComputingDevice rdfs:subClassOf :Device.
-:Laptop rdfs:subClassOf :ComputingDevice.
-:iPad rdfs:subClassOf :ComputingDevice.
+jhess:ComputingDevice rdfs:subClassOf jhess:Device.
+jhess:Laptop rdfs:subClassOf jhess:ComputingDevice.
+jhess:iPad rdfs:subClassOf jhess:ComputingDevice.
 
-:Refrigerator rdfs:subClassOf :Device.
+jhess:Refrigerator rdfs:subClassOf jhess:Device.
 
 ### Location
-:Location a owl:Class.
+jhess:Location a owl:Class.
  
 ### Resident
-:Resident a owl:Class.
+jhess:Resident a owl:Class.
 
 ### CloudOfData
-:DataCloud a owl:Class. 
+jhess:DataCloud a owl:Class. 
 
 ################################################################# 
 #    Properties
 #################################################################
 # for devices
-:hasDescription a owl:DatatypeProperty;                   
-        rdfs:domain :Device;
+jhess:hasDescription a owl:DatatypeProperty;                   
+        rdfs:domain jhess:Device;
         rdfs:range xsd:string.
         
-:hasLocation a owl:ObjectProperty ;                   
-        rdfs:domain :Device;
-        rdfs:range :Location.
+jhess:hasLocation a owl:ObjectProperty ;                   
+        rdfs:domain jhess:Device;
+        rdfs:range jhess:Location.
 		
-:hasInputPower a owl:DatatypeProperty;
-	    rdfs:domain :Device;
+jhess:hasInputPower a owl:DatatypeProperty;
+	    rdfs:domain jhess:Device;
 		rdfs:range xsd:int.
 		
-:hasInputPowerUnit a owl:DatatypeProperty;
-	    rdfs:domain :Device;
+jhess:hasInputPowerUnit a owl:DatatypeProperty;
+	    rdfs:domain jhess:Device;
 		rdfs:range xsd:string.
 
-:hasCurrentDeviceStatus a owl:DatatypeProperty;
-	    rdfs:domain :Device;
+jhess:hasCurrentDeviceStatus a owl:DatatypeProperty;
+	    rdfs:domain jhess:Device;
 		rdfs:range xsd:string.
 		
-:hasStatusStartTime a owl:DatatypeProperty;
-	    rdfs:domain :Device;
+jhess:hasStatusStartTime a owl:DatatypeProperty;
+	    rdfs:domain jhess:Device;
 		rdfs:range xsd:dateTime.
 
-:hasHistoryData a owl:ObjectProperty ;                   
-        rdfs:domain :Device;
-        rdfs:range :DataCloud.
+jhess:hasHistoryData a owl:ObjectProperty ;                   
+        rdfs:domain jhess:Device;
+        rdfs:range jhess:DataCloud.
 
 # for meters
-:hasCurrentMeasureValue a owl:DatatypeProperty;
-	    rdfs:domain :Meter;
+jhess:hasCurrentMeasureValue a owl:DatatypeProperty;
+	    rdfs:domain jhess:Meter;
 		rdfs:range xsd:int.
 	
-:hasMeasureUnit a owl:DatatypeProperty;
-	    rdfs:domain :Meter;
+jhess:hasMeasureUnit a owl:DatatypeProperty;
+	    rdfs:domain jhess:Meter;
 		rdfs:range xsd:string.
 		
-:isMeasuringFor a owl:ObjectProperty ;                   
-        rdfs:domain :Meter;
-        rdfs:range :Resident.
+jhess:isMeasuringFor a owl:ObjectProperty ;                   
+        rdfs:domain jhess:Meter;
+        rdfs:range jhess:Resident.
 		
-:hasMeasureStartTime a owl:DatatypeProperty ;                   
-        rdfs:domain :Meter;
+jhess:hasMeasureStartTime a owl:DatatypeProperty ;                   
+        rdfs:domain jhess:Meter;
         rdfs:range xsd:dateTime.
 		
 # for temperature sensors
-:hasCurrentTemperatureValue a owl:DatatypeProperty ;                   
-        rdfs:domain :TemperatureSensor;
+jhess:hasCurrentTemperatureValue a owl:DatatypeProperty ;                   
+        rdfs:domain jhess:TemperatureSensor;
         rdfs:range xsd:int.
 		
-:hasTemperatureUnit a owl:DatatypeProperty ;                   
-        rdfs:domain :TemperatureSensor;
+jhess:hasTemperatureUnit a owl:DatatypeProperty ;                   
+        rdfs:domain jhess:TemperatureSensor;
         rdfs:range xsd:string.		
 
 # for humidity sensors
-:hasCurrentHumidityValue a owl:DatatypeProperty ;                   
-        rdfs:domain :HumiditySensor;	
+jhess:hasCurrentHumidityValue a owl:DatatypeProperty ;                   
+        rdfs:domain jhess:HumiditySensor;	
 		rdfs:range xsd:int.	
 
-:hasHumidityUnit a owl:DatatypeProperty;
-	    rdfs:domain :HumiditySensor;
+jhess:hasHumidityUnit a owl:DatatypeProperty;
+	    rdfs:domain jhess:HumiditySensor;
 		rdfs:range xsd:string.
 		
 # for presence sensors
-:hasCurrentPresenceValue a owl:DatatypeProperty ;                 
-        rdfs:domain :PresenceSensor;
+jhess:hasCurrentPresenceValue a owl:DatatypeProperty ;                 
+        rdfs:domain jhess:PresenceSensor;
 		rdfs:range xsd:boolean.	   
 
 # for locations
-:isLocatedIn a owl:ObjectProperty ;                   
-        rdfs:domain :Location;
-        rdfs:range :Location.
-:hasTemperature a owl:ObjectProperty ;                   
-        rdfs:domain :Location;
-        rdfs:range :TemperatureSensor.
-:hasHumidity a owl:ObjectProperty ;                   
-        rdfs:domain :Location;
-        rdfs:range :HumiditySensor.
-:hasPresence a owl:ObjectProperty ;                   
-        rdfs:domain :Location;
-        rdfs:range :PresenceSensor.
+jhess:isLocatedIn a owl:ObjectProperty ;                   
+        rdfs:domain jhess:Location;
+        rdfs:range jhess:Location.
+jhess:hasTemperature a owl:ObjectProperty ;                   
+        rdfs:domain jhess:Location;
+        rdfs:range jhess:TemperatureSensor.
+jhess:hasHumidity a owl:ObjectProperty ;                   
+        rdfs:domain jhess:Location;
+        rdfs:range jhess:HumiditySensor.
+jhess:hasPresence a owl:ObjectProperty ;                   
+        rdfs:domain jhess:Location;
+        rdfs:range jhess:PresenceSensor.
 		
 #################################################################
 #    Individuals
 #################################################################
 ### Current Devices 
-:d01_meter_entrance a :Meter, owl:NamedIndividual;
-	   :hasDescription "Main meter"^^xsd:string;
-       :hasLocation :room_4688_entrance;
-       :hasInputPower 10;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+jhess:d01_meter_entrance a jhess:Meter, owl:NamedIndividual;
+	   jhess:hasDescription "Main meter"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_entrance;
+       jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   
-	   :hasCurrentMeasureValue 100;
-	   :hasMeasureUnit "W"^^xsd:string;
-	   :isMeasuringFor :hess;
-	   :hasMeasureStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasCurrentMeasureValue 100;
+	   jhess:hasMeasureUnit "W"^^xsd:string;
+	   jhess:isMeasuringFor jhess:hess;
+	   jhess:hasMeasureStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   
-	   :hasHistoryData :cloud_of_data.
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	
-:d02_lightfitting_entrance a :LightingDevice, owl:NamedIndividual;
-       :hasDescription "Light at entrance"^^xsd:string;
-       :hasLocation :room_4688_entrance;
-	   :hasInputPower 10;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d02_lightfitting_entrance a jhess:LightingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Light at entrance"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_entrance;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
-:d03_vent_bathroom a :Vent, owl:NamedIndividual;
-       :hasDescription "Vent in bathroom"^^xsd:string;
-       :hasLocation :room_4688_bathroom;
-	   :hasInputPower 20;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d03_vent_bathroom a jhess:Vent, owl:NamedIndividual;
+       jhess:hasDescription "Vent in bathroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 20;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 
-:d04_lightfitting_bathroom a :LightingDevice, owl:NamedIndividual;
-	   :hasDescription "Light in bathroom"^^xsd:string;
-       :hasLocation :room_4688_bathroom;
-	   :hasInputPower 30;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d04_lightfitting_bathroom a jhess:LightingDevice, owl:NamedIndividual;
+	   jhess:hasDescription "Light in bathroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 30;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 
-:d05_heating_bathroom a :HeatingDevice, owl:NamedIndividual;
-       :hasDescription "Heating in bathroom"^^xsd:string;
-       :hasLocation :room_4688_bathroom;
-	   :hasInputPower 20;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d05_heating_bathroom a jhess:HeatingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Heating in bathroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 20;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   	   
-:d06_iPad_bedroom a :iPad, owl:NamedIndividual;
-       :hasDescription "iPad in Bedroom"^^xsd:string;
-       :hasLocation :room_4688_bedroom;
-	   :hasInputPower 110;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d06_iPad_bedroom a jhess:iPad, owl:NamedIndividual;
+       jhess:hasDescription "iPad in Bedroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bedroom;
+	   jhess:hasInputPower 110;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
 
-:d07_walllight_bedroom a :LightingDevice, owl:NamedIndividual;
-       :hasDescription "Light in Bedroom"^^xsd:string;
-       :hasLocation :room_4688_bedroom;
-	   :hasInputPower 10;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d07_walllight_bedroom a jhess:LightingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Light in Bedroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bedroom;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
 
-:d08_laptop_livingroom a :Laptop, owl:NamedIndividual;
-       :hasDescription "Laptop in Livingroom"^^xsd:string;
-       :hasLocation :room_4688_livingroom;
-	   :hasInputPower 110;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d08_laptop_livingroom a jhess:Laptop, owl:NamedIndividual;
+       jhess:hasDescription "Laptop in Livingroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_livingroom;
+	   jhess:hasInputPower 110;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
 
-:d09_desklamp_livingroom a :LightingDevice, owl:NamedIndividual;
-       :hasDescription "Lamp in Livingroom"^^xsd:string;
-       :hasLocation :room_4688_livingroom;
-	   :hasInputPower 11;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d09_desklamp_livingroom a jhess:LightingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Lamp in Livingroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_livingroom;
+	   jhess:hasInputPower 11;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "OFF"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
    
 
-:d10_refrigerator_kitchenette a :Refrigerator, owl:NamedIndividual;
-       :hasDescription "Refrigerator in Kitchenette"^^xsd:string;
-       :hasLocation :room_4688_kitchenette;
-	   :hasInputPower 110;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d10_refrigerator_kitchenette a jhess:Refrigerator, owl:NamedIndividual;
+       jhess:hasDescription "Refrigerator in Kitchenette"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_kitchenette;
+	   jhess:hasInputPower 110;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
 
-:d11_heating_kitchenette a :HeatingDevice, owl:NamedIndividual;
-       :hasDescription "Heating in Kitchenette"^^xsd:string;
-       :hasLocation :room_4688_kitchenette;
-	   :hasInputPower 10;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
-	   :hasHistoryData :cloud_of_data.
+jhess:d11_heating_kitchenette a jhess:HeatingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Heating in Kitchenette"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_kitchenette;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
 
 ### Current Locations
-:room_4688 a :Location, owl:NamedIndividual;
-	   :hasTemperature :d12_sensor_temperature.
+jhess:room_4688 a jhess:Location, owl:NamedIndividual;
+	   jhess:hasTemperature jhess:d12_sensor_temperature.
 	   
-:room_4688_entrance a :Location, owl:NamedIndividual;
-	   :isLocatedIn :room_4688;
-	   :hasPresence :d13_sensor_presence.
+jhess:room_4688_entrance a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688;
+	   jhess:hasPresence jhess:d13_sensor_presence.
 
-:room_4688_bathroom a :Location, owl:NamedIndividual;
-	   :isLocatedIn :room_4688;
-	   :hasHumidity :d14_sensor_humidity.
+jhess:room_4688_bathroom a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688;
+	   jhess:hasHumidity jhess:d14_sensor_humidity.
 	   
-:room_4688_bedroom a :Location, owl:NamedIndividual;
-	   :isLocatedIn :room_4688.
+jhess:room_4688_bedroom a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688.
 	   
-:room_4688_livingroom a :Location, owl:NamedIndividual;
-	   :isLocatedIn :room_4688.
+jhess:room_4688_livingroom a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688.
 	   
-:room_4688_kitchentte a :Location, owl:NamedIndividual;
-	   :isLocatedIn :room_4688.
+jhess:room_4688_kitchentte a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688.
 
 ### Current Sensors
-:d12_sensor_temperature a :TemperatureSensor, owl:NamedIndividual;
-	   :hasDescription "Temperature Sensor"^^xsd:string;
-	   :hasLocation :room_4688;
-	   :hasInputPower 10;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+jhess:d12_sensor_temperature a jhess:TemperatureSensor, owl:NamedIndividual;
+	   jhess:hasDescription "Temperature Sensor"^^xsd:string;
+	   jhess:hasLocation jhess:room_4688;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   
-	   :hasCurrentTemperatureValue 10;
-	   :hasTemperatureUnit "C"^^xsd:string;
+	   jhess:hasCurrentTemperatureValue 10;
+	   jhess:hasTemperatureUnit "C"^^xsd:string;
 	   
-	   :hasHistoryData :cloud_of_data.
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
 	   
-:d13_sensor_presence a :PresenceSensor, owl:NamedIndividual;
-	   :hasDescription "Presence Sensor"^^xsd:string;
-	   :hasLocation :room_4688_entrance;
-	   :hasInputPower 10;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+jhess:d13_sensor_presence a jhess:PresenceSensor, owl:NamedIndividual;
+	   jhess:hasDescription "Presence Sensor"^^xsd:string;
+	   jhess:hasLocation jhess:room_4688_entrance;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   
-	   :hasCurrentPresenceValue "false"^^xsd:boolean;
+	   jhess:hasCurrentPresenceValue "false"^^xsd:boolean;
 	   
-	   :hasHistoryData :cloud_of_data.
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
-:d14_sensor_humidity a :HumiditySensor, owl:NamedIndividual;
-	   :hasDescription "Humidity Sensor"^^xsd:string;
-	   :hasLocation :room_4688_bathroom;
-	   :hasInputPower 10;
-	   :hasInputPowerUnit "W"^^xsd:string;
-	   :hasCurrentDeviceStatus "ON"^^xsd:string;
-	   :hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+jhess:d14_sensor_humidity a jhess:HumiditySensor, owl:NamedIndividual;
+	   jhess:hasDescription "Humidity Sensor"^^xsd:string;
+	   jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   
-	   :hasCurrentHumidityValue 10;
-	   :hasHumidityUnit "%"^^xsd:string;
+	   jhess:hasCurrentHumidityValue 10;
+	   jhess:hasHumidityUnit "%"^^xsd:string;
 	   
-	   :hasHistoryData :cloud_of_data.
+	   jhess:hasHistoryData jhess:cloud_of_data.
 	   
-:cloud_of_data a :DataCloud, owl:NamedIndividual.	
-:hess a :Resident, owl:NamedIndividual.
-
-#################################################################
-# SPARQL
-#################################################################
-
-#1.
-#PREFIX : <http://www.hess.tsp.eu/2013/1/Maisel.owl#> 
-#
-#SELECT ?id ?location ?inputpower ?unit ?status ?startime ?datacloud 
-#WHERE { 
-#?id :hasLocation ?location. ?id :hasInputPower ?inputpower. ?id :hasInputPowerUnit  ?unit. ?id :hasCurrentDeviceStatus ?status.?id :hasStatusStartTime ?startime. ?id :hasHistoryData ?datacloud.
-#
-#FILTER (?inputpower > 0)
-#}
-#ORDER BY ASC(?id)
-
-
-#2.
-#SELECT (SUM(?consumption) AS ?total)
-#WHERE 
-#{ 
-#?name a :Device. 
-#?name :hasCurrentDeviceStatus "ON"^^xsd:string.
-#?name :hasInputPower ?consumption.
-#}
-
-#3.
-#SELECT ?id ?name ?status ?location ?inputpower ?sensor ?sensor_value
-#WHERE 
-#{ 
-#?name a :Device. ?name :hasID ?id. ?name :hasLocation ?location. ?name :hasInputPower ?inputpower. 
-#OPTIONAL {?name :hasCurrentDeviceStatus ?status.}
-#OPTIONAL {?location :hasSensor ?sensor. ?sensor :hasValue ?sensor_value.}
-#FILTER (?inputpower > 1)
-#}
-#ORDER BY ASC(?id)
-
-#################################################################
-# SQWRL, SWRL
-#################################################################
-
-#################################################################
-# JenaRules
-#################################################################
-
-
+jhess:cloud_of_data a jhess:DataCloud, owl:NamedIndividual.	
+jhess:hess a jhess:Resident, owl:NamedIndividual.
 
 ###  Generated by the OWL API (version 3.3.1957) http://owlapi.sourceforge.net
 

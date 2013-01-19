@@ -11,32 +11,28 @@
 	</context-param>
 	<context-param>
 		<param-name>rules</param-name>
-		<param-value>/rules/hess.rules</param-value>
+		<param-value>/rules/</param-value>
 	</context-param>
 	<listener>
 		<listener-class>eu.tsp.hess.SmartHomeContextListener</listener-class>
 	</listener>
+	<!-- Application class name -->
+	<context-param>
+		<param-name>org.restlet.application</param-name>
+		<param-value>eu.tsp.hess.RouterApplication</param-value>
+	</context-param>
 
-	<filter>
-		<filter-name>jersey</filter-name>
-		<filter-class>com.sun.jersey.spi.container.servlet.ServletContainer</filter-class>
-		<init-param>
-			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>eu.tsp.hess</param-value>
-		</init-param>
-		<init-param>
-			<param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name>
-			<param-value>/view</param-value>
-		</init-param>
-		<init-param>
-			<param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
-			<param-value>/(view/images|view/images/devices)/.*</param-value>
-		</init-param>
-		
-	</filter>
-	<filter-mapping>
-		<filter-name>jersey</filter-name>
+	<!-- Restlet adapter -->
+	<servlet>
+		<servlet-name>RestletServlet</servlet-name>
+		<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+	</servlet>
+
+	<!-- Catch all requests -->
+	<servlet-mapping>
+		<servlet-name>RestletServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</servlet-mapping>
+
 
 </web-app>
