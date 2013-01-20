@@ -1,13 +1,20 @@
 package eu.tsp.hess;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.servlet.ServletContext;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.restlet.data.MediaType;
 import org.restlet.data.Reference;
+import org.restlet.ext.freemarker.ContextTemplateLoader;
+import org.restlet.ext.freemarker.TemplateRepresentation;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.ext.rdf.Graph;
 import org.restlet.ext.rdf.Literal;
+import org.restlet.ext.rdf.RdfRepresentation;
 import org.restlet.ext.rdf.internal.RdfConstants;
 import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
@@ -21,8 +28,12 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.util.PrintUtil;
 
 import eu.tsp.hess.dto.Device;
+import freemarker.template.Configuration;
 
 public class DeviceResource extends ServerResource {
 
@@ -31,85 +42,85 @@ public class DeviceResource extends ServerResource {
 		String did = (String) getRequestAttributes().get("did");
 		Device device = getDevice(did);
 		JSONObject jsonDevice = new JSONObject();
-		
+
 		if (device != null) {
 			jsonDevice.put("id", did);
 			jsonDevice.put("hasDescription", device.getDescription());
 			jsonDevice.put("hasLocation", device.getLocation());
 			jsonDevice.put("hasInputPower", device.getInputPower());
 			jsonDevice.put("hasInputPowerUnit", device.getInputPowerUnit());
-			jsonDevice.put("hasCurrentDeviceStatus", device.getCurrentDeviceStatus());
+			jsonDevice.put("hasCurrentDeviceStatus",
+					device.getCurrentDeviceStatus());
 			jsonDevice.put("hasStatusStartTime", device.getStatusStartTime());
 		}
 		return new JsonRepresentation(jsonDevice);
 	}
 
-	@Get("rdf")	
+	@Get("rdf")
 	public Representation toRdf() throws ResourceException {
 		String did = (String) getRequestAttributes().get("did");
 		Device device = getDevice(did);
-		Graph example = new Graph();
-
-		if (device != null) {
-
-			String ONT_BASE = ":";
-
-			Reference id = new Reference(ONT_BASE + device.getId());
-			Reference description = new Reference(ONT_BASE + "hasDescription");
-			Reference location = new Reference(ONT_BASE + "hasLocation");
-			Reference inputPower = new Reference(ONT_BASE + "hasInputPower");
-			Reference inputPowerUnit = new Reference(ONT_BASE
-					+ "hasInputPowerUnit");
-			Reference currentDeviceStatus = new Reference(ONT_BASE
-					+ "hasCurrentDeviceStatus");
-			Reference statusStartTime = new Reference(ONT_BASE
-					+ "hasStatusStartTime");
-
-			// Reference dataCloud = new Reference(ONT_BASE + "hasDataCloud");
-
-			example.add(id, description, new Literal(device.getDescription()));
-			example.add(id, location, new Reference(device.getLocation()
-					.toString()));
-			example.add(id, inputPower, new Literal(
-					"" + device.getInputPower(),
-					RdfConstants.XML_SCHEMA_TYPE_INTEGER));
-			example.add(id, inputPowerUnit,
-					new Literal(device.getInputPowerUnit()));
-			example.add(id, currentDeviceStatus,
-					new Literal(device.getCurrentDeviceStatus()));
-			example.add(id, statusStartTime,
-					new Literal(device.getStatusStartTime(), new Reference(
-							"http://www.w3.org/2001/XMLSchema#dateTime")));
-
+		String template = "";
+		if (did.contains("meter")) {
+			template = "meter.rdf";
+		} else if (did.contains("heating")) {
+			template = "heatingdevice.rdf";
+		} else if (did.contains("humidity")) {
+			template = "humiditysensor.rdf";
+		} else if (did.contains("iPad")) {
+			template = "iPad.rdf";
+		} else if (did.contains("laptop")) {
+			template = "laptop.rdf";
+		} else if (did.contains("lighting")) {
+			template = "lightingdevice.rdf";
+		} else if (did.contains("presence")) {
+			template = "presencesensor.rdf";
+		} else if (did.contains("temperature")) {
+			template = "temperaturesensor.rdf";
+		} else if (did.contains("vent")) {
+			template = "vent.rdf";
 		}
+		Configuration cfg = new Configuration();
 
-		return example.getRdfTurtleRepresentation();
+		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
+				"war:///WEB-INF/rdf");
+
+		cfg.setTemplateLoader(loader);
+
+		TemplateRepresentation rep = null;
+		final Map<String, Object> dataModel = new TreeMap<String, Object>();
+		dataModel.put("device", device);
+
+		rep = new TemplateRepresentation(template, cfg, dataModel,
+				MediaType.APPLICATION_RDF_TURTLE);
+
+		return rep;
 	}
-	
-	
-	private Device getDevice(String did) {
 
+	private Device getDevice(String did) {
 		String queryString = ""
-				+ "PREFIX : <http://jhess.googlecode.com/files/jhess.owl#>"
-				+ "SELECT ?description ?location ?inputpower ?unit ?status ?startime ?datacloud"
-				+ "WHERE {" + ":" + did + " :hasDescription ?description."
-				+ ":" + did + " :hasLocation ?location. " + ":" + did
-				+ " :hasInputPower ?inputpower. " + ":" + did
-				+ " :hasInputPowerUnit  ?unit. " + ":" + did
-				+ " :hasCurrentDeviceStatus ?status." + ":" + did
-				+ " :hasStatusStartTime ?startime. " + ":" + did
-				+ " :hasHistoryData ?datacloud." + "}";
+				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
+				+ "SELECT ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
+				+ "WHERE {" + " jhess:" + did
+				+ " jhess:hasDescription ?description." + " jhess:" + did
+				+ " jhess:hasLocation ?location. " + " jhess:" + did
+				+ " jhess:hasInputPower ?inputpower. " + " jhess:" + did
+				+ " jhess:hasInputPowerUnit  ?unit. " + " jhess:" + did
+				+ " jhess:hasCurrentDeviceStatus ?status." + " jhess:" + did
+				+ " jhess:hasStatusStartTime ?start. " + " jhess:" + did
+				+ " jhess:hasHistoryData ?datacloud." + "}";
 		QueryExecution qe = null;
 		Device result = new Device();
 		// Query
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+		String ontology = context.getAttribute("ontology").toString();
 		try {
-			ServletContext context = (ServletContext) getContext()
-					.getAttributes().get(
-							"org.restlet.ext.servlet.ServletContext");
 
-			Object model = context.getAttribute("ontology");
+			Model modelRDF = FileManager.get().loadModel(ontology);
+
 			Query query = QueryFactory.create(queryString);
-			qe = QueryExecutionFactory.create(query, (Model) model);
+			qe = QueryExecutionFactory.create(query, modelRDF);
 			ResultSet rs = qe.execSelect();
 
 			while (rs.hasNext()) {
@@ -123,13 +134,12 @@ public class DeviceResource extends ServerResource {
 				result.setInputPowerUnit(binding.getLiteral("unit").getString());
 				result.setCurrentDeviceStatus(binding.getLiteral("status")
 						.getString());
-				result.setStatusStartTime(binding.getLiteral("startime")
+				result.setStatusStartTime(binding.getLiteral("start")
 						.getString());
-
 			}
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		} finally {
 			qe.close();
 		}

@@ -2,7 +2,6 @@ package eu.tsp.hess;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -29,6 +28,7 @@ public class DeviceStatusResource extends ServerResource {
 
 		String did = (String) getRequestAttributes().get("did");
 		String status = (String) getRequestAttributes().get("status");
+		String time = "";
 
 		StringBuilder sb = new StringBuilder();
 

@@ -1,7 +1,6 @@
 package eu.tsp.hess;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -63,8 +62,21 @@ public class ApproachResource extends ServerResource {
 	}
 
 	private Representation processApproach3() throws ResourceException {
-		// TODO Auto-generated method stub
-		return null;
+		Configuration cfg = new Configuration();
+
+		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
+				"war:///view");
+
+		cfg.setTemplateLoader(loader);
+
+		TemplateRepresentation rep = null;
+		final Map<String, Object> dataModel = new TreeMap<String, Object>();
+		dataModel.put("pattern", "Completely!");
+
+		rep = new TemplateRepresentation("pattern.html", cfg, dataModel,
+				MediaType.TEXT_HTML);
+
+		return rep;
 	}
 
 	private Representation processApproach2() throws ResourceException {
@@ -110,7 +122,7 @@ public class ApproachResource extends ServerResource {
 
 		TemplateRepresentation rep = null;
 		final Map<String, Object> dataModel = new TreeMap<String, Object>();
-		dataModel.put("policy",ruleFile);
+		dataModel.put("policy", ruleFile);
 
 		rep = new TemplateRepresentation("policy.html", cfg, dataModel,
 				MediaType.TEXT_HTML);
@@ -130,13 +142,12 @@ public class ApproachResource extends ServerResource {
 		QueryExecution qe = null;
 		List<Device> devices = new ArrayList<Device>();
 		// Query
+
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+
+		String ontology = context.getAttribute("ontology").toString();
 		try {
-
-			ServletContext context = (ServletContext) getContext()
-					.getAttributes().get(
-							"org.restlet.ext.servlet.ServletContext");
-
-			String ontology = context.getAttribute("ontology").toString();
 
 			Model modelRDF = FileManager.get().loadModel(ontology);
 
@@ -163,7 +174,9 @@ public class ApproachResource extends ServerResource {
 			}
 
 		} catch (Exception e) {
+			
 			e.printStackTrace();
+			
 		} finally {
 			qe.close();
 		}

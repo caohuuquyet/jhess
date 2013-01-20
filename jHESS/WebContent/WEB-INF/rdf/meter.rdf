@@ -1,0 +1,15 @@
+@prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+jhess:${device.id} a jhess:Meter, owl:NamedIndividual;
+       jhess:hasDescription "${device.description}"^^xsd:string;
+       jhess:hasLocation jhess:${device.location};
+	   jhess:hasInputPower ${device.inputPower};
+	   jhess:hasInputPowerUnit "${device.inputPowerUnit}"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "${device.currentDeviceStatus}"^^xsd:string;
+	   jhess:hasStatusStartTime "${device.statusStartTime}"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.

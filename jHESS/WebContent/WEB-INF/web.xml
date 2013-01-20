@@ -4,7 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	<display-name>jHESS</display-name>
-
 	<context-param>
 		<param-name>ontology</param-name>
 		<param-value>/rdf/hess.ttl</param-value>
@@ -33,6 +32,4 @@
 		<servlet-name>RestletServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-
-
 </web-app>

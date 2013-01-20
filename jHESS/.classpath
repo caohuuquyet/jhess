@@ -13,40 +13,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-codec-1.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-httpclient-3.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/fuseki-0.2.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpclient-4.0.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/httpcore-4.0.1_1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/icu4j-3.4.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jena-arq-2.9.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jena-core-2.7.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jena-iri-0.9.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jena-sesame.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jena-tdb-0.9.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/junit-4.5.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.13.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/lucene-core-2.3.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/openrdf-sesame-2.6.0-onejar.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.freemarker.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.json.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.restlet.ext.freemarker.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.restlet.ext.json.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.restlet.ext.rdf.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.restlet.ext.servlet.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.restlet.ext.xml.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.restlet.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/owlim-3.0.beta12.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/owlim-big-3.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/sesame-repository-api-2.6.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/sesame-repository-sail-2.6.2.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/sjadapter.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.5.8.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-log4j12-1.5.8.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/wstx-asl-3.2.9.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xercesImpl-2.7.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
