@@ -16,8 +16,7 @@ import javax.servlet.http.HttpSessionBindingListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.util.FileManager;
+
 
 
 /**
@@ -44,8 +43,7 @@ HttpSessionListener
 		String rules = sc.getRealPath("/WEB-INF") + sc.getInitParameter("rules");
 		rules = rules.replaceAll("\\\\+", "/");
 		
-		Model model = FileManager.get().loadModel(ontology); 
-		sc.setAttribute("ontology", model);
+		sc.setAttribute("ontology", ontology);
 		sc.setAttribute("rules", rules);
 		
 	}

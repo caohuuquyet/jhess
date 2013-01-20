@@ -1,10 +1,11 @@
 package eu.tsp.hess;
 
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Writer;
 
 import javax.servlet.ServletContext;
 
@@ -18,23 +19,16 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
-import com.hp.hpl.jena.util.PrintUtil;
+import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 public class DeviceStatusResource extends ServerResource {
 
 	@Get
 	public String processStatus() throws JSONException {
+
 		String did = (String) getRequestAttributes().get("did");
 		String status = (String) getRequestAttributes().get("status");
-
-		ServletContext context = (ServletContext) getContext().getAttributes()
-				.get("org.restlet.ext.servlet.ServletContext");
-
-		Object modelRDF = context.getAttribute("ontology");
-
-		String ruleFile = context.getAttribute("rules").toString()
-				+ "temp.rules";
 
 		StringBuilder sb = new StringBuilder();
 
@@ -44,13 +38,45 @@ public class DeviceStatusResource extends ServerResource {
 					+ " jhess:hasCurrentDeviceStatus \"OFF\"^^xsd:string ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
 					+ did
 					+ " jhess:hasCurrentDeviceStatus \"ON\"^^xsd:string ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
-		} else {
+		} else if (status.equalsIgnoreCase("off")) {
 			sb.append("[r2:   (jhess:"
 					+ did
 					+ " jhess:hasCurrentDeviceStatus \"ON\"^^xsd:string ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
 					+ did
 					+ " jhess:hasCurrentDeviceStatus \"OFF\"^^xsd:string ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+		} else {
+			if (did.contains("sensor_temperature")) {
+				sb.append("[r3: (jhess:"
+						+ did
+						+ " jhess:hasCurrentTemperatureValue ?value ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
+						+ did
+						+ " jhess:hasCurrentTemperatureValue "
+						+ status
+						+ " ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+			} else if (did.contains("sensor_humidity")) {
+				sb.append("[r4: (jhess:"
+						+ did
+						+ " jhess:hasCurrentHumidityValue ?value ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
+						+ did
+						+ " jhess:hasCurrentHumidityValue "
+						+ status
+						+ " ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+			} else if (did.contains("sensor_presence")) {
+				sb.append("[r5: (jhess:"
+						+ did
+						+ " jhess:hasCurrentPresenceValue ?value ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
+						+ did
+						+ " jhess:hasCurrentPresenceValue \""
+						+ status
+						+ "\"^^xsd:boolean ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+			}
 		}
+
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+
+		String ruleFile = context.getAttribute("rules").toString()
+				+ "temp.rules";
 
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(ruleFile));
@@ -62,7 +88,7 @@ public class DeviceStatusResource extends ServerResource {
 			bw.newLine();
 			bw.write("@prefix owl:	<http://www.w3.org/2002/07/owl#>.");
 			bw.newLine();
-			bw.write("@prefix jhess: <http://www.hess.tsp.eu/2013/1/Maisel.owl#>.");
+			bw.write("@prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.");
 			bw.newLine();
 			bw.write(sb.toString());
 			bw.close();
@@ -72,6 +98,7 @@ public class DeviceStatusResource extends ServerResource {
 			e.printStackTrace();
 
 		}
+
 		Model model = ModelFactory.createDefaultModel();
 		Resource configuration = model.createResource();
 		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
@@ -79,17 +106,26 @@ public class DeviceStatusResource extends ServerResource {
 		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
 				configuration);
 
-		// Create inferred model using the reasoner and write it out.
-		InfModel infModel = ModelFactory.createInfModel(reasoner,
-				(Model) modelRDF);
+		String ontology = context.getAttribute("ontology").toString();
+		Model modelRDF = FileManager.get().loadModel(ontology);
+		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
 		infModel.prepare();
 
 		if (infModel != null) {
-			context.setAttribute("ontology", infModel);
-			// infModel.write(System.out);
+			context.setAttribute("ontology", ontology);
+			try {
+				// output inferences to file
+				File outFile = new File(ontology);
+				Writer writer = new FileWriter(outFile);
+				infModel.write(writer, "TURTLE");
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				System.out.println("Exception caught" + e.getMessage());
+			}
 		}
 
-		return did + ":" + status + sb.toString();
+		return did + ":" + status + ruleFile;
 
 	}
 }

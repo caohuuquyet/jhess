@@ -90,7 +90,7 @@ public class DeviceResource extends ServerResource {
 	private Device getDevice(String did) {
 
 		String queryString = ""
-				+ "PREFIX : <http://www.hess.tsp.eu/2013/1/Maisel.owl#>"
+				+ "PREFIX : <http://jhess.googlecode.com/files/jhess.owl#>"
 				+ "SELECT ?description ?location ?inputpower ?unit ?status ?startime ?datacloud"
 				+ "WHERE {" + ":" + did + " :hasDescription ?description."
 				+ ":" + did + " :hasLocation ?location. " + ":" + did
