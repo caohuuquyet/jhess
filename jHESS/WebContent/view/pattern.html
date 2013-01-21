@@ -44,10 +44,10 @@
 			<div class="servicelist">
 				<br />
 				<br />
-				<br /> <span class="title"> Finding the patterns, learning user behavior! </span>
+				<br /> <span class="title">Learning the patterns from user behaviors! </span>
 				<br />
 				<br />	
-				<table border="1" width="100%">
+				<table border="1" style="border-style:solid solid solid solid;" width="100%">
 					<tr>
 						<th>Time</th>
 						<th>Device</th>
@@ -56,7 +56,7 @@
 					<#list activities as activity>
 					<tr>
 						<td>${activity.time}</td>
-						<td>${activity.device}</td>
+						<td><a href="/jHESS/approach/${activity.device}">${activity.device}</a></td>
 						<td>${activity.value}</td>
 					</tr>
 					</#list>
@@ -68,7 +68,7 @@
 		</div>
 		<div class="clearfloat"></div>
 		<center>
-			<img src="/jHESS/view/images/bottomline.jpg" border="0"
+			<br/><img src="/jHESS/view/images/bottomline.jpg" border="0"
 				alt="jHess, Hybrid Energy Saving Service" /> <br />
 			<table align="center">
 				<tr>

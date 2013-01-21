@@ -52,14 +52,69 @@ public class ApproachResource extends ServerResource {
 		} else if (act.equalsIgnoreCase("3")) {
 			return processApproach3();
 		} else {
-			return processError();
+			return processApproach3Detail(act);
 		}
 
 	}
 
-	private Representation processError() throws ResourceException {
-		// TODO Auto-generated method stub
-		return null;
+	private Representation processApproach3Detail(String act) throws ResourceException {
+		String queryString = ""
+				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
+				+ " SELECT ?id ?value ?time"
+				+ " WHERE {"
+				+ " ?id jhess:hasActivity jhess:"+act+". ?id jhess:hasActivityValue ?value. ?id jhess:hasActivityTime ?time."
+				+ "}" + " ORDER BY DESC(?time) LIMIT 100";
+		QueryExecution qe = null;
+		List<Activity> activities = new ArrayList<Activity>();
+		// Query
+
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+
+		String ontology = context.getAttribute("ontology").toString();
+		try {
+
+			Model modelRDF = FileManager.get().loadModel(
+					ontology + "datacloud.ttl");
+
+			Query query = QueryFactory.create(queryString);
+			qe = QueryExecutionFactory.create(query, modelRDF);
+			ResultSet rs = qe.execSelect();
+
+			while (rs.hasNext()) {
+				Activity result = new Activity();
+				QuerySolution binding = rs.nextSolution();
+				result.setId(binding.getResource("id").getLocalName());
+				result.setDevice(act);
+				result.setValue(binding.getLiteral("value").getString());
+				result.setTime(binding.getLiteral("time").getString());
+
+				activities.add(result);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+			qe.close();
+		}
+
+		Configuration cfg = new Configuration();
+
+		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
+				"war:///view");
+
+		cfg.setTemplateLoader(loader);
+
+		TemplateRepresentation rep = null;
+		final Map<String, Object> dataModel = new TreeMap<String, Object>();
+		dataModel.put("activities", activities);
+
+		rep = new TemplateRepresentation("pattern.html", cfg, dataModel,
+				MediaType.TEXT_HTML);
+
+		return rep;
 	}
 
 	private Representation processApproach3() throws ResourceException {
