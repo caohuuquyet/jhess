@@ -71,7 +71,7 @@ public class DeviceResource extends ServerResource {
 			template = "iPad.rdf";
 		} else if (did.contains("laptop")) {
 			template = "laptop.rdf";
-		} else if (did.contains("lighting")) {
+		} else if (did.contains("light")) {
 			template = "lightingdevice.rdf";
 		} else if (did.contains("presence")) {
 			template = "presencesensor.rdf";
@@ -117,7 +117,7 @@ public class DeviceResource extends ServerResource {
 		String ontology = context.getAttribute("ontology").toString();
 		try {
 
-			Model modelRDF = FileManager.get().loadModel(ontology);
+			Model modelRDF = FileManager.get().loadModel(ontology+"hess.ttl");
 
 			Query query = QueryFactory.create(queryString);
 			qe = QueryExecutionFactory.create(query, modelRDF);

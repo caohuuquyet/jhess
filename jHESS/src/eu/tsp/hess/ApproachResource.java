@@ -94,7 +94,7 @@ public class ApproachResource extends ServerResource {
 				configuration);
 
 		String ontology = context.getAttribute("ontology").toString();
-		Model modelRDF = FileManager.get().loadModel(ontology);
+		Model modelRDF = FileManager.get().loadModel(ontology+"hess.ttl");
 
 		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
 		infModel.prepare();
@@ -103,7 +103,7 @@ public class ApproachResource extends ServerResource {
 			context.setAttribute("ontology", ontology);
 			try {
 				// output inferences to file
-				File outFile = new File(ontology);
+				File outFile = new File(ontology+"hess.ttl");
 				Writer writer = new FileWriter(outFile);
 				infModel.write(writer, "TURTLE");
 				writer.flush();
@@ -149,7 +149,7 @@ public class ApproachResource extends ServerResource {
 		String ontology = context.getAttribute("ontology").toString();
 		try {
 
-			Model modelRDF = FileManager.get().loadModel(ontology);
+			Model modelRDF = FileManager.get().loadModel(ontology+"hess.ttl");
 
 			Query query = QueryFactory.create(queryString);
 			qe = QueryExecutionFactory.create(query, modelRDF);

@@ -27,7 +27,7 @@ public class Device implements Serializable {
 			String statusStartTime, Object dataCloud) {
 		super();
 		this.id = id;
-		this.description = description;				
+		this.description = description;			
 		this.location = location;
 		this.inputPower = inputPower;
 		this.inputPowerUnit = inputPowerUnit;
