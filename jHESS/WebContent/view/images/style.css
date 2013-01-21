@@ -14,6 +14,15 @@ body{
 
 }
 
+.hlON{
+	text-decoration: blink;
+	color: red;
+}
+.hlOFF{
+	font-style:italic;
+	color: green;
+}
+
 /*2.*/
 .topmenu{
     

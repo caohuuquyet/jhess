@@ -30,21 +30,36 @@ public class DeviceStatusResource extends ServerResource {
 
 		String did = (String) getRequestAttributes().get("did");
 		String status = (String) getRequestAttributes().get("status");
+		Date now = new Date();
+
+		SimpleDateFormat dateFormatter = new SimpleDateFormat(
+				"yyyy-MM-dd'T'hh:mm:ss");
+		String dateTime = dateFormatter.format(now);
 
 		StringBuilder sb = new StringBuilder();
 
 		if (status.equalsIgnoreCase("on")) {
 			sb.append("[r1: (jhess:"
 					+ did
-					+ " jhess:hasCurrentDeviceStatus \"OFF\"^^xsd:string ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
+					+ " jhess:hasCurrentDeviceStatus \"OFF\"^^xsd:string ), (jhess:"
 					+ did
-					+ " jhess:hasCurrentDeviceStatus \"ON\"^^xsd:string ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+					+ " jhess:hasStatusStartTime ?time ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0),remove(1) (jhess:"
+					+ did
+					+ " jhess:hasCurrentDeviceStatus \"ON\"^^xsd:string ),  (jhess:"
+					+ did
+					+ " jhess:hasStatusStartTime \""+ dateTime +"\" ),(?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+
 		} else if (status.equalsIgnoreCase("off")) {
-			sb.append("[r2:   (jhess:"
+			sb.append("[r1: (jhess:" 
 					+ did
-					+ " jhess:hasCurrentDeviceStatus \"ON\"^^xsd:string ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
+					+ " jhess:hasCurrentDeviceStatus \"ON\"^^xsd:string ), (jhess:"
 					+ did
-					+ " jhess:hasCurrentDeviceStatus \"OFF\"^^xsd:string ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+					+ " jhess:hasStatusStartTime ?time ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0),remove(1) (jhess:"
+					+ did
+					+ " jhess:hasCurrentDeviceStatus \"OFF\"^^xsd:string ),  (jhess:"
+					+ did
+					+ " jhess:hasStatusStartTime \""+ dateTime +"\" ),(?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+
 		} else {
 			if (did.contains("sensor_temperature")) {
 				sb.append("[r3: (jhess:"
@@ -126,13 +141,9 @@ public class DeviceStatusResource extends ServerResource {
 			}
 		}
 
-		Date now = new Date();
-		SimpleDateFormat dateFormatter = new SimpleDateFormat(
-				"yyyy-MM-dd'T'hh:mm:ss");
-
-		addToDataCloud(dateFormatter.format(now), did, status);
+		addToDataCloud(dateTime, did, status);
 		// add this triple to datacloud
-		return dateFormatter.format(now) + "," + did + "," + status;
+		return dateTime + "," + did + "," + status;
 
 	}
 

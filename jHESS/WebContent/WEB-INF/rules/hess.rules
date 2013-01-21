@@ -29,7 +29,7 @@ hide(jhess:ruleFiredFor)
 
 [jhess3: 
 (jhess:d14_sensor_humidity jhess:hasCurrentHumidityValue ?value ), 
-greaterThan(?value,5),
+lessThan(?value,5),
 (jhess:d03_vent_bathroom jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
 noValue(?c jhess:ruleFiredFor jhess:jhessv) 
 -> 
