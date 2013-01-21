@@ -2,62 +2,80 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>jHess, Java Hybrid Energy Saving Service</title> 
-		<meta name="Keywords" content="jHess, Java Hybrid Energy Saving Service">
-		<meta name="Description" content="jHess, Java Hybrid Energy Saving Service">		
-        <link href="/jHESS/view/images/style.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body >
-        <div class="topmenu">
-                <div class="topmenuitem">					
-					<ul>   
-					     
-                            <li> <a href="#"> CONTACT</a> </li>							
-                            <li> <a href="#"> jHESS V1.0</a> </li>
-							<li>Welcome to Java Hybrid Energy Saving Service!</li>	
-					</ul>
-				</div>
-        </div>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jHess, Java Hybrid Energy Saving Service</title>
+<meta name="Keywords" content="jHess, Java Hybrid Energy Saving Service">
+<meta name="Description"
+	content="jHess, Java Hybrid Energy Saving Service">
+<link href="/jHESS/view/images/style.css" rel="stylesheet"
+	type="text/css" />
+</head>
+<body>
+	<div class="topmenu">
+		<div class="topmenuitem">
+			<ul>
 
-        <div class="container">
-            <div class="leftside">
-				<div class="hkhbox2">
-                    <img src="/jHESS/view/images/logo.jpg" border="0" />                
-			    </div>
-                <div class="hkhboxmenu">				
-                    <ul id="verticalmenu" class="glossymenu">                          
-                            <li> <a href="/jHESS/approach/1"> Approach 1</a> </li>
-							<li> <a href="/jHESS/approach/2"> Approach 2</a> </li>
-							<li> <a href="/jHESS/approach/3"> Approach 3</a> </li>	
-                    </ul>
-                </div>                                             
-            </div>
+				<li><a href="http://jhess.googlecode.com"> CONTACT</a></li>
+				<li><a href="http://jhess.googlecode.com"> jHESS V1.0</a></li>
+				<li>Welcome to Java Hybrid Energy Saving Service!</li>
+			</ul>
+		</div>
+	</div>
 
-            <div class="rightside">
-				<img src="/jHESS/view/images/topline.jpg" border="0" style="margin-top:10px;" align="right"/>
-				<div class="clearfloat"></div>
-				<div class="servicelist">
-					<br/><br/><br/>
-					<span class="title"> Process Completely! </span>  
-					
-					
-				</div>
-			</div>			
+	<div class="container">
+		<div class="leftside">
+			<div class="hkhbox2">
+				<img src="/jHESS/view/images/logo.jpg" border="0" />
+			</div>
+			<div class="hkhboxmenu">
+				<ul id="verticalmenu" class="glossymenu">
+					<li><a href="/jHESS/approach/1"> Approach 1</a></li>
+					<li><a href="/jHESS/approach/2"> Approach 2</a></li>
+					<li><a href="/jHESS/approach/3"> Approach 3</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="rightside">
+			<img src="/jHESS/view/images/topline.jpg" border="0"
+				style="margin-top: 10px;" align="right" />
 			<div class="clearfloat"></div>
-            <center>
-                <img src="/jHESS/view/images/bottomline.jpg" border="0" alt="jHess, Hybrid Energy Saving Service" /> <br/>
-                    <table align="center">
-                    <tr>
-                        <td align="center">
-							<b>&copy; Copyright 2013, Java Hybrid Energy Saving Service - jHESS V1.0</b> <br/>
-			            </td>
-                    </tr>
-                </table>
-            </center>
-        </div>
+			<div class="servicelist">
+				<br />
+				<br />
+				<br /> <span class="title"> Finding the patterns from list of
+					user behavior! </span>
+				<table border="1" width="100%">
+					<tr>
+						<th>Time</th>
+						<th>Device</th>
+						<th>Value</th>
+					</tr>
+					<#list activities as activity>
+					<tr>
+						<td>${activity.time}</td>
+						<td>${activity.device}</td>
+						<td>${activity.value}</td>
+					</tr>
+					</#list>
+				</table>
 
-    </body>
+			</div>
+		</div>
+		<div class="clearfloat"></div>
+		<center>
+			<img src="/jHESS/view/images/bottomline.jpg" border="0"
+				alt="jHess, Hybrid Energy Saving Service" /> <br />
+			<table align="center">
+				<tr>
+					<td align="center"><b>&copy; Copyright 2013, Java Hybrid
+							Energy Saving Service - jHESS V1.0</b> <br /></td>
+				</tr>
+			</table>
+		</center>
+	</div>
+
+</body>
 </html>
 

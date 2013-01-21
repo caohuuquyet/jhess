@@ -34,6 +34,7 @@ import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
+import eu.tsp.hess.dto.Activity;
 import eu.tsp.hess.dto.Device;
 import freemarker.template.Configuration;
 
@@ -62,6 +63,49 @@ public class ApproachResource extends ServerResource {
 	}
 
 	private Representation processApproach3() throws ResourceException {
+
+		String queryString = ""
+				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
+				+ " SELECT ?id ?device ?value ?time"
+				+ " WHERE {"
+				+ " ?id jhess:hasActivity ?device. ?id jhess:hasActivityValue ?value. ?id jhess:hasActivityTime ?time."
+				+ "}" + " ORDER BY DESC(?time) LIMIT 100";
+		QueryExecution qe = null;
+		List<Activity> activities = new ArrayList<Activity>();
+		// Query
+
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+
+		String ontology = context.getAttribute("ontology").toString();
+		try {
+
+			Model modelRDF = FileManager.get().loadModel(
+					ontology + "datacloud.ttl");
+
+			Query query = QueryFactory.create(queryString);
+			qe = QueryExecutionFactory.create(query, modelRDF);
+			ResultSet rs = qe.execSelect();
+
+			while (rs.hasNext()) {
+				Activity result = new Activity();
+				QuerySolution binding = rs.nextSolution();
+				result.setId(binding.getResource("id").getLocalName());
+				result.setDevice(binding.getResource("device").getLocalName());
+				result.setValue(binding.getLiteral("value").getString());
+				result.setTime(binding.getLiteral("time").getString());
+
+				activities.add(result);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		} finally {
+			qe.close();
+		}
+
 		Configuration cfg = new Configuration();
 
 		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
@@ -71,7 +115,7 @@ public class ApproachResource extends ServerResource {
 
 		TemplateRepresentation rep = null;
 		final Map<String, Object> dataModel = new TreeMap<String, Object>();
-		dataModel.put("pattern", "Completely!");
+		dataModel.put("activities", activities);
 
 		rep = new TemplateRepresentation("pattern.html", cfg, dataModel,
 				MediaType.TEXT_HTML);
@@ -94,7 +138,7 @@ public class ApproachResource extends ServerResource {
 				configuration);
 
 		String ontology = context.getAttribute("ontology").toString();
-		Model modelRDF = FileManager.get().loadModel(ontology+"hess.ttl");
+		Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
 
 		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
 		infModel.prepare();
@@ -103,7 +147,7 @@ public class ApproachResource extends ServerResource {
 			context.setAttribute("ontology", ontology);
 			try {
 				// output inferences to file
-				File outFile = new File(ontology+"hess.ttl");
+				File outFile = new File(ontology + "hess.ttl");
 				Writer writer = new FileWriter(outFile);
 				infModel.write(writer, "TURTLE");
 				writer.flush();
@@ -149,7 +193,7 @@ public class ApproachResource extends ServerResource {
 		String ontology = context.getAttribute("ontology").toString();
 		try {
 
-			Model modelRDF = FileManager.get().loadModel(ontology+"hess.ttl");
+			Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
 
 			Query query = QueryFactory.create(queryString);
 			qe = QueryExecutionFactory.create(query, modelRDF);
@@ -174,9 +218,9 @@ public class ApproachResource extends ServerResource {
 			}
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
-			
+
 		} finally {
 			qe.close();
 		}
