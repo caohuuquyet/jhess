@@ -41,7 +41,7 @@ import freemarker.template.Configuration;
 public class ApproachResource extends ServerResource {
 
 	@Get("html")
-	public Representation process() throws ResourceException {
+	public Representation toHTML() throws ResourceException {
 
 		String act = (String) getRequestAttributes().get("act");
 
@@ -54,6 +54,37 @@ public class ApproachResource extends ServerResource {
 		} else {
 			return processApproach3Detail(act);
 		}
+
+	}
+
+	@Get("rdf")
+	public Representation toRDF() throws ResourceException {
+		String act = (String) getRequestAttributes().get("act");
+		String rdfTemplate = "";
+
+		if (act.equalsIgnoreCase("1")) {
+			rdfTemplate = "rdf/hess.ttl";
+		} else if (act.equalsIgnoreCase("2")) {
+			rdfTemplate = "rules/hess.rules";
+		} else if (act.equalsIgnoreCase("3")) {
+			rdfTemplate = "rdf/datacloud.ttl";
+		} 
+
+		Configuration cfg = new Configuration();
+
+		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
+				"war:///WEB-INF");
+
+		cfg.setTemplateLoader(loader);
+
+		TemplateRepresentation rep = null;
+		final Map<String, Object> dataModel = new TreeMap<String, Object>();
+		// dataModel.put("devices", devices);
+
+		rep = new TemplateRepresentation(rdfTemplate, cfg, dataModel,
+				MediaType.TEXT_HTML);
+
+		return rep;
 
 	}
 
@@ -235,7 +266,7 @@ public class ApproachResource extends ServerResource {
 
 	private Representation processApproach1() throws ResourceException {
 		// TODO Auto-generated method stub
-		   
+
 		String queryString = ""
 				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
 				+ " SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
