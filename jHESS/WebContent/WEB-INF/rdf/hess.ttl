@@ -22,7 +22,6 @@ jhess:d01_meter_entrance a jhess:Meter, owl:NamedIndividual;
 	   jhess:hasCurrentMeasureValue 100;
 	   jhess:hasMeasureUnit "W"^^xsd:string;
 	   jhess:isMeasuringFor jhess:hess;
-	   jhess:hasMeasureStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   
 	   jhess:hasHistoryData jhess:cloud_of_data.
 	

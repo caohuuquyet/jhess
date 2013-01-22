@@ -89,10 +89,6 @@ jhess:isMeasuringFor a owl:ObjectProperty ;
         rdfs:domain jhess:Meter;
         rdfs:range jhess:Resident.
 		
-jhess:hasMeasureStartTime a owl:DatatypeProperty ;                   
-        rdfs:domain jhess:Meter;
-        rdfs:range xsd:dateTime.
-		
 # for temperature sensors
 jhess:hasCurrentTemperatureValue a owl:DatatypeProperty ;                   
         rdfs:domain jhess:TemperatureSensor;
