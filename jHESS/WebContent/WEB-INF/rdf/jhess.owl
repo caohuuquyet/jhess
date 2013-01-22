@@ -73,9 +73,8 @@ jhess:hasStatusStartTime a owl:DatatypeProperty;
 	    rdfs:domain jhess:Device;
 		rdfs:range xsd:dateTime.
 
-jhess:hasHistoryData a owl:ObjectProperty ;                   
-        rdfs:domain jhess:Device;
-        rdfs:range jhess:DataCloud.
+jhess:hasHistoryData a owl:DatatypeProperty;                   
+        rdfs:domain jhess:Device.
 
 # for meters
 jhess:hasCurrentMeasureValue a owl:DatatypeProperty;

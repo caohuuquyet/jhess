@@ -93,15 +93,35 @@ public class DeviceResource extends ServerResource {
 	private Device getDevice(String did) {
 		String queryString = ""
 				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
-				+ "SELECT ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
-				+ "WHERE {" + " jhess:" + did
-				+ " jhess:hasDescription ?description." + " jhess:" + did
-				+ " jhess:hasLocation ?location. " + " jhess:" + did
-				+ " jhess:hasInputPower ?inputpower. " + " jhess:" + did
-				+ " jhess:hasInputPowerUnit  ?unit. " + " jhess:" + did
-				+ " jhess:hasCurrentDeviceStatus ?status." + " jhess:" + did
-				+ " jhess:hasStatusStartTime ?start. " + " jhess:" + did
-				+ " jhess:hasHistoryData ?datacloud." + "}";
+				+ " SELECT ?description ?location ?inputpower ?unit ?status ?start ?datacloud "
+				+ " WHERE {"
+				+ " jhess:"
+				+ did
+				+ " jhess:hasDescription ?description."
+				+ " jhess:"
+				+ did
+				+ " jhess:hasLocation ?location. "
+				+ " jhess:"
+				+ did
+				+ " jhess:hasInputPower ?inputpower. "
+				+ " jhess:"
+				+ did
+				+ " jhess:hasInputPowerUnit  ?unit. "
+				+ " jhess:"
+				+ did
+				+ " jhess:hasCurrentDeviceStatus ?status."
+				+ " jhess:"
+				+ did
+				+ " jhess:hasStatusStartTime ?start. "
+				+ " OPTIONAL { jhess:"
+				+ did
+				+ "  jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL {jhess:"
+				+ did
+				+ "  jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL {jhess:"
+				+ did
+				+ "  jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL {jhess:"
+				+ did
+				+ "  jhess:hasCurrentHumidityValue ?datacloud }}";
 		QueryExecution qe = null;
 		Device result = new Device();
 		// Query
@@ -110,7 +130,7 @@ public class DeviceResource extends ServerResource {
 		String ontology = context.getAttribute("ontology").toString();
 		try {
 
-			Model modelRDF = FileManager.get().loadModel(ontology+"hess.ttl");
+			Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
 
 			Query query = QueryFactory.create(queryString);
 			qe = QueryExecutionFactory.create(query, modelRDF);
@@ -129,6 +149,14 @@ public class DeviceResource extends ServerResource {
 						.getString());
 				result.setStatusStartTime(binding.getLiteral("start")
 						.getString());
+				if (binding.getLiteral("datacloud") != null) {
+					result.setDataCloud(binding.getLiteral("datacloud")
+							.getString());
+				} else {
+					result.setDataCloud(new String(""));
+
+				}
+
 			}
 
 		} catch (Exception e) {

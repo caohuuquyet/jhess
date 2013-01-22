@@ -85,6 +85,14 @@ public class DeviceStatusResource extends ServerResource {
 						+ " jhess:hasCurrentPresenceValue \""
 						+ status
 						+ "\"^^xsd:boolean ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
+			}  else if (did.contains("meter")) {
+				sb.append("[r6: (jhess:"
+						+ did
+						+ " jhess:hasCurrentMeasureValue ?value ), noValue(?c jhess:ruleFiredFor jhess:jhessv) -> remove(0), (jhess:"
+						+ did
+						+ " jhess:hasCurrentMeasureValue \""
+						+ status
+						+ "\"^^xsd:int ), (?c jhess:ruleFiredFor jhess:jhessv),	hide(jhess:ruleFiredFor)] ");
 			}
 		}
 

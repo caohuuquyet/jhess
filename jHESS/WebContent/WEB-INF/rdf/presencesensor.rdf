@@ -14,4 +14,4 @@ jhess:${device.id} a jhess:HeatingDevice, owl:NamedIndividual;
 	   jhess:hasStatusStartTime "${device.statusStartTime}"^^xsd:dateTime;
 	   jhess:hasHistoryData jhess:cloud_of_data;
 	   
-	   jhess:hasCurrentPresenceValue "false"^^xsd:boolean.
+	   jhess:hasCurrentPresenceValue "${device.dataCloud}"^^xsd:boolean.

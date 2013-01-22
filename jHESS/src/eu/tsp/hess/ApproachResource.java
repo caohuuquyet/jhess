@@ -57,12 +57,15 @@ public class ApproachResource extends ServerResource {
 
 	}
 
-	private Representation processApproach3Detail(String act) throws ResourceException {
+	private Representation processApproach3Detail(String act)
+			throws ResourceException {
 		String queryString = ""
 				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
 				+ " SELECT ?id ?value ?time"
 				+ " WHERE {"
-				+ " ?id jhess:hasActivity jhess:"+act+". ?id jhess:hasActivityValue ?value. ?id jhess:hasActivityTime ?time."
+				+ " ?id jhess:hasActivity jhess:"
+				+ act
+				+ ". ?id jhess:hasActivityValue ?value. ?id jhess:hasActivityTime ?time."
 				+ "}" + " ORDER BY DESC(?time) LIMIT 100";
 		QueryExecution qe = null;
 		List<Activity> activities = new ArrayList<Activity>();
@@ -232,12 +235,14 @@ public class ApproachResource extends ServerResource {
 
 	private Representation processApproach1() throws ResourceException {
 		// TODO Auto-generated method stub
+		   
 		String queryString = ""
 				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
-				+ "SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
-				+ "WHERE {"
-				+ " ?id jhess:hasDescription ?description. ?id jhess:hasLocation ?location. ?id jhess:hasInputPower ?inputpower. ?id jhess:hasInputPowerUnit  ?unit. ?id jhess:hasCurrentDeviceStatus ?status.?id jhess:hasStatusStartTime ?start. ?id jhess:hasHistoryData ?datacloud."
-				+ "}" + "ORDER BY ASC(?id)";
+				+ " SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
+				+ " WHERE {"
+				+ " ?id jhess:hasDescription ?description. ?id jhess:hasLocation ?location. ?id jhess:hasInputPower ?inputpower. ?id jhess:hasInputPowerUnit  ?unit. ?id jhess:hasCurrentDeviceStatus ?status.?id jhess:hasStatusStartTime ?start. "
+				+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }}"
+				+ " ORDER BY ASC(?id)";
 		QueryExecution qe = null;
 		List<Device> devices = new ArrayList<Device>();
 		// Query
@@ -268,6 +273,13 @@ public class ApproachResource extends ServerResource {
 						.getString());
 				result.setStatusStartTime(binding.getLiteral("start")
 						.getString());
+				if (binding.getLiteral("datacloud") != null) {
+					result.setDataCloud(binding.getLiteral("datacloud")
+							.getString());
+				} else {
+					result.setDataCloud(new String(""));
+
+				}
 
 				devices.add(result);
 			}

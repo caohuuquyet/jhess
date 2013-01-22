@@ -12,4 +12,8 @@ jhess:${device.id} a jhess:Meter, owl:NamedIndividual;
 	   jhess:hasInputPowerUnit "${device.inputPowerUnit}"^^xsd:string;
 	   jhess:hasCurrentDeviceStatus "${device.currentDeviceStatus}"^^xsd:string;
 	   jhess:hasStatusStartTime "${device.statusStartTime}"^^xsd:dateTime;
+	   jhess:hasCurrentMeasureValue "${device.dataCloud}"^^xsd:int;
+	   jhess:hasMeasureUnit "W"^^xsd:string;
+	   jhess:isMeasuringFor jhess:hess;
+	   jhess:hasMeasureStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
 	   jhess:hasHistoryData jhess:cloud_of_data.

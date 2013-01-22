@@ -14,6 +14,6 @@ jhess:${device.id} a jhess:HeatingDevice, owl:NamedIndividual;
 	   jhess:hasStatusStartTime "${device.statusStartTime}"^^xsd:dateTime;
 	   jhess:hasHistoryData jhess:cloud_of_data;
 	   
-	   jhess:hasCurrentHumidityValue 10;
+	   jhess:hasCurrentHumidityValue "${device.dataCloud}"^^xsd:int;
 	   jhess:hasHumidityUnit "%"^^xsd:string.
 	   
