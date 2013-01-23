@@ -151,6 +151,7 @@ public class DeviceStatusResource extends ServerResource {
 
 		addToDataCloud(dateTime, did, status);
 		// add this triple to datacloud
+		getResponse().redirectSeeOther("/jHESS/approach/1");
 		return dateTime + "," + did + "," + status;
 
 	}
