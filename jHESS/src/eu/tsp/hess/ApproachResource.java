@@ -62,13 +62,6 @@ public class ApproachResource extends ServerResource {
 		String act = (String) getRequestAttributes().get("act");
 		String rdfTemplate = "";
 
-		if (act.equalsIgnoreCase("1")) {
-			rdfTemplate = "rdf/hess.ttl";
-		} else if (act.equalsIgnoreCase("2")) {
-			rdfTemplate = "rules/hess.rules";
-		} else if (act.equalsIgnoreCase("3")) {
-			rdfTemplate = "rdf/datacloud.ttl";
-		} 
 
 		Configuration cfg = new Configuration();
 
@@ -81,8 +74,23 @@ public class ApproachResource extends ServerResource {
 		final Map<String, Object> dataModel = new TreeMap<String, Object>();
 		// dataModel.put("devices", devices);
 
-		rep = new TemplateRepresentation(rdfTemplate, cfg, dataModel,
-				MediaType.TEXT_HTML);
+		if (act.equalsIgnoreCase("1")) {
+			rdfTemplate = "rdf/hess.ttl";
+			rep = new TemplateRepresentation(rdfTemplate, cfg, dataModel,
+					MediaType.APPLICATION_RDF_TURTLE);
+
+		} else if (act.equalsIgnoreCase("2")) {
+			rdfTemplate = "rules/hess.rules";
+			rep = new TemplateRepresentation(rdfTemplate, cfg, dataModel,
+					MediaType.TEXT_PLAIN);
+
+		} else if (act.equalsIgnoreCase("3")) {
+			rdfTemplate = "rdf/datacloud.ttl";
+			rep = new TemplateRepresentation(rdfTemplate, cfg, dataModel,
+					MediaType.APPLICATION_RDF_TURTLE);
+
+		} 
+
 
 		return rep;
 
