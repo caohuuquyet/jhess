@@ -267,6 +267,9 @@ public class ApproachResource extends ServerResource {
 
 		rep = new TemplateRepresentation("policy.html", cfg, dataModel,
 				MediaType.TEXT_HTML);
+		
+		getResponse().redirectSeeOther("/jHESS/approach/1");
+		
 
 		return rep;
 
