@@ -8,33 +8,33 @@
 (jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
 greaterThan(?value,25), 
 (jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
-noValue(?c jhess:ruleFiredFor jhess:jhessv) 
+noValue(?c jhess:ruleFiredFora jhess:jhessv) 
 -> 
 remove(2), 
 (jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), 
-(?c jhess:ruleFiredFor jhess:jhessv),	
-hide(jhess:ruleFiredFor)
+(?c jhess:ruleFiredFora jhess:jhessv),	
+hide(jhess:ruleFiredFora)
 ]
 
 [jhess2:
 (jhess:d13_sensor_presence jhess:hasCurrentPresenceValue "false"^^xsd:boolean), 
-(jhess:d02_lightfitting_entrance jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
-noValue(?c jhess:ruleFiredFor jhess:jhessv) 
+(jhess:d02_lightfitting_entrance jhess:hasCurrentDeviceStatus "ON"^^xsd:string ),
+noValue(?c jhess:ruleFiredForb jhess:jhessv) 
 -> 
 remove(1), 
 (jhess:d02_lightfitting_entrance jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), 
-(?c jhess:ruleFiredFor jhess:jhessv),
-hide(jhess:ruleFiredFor)
+(?c jhess:ruleFiredForb jhess:jhessv),
+hide(jhess:ruleFiredForb)
 ] 
 
 [jhess3: 
 (jhess:d14_sensor_humidity jhess:hasCurrentHumidityValue ?value ), 
 lessThan(?value,5),
 (jhess:d03_vent_bathroom jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
-noValue(?c jhess:ruleFiredFor jhess:jhessv) 
+noValue(?c jhess:ruleFiredForc jhess:jhessv) 
 -> 
 remove(2), 
 (jhess:d03_vent_bathroom jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), 
-(?c jhess:ruleFiredFor jhess:jhessv),	
-hide(jhess:ruleFiredFor)
+(?c jhess:ruleFiredForc jhess:jhessv),	
+hide(jhess:ruleFiredForc)
 ]
