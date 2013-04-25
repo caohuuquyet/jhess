@@ -161,7 +161,8 @@ public class ApproachResource extends ServerResource {
 				+ "pattern.rules";
 		String result = "";
 
-		double minsup = 0.6; // means a minsup of 2 transaction (we used a
+		
+		double minsup = Double.parseDouble(context.getAttribute("minsup").toString()); // means a minsup of 2 transaction (we used a
 								// relative support)
 
 		// Applying the Apriori algorithm

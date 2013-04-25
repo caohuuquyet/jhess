@@ -42,9 +42,12 @@ HttpSessionListener
 		ontology = ontology.replaceAll("\\\\+", "/");
 		String rules = sc.getRealPath("/WEB-INF") + sc.getInitParameter("rules");
 		rules = rules.replaceAll("\\\\+", "/");
+		String minsup = sc.getInitParameter("minsup");
+		
 		
 		sc.setAttribute("ontology", ontology);
 		sc.setAttribute("rules", rules);
+		sc.setAttribute("minsup", minsup);
 		
 	}
 
