@@ -161,9 +161,9 @@ public class ApproachResource extends ServerResource {
 				+ "pattern.rules";
 		String result = "";
 
-		
-		double minsup = Double.parseDouble(context.getAttribute("minsup").toString()); // means a minsup of 2 transaction (we used a
-								// relative support)
+		double minsup = Double.parseDouble(context.getAttribute("minsup")
+				.toString()); // means a minsup of 2 transaction (we used a
+		// relative support)
 
 		// Applying the Apriori algorithm
 		PatternMining_SaveToFile apriori = new PatternMining_SaveToFile();
@@ -183,8 +183,10 @@ public class ApproachResource extends ServerResource {
 			e.printStackTrace();
 		}
 
-		dataModel.put("temppattern", " <br/><b>Pattern Mining: Turn OFF device "+ act+" (MinSup ="+minsup*100+"%):</b> <br/>"
-				+ result);
+		dataModel.put("temppattern",
+				" <br/><b>Pattern Mining: Turn OFF device " + act
+						+ " (MinSup =" + minsup * 100 + "%):</b> <br/>"
+						+ result);
 
 		rep = new TemplateRepresentation("patterndetail.html", cfg, dataModel,
 				MediaType.TEXT_HTML);
@@ -220,12 +222,20 @@ public class ApproachResource extends ServerResource {
 			while (rs.hasNext()) {
 				Activity result = new Activity();
 				QuerySolution binding = rs.nextSolution();
-				result.setId(binding.getResource("id").getLocalName());
-				result.setDevice(binding.getResource("device").getLocalName());
+				String id = binding.getResource("id").getLocalName();
+				result.setId(id);
+				
+				String device = binding.getResource("device").getLocalName();
+				result.setDevice(device);
+				
 				result.setValue(binding.getLiteral("value").getString());
 				result.setTime(binding.getLiteral("time").getString());
 
-				activities.add(result);
+				if ((device.indexOf("sensor") >= 0) || (device.indexOf("meter") >= 0)) {
+
+				} else {
+					activities.add(result);
+				}
 			}
 
 		} catch (Exception e) {

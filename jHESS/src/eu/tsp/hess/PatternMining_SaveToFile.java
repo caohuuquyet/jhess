@@ -317,6 +317,8 @@ import java.util.Map.Entry;
 		public void saveItemsetToFile(Integer item, Integer support, int transactionCount) throws IOException {
 			writer.write(item/100 + "h"+ (item%100!=0?item%100+"":"") + " support: " + (support/(1.0*transactionCount) *100) +"%");
 			writer.newLine();
+			//TODO: Automatically Convert to Rule
+			
 			itemsetCount++;
 		}
 		
