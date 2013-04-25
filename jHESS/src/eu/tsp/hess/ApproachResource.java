@@ -7,8 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import javax.servlet.ServletContext;
@@ -157,6 +159,8 @@ public class ApproachResource extends ServerResource {
 
 		String input = context.getAttribute("ontology").toString()
 				+ "pattern.ttl";
+		convertToFile(activities, input);
+
 		String output = context.getAttribute("rules").toString()
 				+ "pattern.rules";
 		String result = "";
@@ -184,7 +188,7 @@ public class ApproachResource extends ServerResource {
 		}
 
 		dataModel.put("temppattern",
-				" <br/><b>Pattern Mining: Turn OFF device " + act
+				" <br/><b>Pattern Mining for Turning OFF device " + act
 						+ " (MinSup =" + minsup * 100 + "%):</b> <br/>"
 						+ result);
 
@@ -192,6 +196,55 @@ public class ApproachResource extends ServerResource {
 				MediaType.TEXT_HTML);
 
 		return rep;
+	}
+
+	private void convertToFile(List<Activity> list, String fileName) {
+		// TODO
+
+		// convert list to map
+		TreeMap<String, String> map = new TreeMap<String, String>();
+		Iterator<Activity> itr = list.iterator();
+
+		while (itr.hasNext()) {
+			Activity act = (Activity) itr.next();
+			String time = act.getTime();
+			String day = time.substring(0, 9);
+			int h = Integer.parseInt(time.substring(11, 12));
+			int m = Integer.parseInt(time.substring(14, 15));
+
+			if (act.getValue().equalsIgnoreCase("off")) {
+				if (map.containsKey(day)) {
+					// update
+					String newValue = map.get(day) + " " + h + "" + m;
+					map.remove(day);
+					map.put(day, newValue);
+				} else {
+					// add
+					map.put(day, h + "" + m);
+
+				}
+			}
+
+		}// end of while
+
+		// save treemap to file
+		Set<Map.Entry<String, String>> set = map.entrySet();
+		String p = new String();
+		// String p = "";
+		try {
+			FileWriter fOut = new FileWriter(fileName);
+			for (Map.Entry<String, String> me : set) {
+				p = me.getValue();
+				// p=mey.getKey();
+				fOut.write(p);
+
+			}
+			fOut.close();
+		} catch (IOException e) {
+
+			return;
+		}
+
 	}
 
 	private Representation processApproach3() throws ResourceException {
@@ -224,14 +277,15 @@ public class ApproachResource extends ServerResource {
 				QuerySolution binding = rs.nextSolution();
 				String id = binding.getResource("id").getLocalName();
 				result.setId(id);
-				
+
 				String device = binding.getResource("device").getLocalName();
 				result.setDevice(device);
-				
+
 				result.setValue(binding.getLiteral("value").getString());
 				result.setTime(binding.getLiteral("time").getString());
 
-				if ((device.indexOf("sensor") >= 0) || (device.indexOf("meter") >= 0)) {
+				if ((device.indexOf("sensor") >= 0)
+						|| (device.indexOf("meter") >= 0)) {
 
 				} else {
 					activities.add(result);
