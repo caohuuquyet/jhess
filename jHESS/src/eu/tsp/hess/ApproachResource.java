@@ -1,6 +1,8 @@
 package eu.tsp.hess;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -18,6 +20,8 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
+
+import ca.pfv.spmf.frequentpatterns.apriori_optimized.AlgoApriori_saveToFile;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -62,7 +66,6 @@ public class ApproachResource extends ServerResource {
 		String act = (String) getRequestAttributes().get("act");
 		String rdfTemplate = "";
 
-
 		Configuration cfg = new Configuration();
 
 		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
@@ -89,8 +92,7 @@ public class ApproachResource extends ServerResource {
 			rep = new TemplateRepresentation(rdfTemplate, cfg, dataModel,
 					MediaType.APPLICATION_RDF_TURTLE);
 
-		} 
-
+		}
 
 		return rep;
 
@@ -153,7 +155,37 @@ public class ApproachResource extends ServerResource {
 		final Map<String, Object> dataModel = new TreeMap<String, Object>();
 		dataModel.put("activities", activities);
 
-		rep = new TemplateRepresentation("pattern.html", cfg, dataModel,
+		String input = context.getAttribute("ontology").toString()
+				+ "pattern.ttl";
+		String output = context.getAttribute("rules").toString()
+				+ "pattern.rules";
+		String result = "";
+
+		double minsup = 0.6; // means a minsup of 2 transaction (we used a
+								// relative support)
+
+		// Applying the Apriori algorithm
+		PatternMining_SaveToFile apriori = new PatternMining_SaveToFile();
+		try {
+			apriori.runAlgorithm(minsup, input, output, act);
+			// Read in the file into a list of strings
+			BufferedReader reader = new BufferedReader(new FileReader(output));
+
+			String line = reader.readLine();
+
+			while (line != null) {
+				result += line + "<br/>";
+				line = reader.readLine();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		dataModel.put("temppattern", " <br/><b>Pattern Mining: Turn OFF device "+ act+" (MinSup ="+minsup*100+"%):</b> <br/>"
+				+ result);
+
+		rep = new TemplateRepresentation("patterndetail.html", cfg, dataModel,
 				MediaType.TEXT_HTML);
 
 		return rep;
@@ -267,9 +299,8 @@ public class ApproachResource extends ServerResource {
 
 		rep = new TemplateRepresentation("policy.html", cfg, dataModel,
 				MediaType.TEXT_HTML);
-		
+
 		getResponse().redirectSeeOther("/jHESS/approach/1");
-		
 
 		return rep;
 
