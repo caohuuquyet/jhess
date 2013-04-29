@@ -14,7 +14,7 @@
 	</context-param>
 	<context-param>
 		<param-name>minsup</param-name>
-		<param-value>0.7</param-value>
+		<param-value>0.5</param-value>
 	</context-param>
 	<listener>
 		<listener-class>eu.tsp.hess.SmartHomeContextListener</listener-class>
