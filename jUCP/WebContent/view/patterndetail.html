@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jUCP, Java Usage Control Policy</title>
+<meta name="Keywords" content="jUCP, Java Hybrid Energy Saving Service">
+<meta name="Description"
+	content="jUCP, Java Hybrid Energy Saving Service">
+<link href="/jUCP/view/images/style.css" rel="stylesheet"
+	type="text/css" />
+</head>
+<body>
+	<div class="topmenu">
+		<div class="topmenuitem">
+			<ul>
+
+				<li><a href="http://jUCP.googlecode.com"> CONTACT</a></li>
+				<li><a href="http://jUCP.googlecode.com"> jUCP V1.0</a></li>
+				<li>Welcome to Java Usage Control Policy!</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="leftside">
+			<div class="hkhbox2">
+				<img src="/jUCP/view/images/logo.jpg" border="0" />
+			</div>
+			<div class="hkhboxmenu">
+				<ul id="verticalmenu" class="glossymenu">
+					<li><a href="/jUCP/approach/1"> Approach 1</a></li>
+					<li><a href="/jUCP/approach/2"> Approach 2</a></li>
+					<li><a href="/jUCP/approach/3"> Approach 3</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="rightside">
+			<img src="/jUCP/view/images/topline.jpg" border="0"
+				style="margin-top: 10px;" align="right" />
+			<div class="clearfloat"></div>
+			<div class="servicelist">
+				<br />
+				<br />
+				<br /> <span class="title">Learning the patterns from user behaviors! </span>
+				<br />
+				<br />	
+				<table border="1" style="border-style:solid solid solid solid;" width="100%">
+					<tr>
+						<th>Time</th>
+						<th>Device</th>
+						<th>Value</th>
+					</tr>
+					<#list activities as activity>
+					<tr>
+						<td>${activity.time}</td>
+						<td><a href="/jUCP/approach/${activity.device}">${activity.device}</a></td>
+						<td>${activity.value}</td>
+					</tr>
+					</#list>
+					
+				</table>
+				<br />	
+				<table>
+					<tr>
+						<td colspan="3">${temppattern}</td>						
+					</tr>
+				</table>
+				
+			</div>
+		</div>
+		<div class="clearfloat"></div>
+		<center>
+			<br/><img src="/jUCP/view/images/bottomline.jpg" border="0"
+				alt="jUCP, Hybrid Energy Saving Service" /> <br />
+			<table align="center">
+				<tr>
+					<td align="center"><b>&copy; Copyright 2013, Java Usage Control Policy - jUCP V1.0</b> <br /></td>
+				</tr>
+			</table>
+		</center>
+	</div>
+
+</body>
+</html>
+

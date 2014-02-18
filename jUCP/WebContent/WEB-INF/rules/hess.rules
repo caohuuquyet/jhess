@@ -1,0 +1,40 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl:	<http://www.w3.org/2002/07/owl#>.
+@prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.
+
+[jhess1: 
+(jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
+greaterThan(?value,25), 
+(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
+noValue(?c jhess:ruleFiredFora jhess:jhessv) 
+-> 
+remove(2), 
+(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), 
+(?c jhess:ruleFiredFora jhess:jhessv),	
+hide(jhess:ruleFiredFora)
+]
+
+[jhess2:
+(jhess:d13_sensor_presence jhess:hasCurrentPresenceValue "false"^^xsd:boolean), 
+(jhess:d02_lightfitting_entrance jhess:hasCurrentDeviceStatus "ON"^^xsd:string ),
+noValue(?c jhess:ruleFiredForb jhess:jhessv) 
+-> 
+remove(1), 
+(jhess:d02_lightfitting_entrance jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), 
+(?c jhess:ruleFiredForb jhess:jhessv),
+hide(jhess:ruleFiredForb)
+] 
+
+[jhess3: 
+(jhess:d14_sensor_humidity jhess:hasCurrentHumidityValue ?value ), 
+lessThan(?value,5),
+(jhess:d03_vent_bathroom jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
+noValue(?c jhess:ruleFiredForc jhess:jhessv) 
+-> 
+remove(2), 
+(jhess:d03_vent_bathroom jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), 
+(?c jhess:ruleFiredForc jhess:jhessv),	
+hide(jhess:ruleFiredForc)
+]

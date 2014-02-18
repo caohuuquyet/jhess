@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>jUCP</display-name>
+  <context-param>
+		<param-name>ontology</param-name>
+		<param-value>/rdf/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>rules</param-name>
+		<param-value>/rules/</param-value>
+	</context-param>
+	<context-param>
+		<param-name>minsup</param-name>
+		<param-value>0.5</param-value>
+	</context-param>
+	<listener>
+		<listener-class>com.orange.ucp.SmartHomeContextListener</listener-class>
+	</listener>
+	<!-- Application class name -->
+	<context-param>
+		<param-name>org.restlet.application</param-name>
+		<param-value>com.orange.ucp.RouterApplication</param-value>
+	</context-param>
+
+	<!-- Restlet adapter -->
+	<servlet>
+		<servlet-name>RestletServlet</servlet-name>
+		<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+	</servlet>
+
+	<!-- Catch all requests -->
+	<servlet-mapping>
+		<servlet-name>RestletServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>
