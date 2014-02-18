@@ -17,6 +17,10 @@ function changeValue(did, value){
     	window.location = "/jUCP/device/"+did+"/"+promptValue;
     }
 }
+
+
+function ucp() { document.getElementById("label").innerHTML=document.getElementById("mySelect").value
+}
 </script>
 </head>
 <body>
@@ -67,7 +71,14 @@ function changeValue(did, value){
 						href="#" onclick="changeValue('${device.id}','${device.dataCloud}');return false">${device.description},
 						value ${device.dataCloud}</a> <#else> ${device.description} </#if> <br />
 					<span class="hl${device.currentDeviceStatus}">(${device.currentDeviceStatus}
-						from ${device.statusStartTime})</span> <br />
+						from ${device.statusStartTime})</span> <br /> <br />
+						
+						
+						<select id="mySelect" onchange="ucp();">
+								<option value="">Usage Control Policy:</option>
+							    <option value="com" >Commercial</option>
+							    <option value="wipro" >Non Commercial</option>							    
+						</select>
 				</div> 
 				</#list>
 
@@ -79,7 +90,7 @@ function changeValue(did, value){
 				alt="jUCP, Hybrid Energy Saving Service" /> <br />
 			<table align="center">
 				<tr>
-					<td align="center"><b>&copy; Copyright 2013, Java Usage Control Policy - jUCP V1.0</b> <br /></td>
+					<td align="center"><b>&copy; Copyright 2014, Java Usage Control Policy - jUCP V1.0</b> <br /></td>
 				</tr>
 			</table>
 		</center>
