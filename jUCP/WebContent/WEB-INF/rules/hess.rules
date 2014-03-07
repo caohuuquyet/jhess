@@ -38,3 +38,4 @@ remove(2),
 (?c jhess:ruleFiredForc jhess:jhessv),	
 hide(jhess:ruleFiredForc)
 ]
+

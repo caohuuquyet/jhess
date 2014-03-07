@@ -38,8 +38,10 @@ import com.hp.hpl.jena.reasoner.Reasoner;
 import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasonerFactory;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
+
 import com.orange.ucp.dto.Activity;
 import com.orange.ucp.dto.Device;
+
 import com.sun.xml.internal.ws.api.pipe.NextAction;
 
 import freemarker.template.Configuration;
