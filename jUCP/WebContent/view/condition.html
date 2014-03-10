@@ -76,6 +76,11 @@ function ucp() { document.getElementById("label").innerHTML=document.getElementB
 					<span class="hl${device.currentDeviceStatus}">(${device.currentDeviceStatus}
 						from ${device.statusStartTime})</span> <br /> <br />						
 						
+						<select id="mySelect" onchange="ucp();">
+								<option value="">Usage Control Policy:</option>
+							    <option value="com" >Commercial</option>
+							    <option value="wipro" >Non Commercial</option>							    
+						</select>
 				</div> 
 				</#list>
 
