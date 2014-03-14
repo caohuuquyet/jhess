@@ -1,0 +1,137 @@
+
+# $Date: 2011-05-28 11:36:37 -0400 (Sat, 28 May 2011) $
+# $Revision: 30841 $
+# $Author: oshani $
+
+# The Respect My Privacy Vocabulary Definition
+# author: tkang@mit.edu
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix : <http://dig.csail.mit.edu/2008/02/rmp/rmp-schema#> .
+
+
+:restricts a rdfs:Property;
+	rdfs:comment "Applies a restriction";
+	rdfs:label "restricts";
+	rdfs:range :Restriction.
+
+:Restriction a rdfs:Class;
+	rdfs:comment "A privacy restriction";
+	rdfs:label "Privacy Restriction".
+
+:No-Cookies a :Restriction;
+        rdfs:comment "The no-cookies restriction is used in HTTPA.the server will not place any first-party or third-party cookies on the user's hard disk";
+        rdfs:label "No Cookies".
+		
+:No-Third-Party-Cookies a :Restriction;
+        rdfs:comment "The no-third-party-cookies restriction is used in HTTPA. The server will not place any third-party cookies on the user's hard disk.";
+        rdfs:label "No Third-Party Cookies".
+
+:No-User-Tracking a :Restriction;
+        rdfs:comment "The no-user-tracking restriction is used in HTTPA. The server will place a cookie on to the user's hard disk, but this cookie will not in any way track the user behavior over time and report to a central ad network. It will only be used in website personalization.";
+        rdfs:label "No User Tracking".
+
+:No-Ownership-Transfer a :Restriction;
+        rdfs:comment "The no-ownership-tranfer restriction is used in HTTPA. The ownership of the data item is with the data producer and it is non-transferable";
+        rdfs:label "No Ownership Transfer".
+
+
+:No-Commercial a :Restriction;
+	rdfs:comment "The no-commercial restriction states that the owner of this profile does not want the information on this profile used for commercial purposes.";
+	rdfs:label "No-Commercial".
+	
+:No-Depiction a :Restriction;
+	rdfs:comment "The no-depiction restriction states that the owner of this profile does not want this profile associated with any pictures.";
+	rdfs:label "No-Depiction".
+	
+:No-Employment a :Restriction;
+	rdfs:comment "The no-employment restriction states that the owner of this profile does not want the information on this profile used for employment purposes.";
+	rdfs:label "No-Employment".	
+
+:No-Financial a :Restriction;
+	rdfs:comment "The no-financial restriction states that the owner of this profile does not want the information on this profile used for financial decisions.";
+	rdfs:label "No-Financial".	
+	
+:No-Medical a :Restriction;
+	rdfs:comment "The no-medical restriction states that the owner of this profile does not want the information on this profile used for decisions related to medicine or medical care";
+	rdfs:label "No-Medical".	
+	
+:No-Insurance a :Restriction;
+	rdfs:comment "The no-insurance restriction states that the owner of this profile does not want the information on this profile used for decisions related for Insurance purposes";
+	rdfs:label "No-Insurance".	
+
+:Purpose a rdfs:Class;
+	rdfs:comment "purpose";
+	rdfs:label "Purpose or Use of data".
+
+:use a rdfs:Property;
+	rdfs:comment "Purpose of data";
+	rdfs:label "purpose";
+	rdfs:range :Purpose.
+
+:cannot-be-used-for a rdfs:Property;
+	rdfs:comment "Not an allowed purpose of data";
+	rdfs:label "unallowed purpose";
+	rdfs:range :Purpose.
+
+:Commercial a :Purpose;
+        rdfs:label "Commercial";
+        owl:differentFrom :No-Commercial.
+
+:Depiction a :Purpose;
+        rdfs:label "Depiction";
+        owl:differentFrom :No-Depiction.
+
+:Employment a :Purpose;
+        rdfs:label "Employment";
+        owl:differentFrom :No-Employment.
+
+:Financial a :Purpose;
+        rdfs:label "Financial";
+        owl:differentFrom :No-Financial.
+
+:Medical a :Purpose;
+        rdfs:label "Medical";
+        owl:differentFrom :No-Medical.
+
+:Insurance a :Purpose;
+        rdfs:label "Medical";
+        owl:differentFrom :No-Insurance.
+
+# adding info for CC licenses because rdfa extraction isn't supported in Tabulator
+
+:restricts rdfs:subPropertyOf cc:license.
+
+<http://creativecommons.org/licenses/by-sa/3.0/> a cc:License;
+	rdfs:label "CC:Attribution-ShareAlike".
+<http://creativecommons.org/licenses/by/3.0/> a cc:License;
+	rdfs:label "CC:Attribution".
+<http://creativecommons.org/licenses/by-nd/3.0/> a cc:License;
+	rdfs:label "CC:Attribution-NoDerivs".
+<http://creativecommons.org/licenses/by-nc-nd/3.0/> a cc:License;
+	rdfs:label "CC:Attribution-NonCommercial-NoDerivs".
+<http://creativecommons.org/licenses/by-nc/3.0/> a cc:License;
+	rdfs:label "CC:Attribution-NonCommercial".
+<http://creativecommons.org/licenses/by-nc-sa/3.0/> a cc:License;
+	rdfs:label "CC:Attribution-NonCommercial-ShareAlike".
+
+<http://creativecommons.org/licenses/by-sa/3.0/us/> a cc:License;
+        rdfs:label "CC:Attribution-ShareAlike".
+<http://creativecommons.org/licenses/by/3.0/us/> a cc:License;
+        rdfs:label "CC:Attribution".
+<http://creativecommons.org/licenses/by-nd/3.0/us/> a cc:License;
+        rdfs:label "CC:Attribution-NoDerivs".
+<http://creativecommons.org/licenses/by-nc-nd/3.0/us/> a cc:License;
+        rdfs:label "CC:Attribution-NonCommercial-NoDerivs".
+<http://creativecommons.org/licenses/by-nc/3.0/us/> a cc:License;
+        rdfs:label "CC:Attribution-NonCommercial".
+<http://creativecommons.org/licenses/by-nc-sa/3.0/us/> a cc:License;
+        rdfs:label "CC:Attribution-NonCommercial-ShareAlike".
+
+#ends
+

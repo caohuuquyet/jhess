@@ -505,13 +505,12 @@ public class ApproachResource extends ServerResource {
 		cfg.setTemplateLoader(loader);
 
 		TemplateRepresentation rep = null;
-		final Map<String, Object> dataModel = new TreeMap<String, Object>();
-		dataModel.put("policy", ruleFile);
+		//final Map<String, Object> dataModel = new TreeMap<String, Object>();
+		//dataModel.put("policy", ruleFile);
 
-		rep = new TemplateRepresentation("abstraction.html", cfg, dataModel,
-				MediaType.TEXT_HTML);
+		//rep = new TemplateRepresentation("abstraction.html", cfg, dataModel, MediaType.TEXT_HTML);
 
-		// getResponse().redirectSeeOther("/jUCP/approach/1");
+		getResponse().redirectSeeOther("/jUCP/approach/1");
 
 		return rep;
 

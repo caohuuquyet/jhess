@@ -1,0 +1,189 @@
+@prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+	
+#################################################################
+#    Individuals
+#################################################################
+### Current Devices 
+jhess:d01_meter_entrance a jhess:Meter, owl:NamedIndividual;
+	   jhess:hasDescription "Main meter"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_entrance;
+       jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   jhess:hasCurrentMeasureValue 100;
+	   jhess:hasMeasureUnit "W"^^xsd:string;
+	   jhess:isMeasuringFor jhess:hess;
+	   
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	
+jhess:d02_lightfitting_entrance a jhess:LightingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Light at entrance"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_entrance;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+jhess:d03_vent_bathroom a jhess:Vent, owl:NamedIndividual;
+       jhess:hasDescription "Vent in bathroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 20;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+
+jhess:d04_lightfitting_bathroom a jhess:LightingDevice, owl:NamedIndividual;
+	   jhess:hasDescription "Light in bathroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 30;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+
+jhess:d05_heating_bathroom a jhess:HeatingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Heating in bathroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 20;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   	   
+jhess:d06_iPad_bedroom a jhess:iPad, owl:NamedIndividual;
+       jhess:hasDescription "iPad in Bedroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bedroom;
+	   jhess:hasInputPower 110;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+
+jhess:d07_walllight_bedroom a jhess:LightingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Light in Bedroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_bedroom;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+
+jhess:d08_laptop_livingroom a jhess:Laptop, owl:NamedIndividual;
+       jhess:hasDescription "Laptop in Livingroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_livingroom;
+	   jhess:hasInputPower 110;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+
+jhess:d09_desklamp_livingroom a jhess:LightingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Lamp in Livingroom"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_livingroom;
+	   jhess:hasInputPower 11;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "OFF"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+   
+
+jhess:d10_refrigerator_kitchenette a jhess:Refrigerator, owl:NamedIndividual;
+       jhess:hasDescription "Refrigerator in Kitchenette"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_kitchenette;
+	   jhess:hasInputPower 110;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+
+jhess:d11_heating_kitchenette a jhess:HeatingDevice, owl:NamedIndividual;
+       jhess:hasDescription "Heating in Kitchenette"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_kitchenette;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+
+### Current Locations
+jhess:room_4688 a jhess:Location, owl:NamedIndividual;
+	   jhess:hasTemperature jhess:d12_sensor_temperature.
+	   
+jhess:room_4688_entrance a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688;
+	   jhess:hasPresence jhess:d13_sensor_presence.
+
+jhess:room_4688_bathroom a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688;
+	   jhess:hasHumidity jhess:d14_sensor_humidity.
+	   
+jhess:room_4688_bedroom a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688.
+	   
+jhess:room_4688_livingroom a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688.
+	   
+jhess:room_4688_kitchentte a jhess:Location, owl:NamedIndividual;
+	   jhess:isLocatedIn jhess:room_4688.
+
+### Current Sensors
+jhess:d12_sensor_temperature a jhess:TemperatureSensor, owl:NamedIndividual;
+	   jhess:hasDescription "Temperature Sensor"^^xsd:string;
+	   jhess:hasLocation jhess:room_4688;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   jhess:hasCurrentTemperatureValue 10;
+	   jhess:hasTemperatureUnit "C"^^xsd:string;
+	   
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+	   
+jhess:d13_sensor_presence a jhess:PresenceSensor, owl:NamedIndividual;
+	   jhess:hasDescription "Presence Sensor"^^xsd:string;
+	   jhess:hasLocation jhess:room_4688_entrance;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   jhess:hasCurrentPresenceValue "false"^^xsd:boolean;
+	   
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+jhess:d14_sensor_humidity a jhess:HumiditySensor, owl:NamedIndividual;
+	   jhess:hasDescription "Humidity Sensor"^^xsd:string;
+	   jhess:hasLocation jhess:room_4688_bathroom;
+	   jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   jhess:hasCurrentHumidityValue 10;
+	   jhess:hasHumidityUnit "%"^^xsd:string;
+	   
+	   jhess:hasHistoryData jhess:cloud_of_data.
+	   
+jhess:cloud_of_data a jhess:DataCloud, owl:NamedIndividual.	
+jhess:hess a jhess:Resident, owl:NamedIndividual.
+
+###  Generated by the OWL API (version 3.3.1957) http://owlapi.sourceforge.net
+
