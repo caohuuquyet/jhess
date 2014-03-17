@@ -19,9 +19,11 @@ function changeValue(did, value){
 }
 
 
-function ucp() { document.getElementById("label").innerHTML=document.getElementById("mySelect").value
+function ucp() { 
 	
-	var value = document.getElementById("mySelect").value
+	document.getElementById("label").innerHTML=document.getElementById("mySelect").value;
+	
+	var value = document.getElementById("mySelect").value;
 	if(value != null){
 		window.location = "/jUCP/approach/" + did + "/" + value;
 	}
