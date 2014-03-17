@@ -465,159 +465,232 @@ public class ApproachResource extends ServerResource {
 
 	private Representation processApproach4() throws ResourceException {
 
-		ServletContext context = (ServletContext) getContext().getAttributes()
-				.get("org.restlet.ext.servlet.ServletContext");
+		// TODO Auto-generated method stub
 
-		String ruleFile = context.getAttribute("rules").toString()
-				+ "abstraction.rules";
-		Model model = ModelFactory.createDefaultModel();
-		Resource configuration = model.createResource();
-		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
-		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
-		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
-				configuration);
+				String queryString = ""
+						+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
+						+ " SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
+						+ " WHERE {"
+						+ " ?id jhess:hasDescription ?description. ?id jhess:hasLocation ?location. ?id jhess:hasInputPower ?inputpower. ?id jhess:hasInputPowerUnit  ?unit. ?id jhess:hasCurrentDeviceStatus ?status.?id jhess:hasStatusStartTime ?start. "
+						+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }}"
+						+ " ORDER BY ASC(?id)";
+				QueryExecution qe = null;
+				List<Device> devices = new ArrayList<Device>();
+				// Query
 
-		String ontology = context.getAttribute("ontology").toString();
-		Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
+				ServletContext context = (ServletContext) getContext().getAttributes()
+						.get("org.restlet.ext.servlet.ServletContext");
 
-		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
-		infModel.prepare();
+				String ontology = context.getAttribute("ontology").toString();
+				try {
 
-		if (infModel != null) {
-			context.setAttribute("ontology", ontology);
-			try {
-				// output inferences to file
-				File outFile = new File(ontology + "hess.ttl");
-				Writer writer = new FileWriter(outFile);
-				infModel.write(writer, "TURTLE");
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				System.out.println("Exception caught" + e.getMessage());
-			}
-		}
+					Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
 
-		Configuration cfg = new Configuration();
+					Query query = QueryFactory.create(queryString);
+					qe = QueryExecutionFactory.create(query, modelRDF);
+					ResultSet rs = qe.execSelect();
 
-		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
-				"war:///view");
+					while (rs.hasNext()) {
+						Device result = new Device();
+						QuerySolution binding = rs.nextSolution();
+						result.setId(binding.getResource("id").getLocalName());
+						result.setDescription(binding.getLiteral("description")
+								.getString());
+						result.setLocation(binding.getResource("location")
+								.getLocalName());
+						result.setInputPower(binding.getLiteral("inputpower").getInt());
+						result.setInputPowerUnit(binding.getLiteral("unit").getString());
+						result.setCurrentDeviceStatus(binding.getLiteral("status")
+								.getString());
+						result.setStatusStartTime(binding.getLiteral("start")
+								.getString());
+						if (binding.getLiteral("datacloud") != null) {
+							result.setDataCloud(binding.getLiteral("datacloud")
+									.getString());
+						} else {
+							result.setDataCloud(new String(""));
 
-		cfg.setTemplateLoader(loader);
+						}
 
-		TemplateRepresentation rep = null;
-		//final Map<String, Object> dataModel = new TreeMap<String, Object>();
-		//dataModel.put("policy", ruleFile);
+						devices.add(result);
+					}
 
-		//rep = new TemplateRepresentation("abstraction.html", cfg, dataModel, MediaType.TEXT_HTML);
+				} catch (Exception e) {
 
-		getResponse().redirectSeeOther("/jUCP/approach/1");
+					e.printStackTrace();
 
-		return rep;
+				} finally {
+					qe.close();
+				}
+
+				Configuration cfg = new Configuration();
+
+				ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
+						"war:///view");
+
+				cfg.setTemplateLoader(loader);
+
+				TemplateRepresentation rep = null;
+				final Map<String, Object> dataModel = new TreeMap<String, Object>();
+				dataModel.put("devices", devices);
+
+				rep = new TemplateRepresentation("abstraction.html", cfg, dataModel,
+						MediaType.TEXT_HTML);
+
+				return rep;
 
 	}
 
 	private Representation processApproach5() throws ResourceException {
-		ServletContext context = (ServletContext) getContext().getAttributes()
-				.get("org.restlet.ext.servlet.ServletContext");
+		// TODO Auto-generated method stub
 
-		String ruleFile = context.getAttribute("rules").toString()
-				+ "abstraction.rules";
-		Model model = ModelFactory.createDefaultModel();
-		Resource configuration = model.createResource();
-		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
-		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
-		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
-				configuration);
+				String queryString = ""
+						+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
+						+ " SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
+						+ " WHERE {"
+						+ " ?id jhess:hasDescription ?description. ?id jhess:hasLocation ?location. ?id jhess:hasInputPower ?inputpower. ?id jhess:hasInputPowerUnit  ?unit. ?id jhess:hasCurrentDeviceStatus ?status.?id jhess:hasStatusStartTime ?start. "
+						+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }}"
+						+ " ORDER BY ASC(?id)";
+				QueryExecution qe = null;
+				List<Device> devices = new ArrayList<Device>();
+				// Query
 
-		String ontology = context.getAttribute("ontology").toString();
-		Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
+				ServletContext context = (ServletContext) getContext().getAttributes()
+						.get("org.restlet.ext.servlet.ServletContext");
 
-		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
-		infModel.prepare();
+				String ontology = context.getAttribute("ontology").toString();
+				try {
 
-		if (infModel != null) {
-			context.setAttribute("ontology", ontology);
-			try {
-				// output inferences to file
-				File outFile = new File(ontology + "hess.ttl");
-				Writer writer = new FileWriter(outFile);
-				infModel.write(writer, "TURTLE");
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				System.out.println("Exception caught" + e.getMessage());
-			}
-		}
+					Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
 
-		Configuration cfg = new Configuration();
+					Query query = QueryFactory.create(queryString);
+					qe = QueryExecutionFactory.create(query, modelRDF);
+					ResultSet rs = qe.execSelect();
 
-		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
-				"war:///view");
+					while (rs.hasNext()) {
+						Device result = new Device();
+						QuerySolution binding = rs.nextSolution();
+						result.setId(binding.getResource("id").getLocalName());
+						result.setDescription(binding.getLiteral("description")
+								.getString());
+						result.setLocation(binding.getResource("location")
+								.getLocalName());
+						result.setInputPower(binding.getLiteral("inputpower").getInt());
+						result.setInputPowerUnit(binding.getLiteral("unit").getString());
+						result.setCurrentDeviceStatus(binding.getLiteral("status")
+								.getString());
+						result.setStatusStartTime(binding.getLiteral("start")
+								.getString());
+						if (binding.getLiteral("datacloud") != null) {
+							result.setDataCloud(binding.getLiteral("datacloud")
+									.getString());
+						} else {
+							result.setDataCloud(new String(""));
 
-		cfg.setTemplateLoader(loader);
+						}
 
-		TemplateRepresentation rep = null;
-		final Map<String, Object> dataModel = new TreeMap<String, Object>();
-		dataModel.put("policy", ruleFile);
+						devices.add(result);
+					}
 
-		rep = new TemplateRepresentation("condition.html", cfg, dataModel,
-				MediaType.TEXT_HTML);
+				} catch (Exception e) {
 
-		// getResponse().redirectSeeOther("/jUCP/approach/1");
+					e.printStackTrace();
 
-		return rep;
+				} finally {
+					qe.close();
+				}
+
+				Configuration cfg = new Configuration();
+
+				ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
+						"war:///view");
+
+				cfg.setTemplateLoader(loader);
+
+				TemplateRepresentation rep = null;
+				final Map<String, Object> dataModel = new TreeMap<String, Object>();
+				dataModel.put("devices", devices);
+
+				rep = new TemplateRepresentation("condition.html", cfg, dataModel,
+						MediaType.TEXT_HTML);
+
+				return rep;
 	}
 
 	private Representation processApproach6() throws ResourceException {
-		ServletContext context = (ServletContext) getContext().getAttributes()
-				.get("org.restlet.ext.servlet.ServletContext");
+		// TODO Auto-generated method stub
 
-		String ruleFile = context.getAttribute("rules").toString()
-				+ "abstraction.rules";
-		Model model = ModelFactory.createDefaultModel();
-		Resource configuration = model.createResource();
-		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
-		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
-		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
-				configuration);
+				String queryString = ""
+						+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
+						+ " SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
+						+ " WHERE {"
+						+ " ?id jhess:hasDescription ?description. ?id jhess:hasLocation ?location. ?id jhess:hasInputPower ?inputpower. ?id jhess:hasInputPowerUnit  ?unit. ?id jhess:hasCurrentDeviceStatus ?status.?id jhess:hasStatusStartTime ?start. "
+						+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }}"
+						+ " ORDER BY ASC(?id)";
+				QueryExecution qe = null;
+				List<Device> devices = new ArrayList<Device>();
+				// Query
 
-		String ontology = context.getAttribute("ontology").toString();
-		Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
+				ServletContext context = (ServletContext) getContext().getAttributes()
+						.get("org.restlet.ext.servlet.ServletContext");
 
-		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
-		infModel.prepare();
+				String ontology = context.getAttribute("ontology").toString();
+				try {
 
-		if (infModel != null) {
-			context.setAttribute("ontology", ontology);
-			try {
-				// output inferences to file
-				File outFile = new File(ontology + "hess.ttl");
-				Writer writer = new FileWriter(outFile);
-				infModel.write(writer, "TURTLE");
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				System.out.println("Exception caught" + e.getMessage());
-			}
-		}
+					Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
 
-		Configuration cfg = new Configuration();
+					Query query = QueryFactory.create(queryString);
+					qe = QueryExecutionFactory.create(query, modelRDF);
+					ResultSet rs = qe.execSelect();
 
-		ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
-				"war:///view");
+					while (rs.hasNext()) {
+						Device result = new Device();
+						QuerySolution binding = rs.nextSolution();
+						result.setId(binding.getResource("id").getLocalName());
+						result.setDescription(binding.getLiteral("description")
+								.getString());
+						result.setLocation(binding.getResource("location")
+								.getLocalName());
+						result.setInputPower(binding.getLiteral("inputpower").getInt());
+						result.setInputPowerUnit(binding.getLiteral("unit").getString());
+						result.setCurrentDeviceStatus(binding.getLiteral("status")
+								.getString());
+						result.setStatusStartTime(binding.getLiteral("start")
+								.getString());
+						if (binding.getLiteral("datacloud") != null) {
+							result.setDataCloud(binding.getLiteral("datacloud")
+									.getString());
+						} else {
+							result.setDataCloud(new String(""));
 
-		cfg.setTemplateLoader(loader);
+						}
 
-		TemplateRepresentation rep = null;
-		final Map<String, Object> dataModel = new TreeMap<String, Object>();
-		dataModel.put("policy", ruleFile);
+						devices.add(result);
+					}
 
-		rep = new TemplateRepresentation("mediation.html", cfg, dataModel,
-				MediaType.TEXT_HTML);
+				} catch (Exception e) {
 
-		// getResponse().redirectSeeOther("/jUCP/approach/1");
+					e.printStackTrace();
 
-		return rep;
+				} finally {
+					qe.close();
+				}
+
+				Configuration cfg = new Configuration();
+
+				ContextTemplateLoader loader = new ContextTemplateLoader(getContext(),
+						"war:///view");
+
+				cfg.setTemplateLoader(loader);
+
+				TemplateRepresentation rep = null;
+				final Map<String, Object> dataModel = new TreeMap<String, Object>();
+				dataModel.put("devices", devices);
+
+				rep = new TemplateRepresentation("mediation.html", cfg, dataModel,
+						MediaType.TEXT_HTML);
+
+				return rep;
 
 
 	}

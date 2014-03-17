@@ -5,24 +5,6 @@
 @prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.
 
 
-[layer1: 
-(?d jhess:hasDescription "Main meter"^^xsd:string),
-(?d jhess:hasLocation jhess:room_4688_entrance),
-(?d jhess:hasInputPower 10),
-(?d jhess:hasInputPowerUnit "W"^^xsd:string),
-(?d jhess:hasCurrentDeviceStatus "ON"^^xsd:string),
-(?d jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime),	   
-(?d jhess:hasCurrentMeasureValue 100),
-(?d jhess:hasMeasureUnit "W"^^xsd:string),
-(?d jhess:isMeasuringFor jhess:hess),	   
-(?d jhess:hasHistoryData jhess:cloud_of_data),
-noValue(?c jhess:ruleFiredFora jhess:jhessv) 
-->
-remove(2),
-(?c jhess:ruleFiredFora jhess:jhessv),	
-hide(jhess:ruleFiredFora)
-]
-
 [jhess1: 
 (jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
 greaterThan(?value,25), 
@@ -30,7 +12,8 @@ greaterThan(?value,25),
 noValue(?c jhess:ruleFiredFora jhess:jhessv) 
 -> 
 remove(2), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "OFF"^^xsd:string ), 
+(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*"^^xsd:string ), 
 (?c jhess:ruleFiredFora jhess:jhessv),	
 hide(jhess:ruleFiredFora)
 ]
+

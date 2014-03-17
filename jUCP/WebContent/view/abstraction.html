@@ -20,6 +20,11 @@ function changeValue(did, value){
 
 
 function ucp() { document.getElementById("label").innerHTML=document.getElementById("mySelect").value
+	
+	var value = document.getElementById("mySelect").value
+	if(value != null){
+		window.location = "/jUCP/approach/" + did + "/" + value;
+	}
 }
 </script>
 </head>
@@ -58,8 +63,8 @@ function ucp() { document.getElementById("label").innerHTML=document.getElementB
 			<div class="clearfloat"></div>
 			<div class="servicelist">
 			<br /> <br />	
-				Abstraction/hiding of certain information:
-				<select id="mySelect" onchange="ucp();">								
+				Abstraction/hiding of certain information: <span id="label"></span>
+				<select id="mySelect" onchange="ucp();"> 								
 							    <option value="l1" >Layer 1</option>
 							    <option value="l2" >Layer 2</option>
 							    <option value="l3" >Layer 3</option>

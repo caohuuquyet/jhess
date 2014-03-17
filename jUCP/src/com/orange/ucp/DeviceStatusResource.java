@@ -26,7 +26,7 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 public class DeviceStatusResource extends ServerResource {
 
 	@Get
-	public String processStatus() throws JSONException {
+	public String processDeviceStatus() throws JSONException {
 
 		String did = (String) getRequestAttributes().get("did");
 		String status = (String) getRequestAttributes().get("status");

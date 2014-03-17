@@ -21,6 +21,7 @@ public class RouterApplication extends Application {
 		router.attach("/view/images", dir);
 
 		router.attach("/approach/{act}", ApproachResource.class);
+		router.attach("/approach/{act}/{status}", ApproachStatusResource.class);
 		router.attach("/device/{did}", DeviceResource.class);
 		router.attach("/device/{did}/{status}", DeviceStatusResource.class);
 
