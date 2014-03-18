@@ -43,11 +43,13 @@ HttpSessionListener
 		String rules = sc.getRealPath("/WEB-INF") + sc.getInitParameter("rules");
 		rules = rules.replaceAll("\\\\+", "/");
 		String minsup = sc.getInitParameter("minsup");
+		String status = sc.getInitParameter("status");
 		
 		
 		sc.setAttribute("ontology", ontology);
 		sc.setAttribute("rules", rules);
 		sc.setAttribute("minsup", minsup);
+		sc.setAttribute("status", status);
 		
 	}
 

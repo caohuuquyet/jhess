@@ -16,4 +16,3 @@ remove(2),
 (?c jhess:ruleFiredFora jhess:jhessv),	
 hide(jhess:ruleFiredFora)
 ]
-
