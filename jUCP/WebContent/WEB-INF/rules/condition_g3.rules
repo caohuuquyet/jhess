@@ -4,7 +4,6 @@
 @prefix owl:	<http://www.w3.org/2002/07/owl#>.
 @prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.
 
-
 [jhess1: 
 (jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
 greaterThan(?value,25), 
@@ -12,8 +11,9 @@ greaterThan(?value,25),
 noValue(?c jhess:ruleFiredFora jhess:jhessv) 
 -> 
 remove(2), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*"^^xsd:string ), 
+(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*g3"^^xsd:string ), 
 (?c jhess:ruleFiredFora jhess:jhessv),	
 hide(jhess:ruleFiredFora)
 ]
+
 

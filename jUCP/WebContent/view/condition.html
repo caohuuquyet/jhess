@@ -19,7 +19,11 @@ function changeValue(did, value){
 }
 
 
-function ucp() { document.getElementById("label").innerHTML=document.getElementById("mySelect").value
+function ucp(did) { 
+	
+	var value = document.getElementById("mySelect").value;
+	window.location = "/jUCP/approach/" + did + "/" + value;
+	
 }
 </script>
 </head>
@@ -59,7 +63,7 @@ function ucp() { document.getElementById("label").innerHTML=document.getElementB
 			<div class="servicelist">
 				<br /> <br />
 				Conditions by class of actors:
-				<select id="mySelect" onchange="ucp();">								
+				<select id="mySelect" onchange="ucp(5);">								
 							    <option value="g1" >User groups</option>
 							    <option value="g2" >Public authorities</option>
 							    <option value="g3" >Social networks</option>

@@ -1,0 +1,19 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl:	<http://www.w3.org/2002/07/owl#>.
+@prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.
+
+
+[jhess1: 
+(jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
+greaterThan(?value,25), 
+(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
+noValue(?c jhess:ruleFiredFora jhess:jhessv) 
+-> 
+remove(2), 
+(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*l1"^^xsd:string ), 
+(?c jhess:ruleFiredFora jhess:jhessv),	
+hide(jhess:ruleFiredFora)
+]
+

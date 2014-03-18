@@ -11,22 +11,19 @@
 <link href="/jUCP/view/images/style.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript">
+
 function changeValue(did, value){
     var promptValue = prompt('Change to the new value:', value);
     if(promptValue != null){
-    	window.location = "/jUCP/device/"+did+"/"+promptValue;
+    	window.location = "/jUCP/device/" + did +"/" + promptValue;
     }
 }
 
-
-function ucp() { 
-	
-	document.getElementById("label").innerHTML=document.getElementById("mySelect").value;
-	
+function ucp(did) { 
+		
 	var value = document.getElementById("mySelect").value;
-	if(value != null){
-		window.location = "/jUCP/approach/" + did + "/" + value;
-	}
+	window.location = "/jUCP/approach/" + did + "/" + value;
+	
 }
 </script>
 </head>
@@ -66,7 +63,7 @@ function ucp() {
 			<div class="servicelist">
 			<br /> <br />	
 				Abstraction/hiding of certain information: <span id="label"></span>
-				<select id="mySelect" onchange="ucp();"> 								
+				<select id="mySelect" onchange="ucp(4);"> 								
 							    <option value="l1" >Layer 1</option>
 							    <option value="l2" >Layer 2</option>
 							    <option value="l3" >Layer 3</option>

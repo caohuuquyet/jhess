@@ -28,29 +28,109 @@ public class ApproachStatusResource extends ServerResource {
 	@Get
 	public String processResourceStatus() throws JSONException {
 
-		String did = (String) getRequestAttributes().get("did");
+		String act = (String) getRequestAttributes().get("act");
 		String status = (String) getRequestAttributes().get("status");
 
-		if (did.equalsIgnoreCase("4")) {
+		if (act.equalsIgnoreCase("4")) {
 			// TODO: change 1
+			processLayer(status);
 			getResponse().redirectSeeOther("/jUCP/approach/4");
-			return "/jUCP/approach/," + did + "," + status;
+			return "/jUCP/approach/" + act + "/" + status;
 
-		} else if (did.equalsIgnoreCase("5")) {
+		} else if (act.equalsIgnoreCase("5")) {
 			// TODO: change 2
+			processActor(status);
 			getResponse().redirectSeeOther("/jUCP/approach/5");
-			return "/jUCP/approach/," + did + "," + status;
+			return "/jUCP/approach/" + act + "/" + status;
 
-		} else if (did.equalsIgnoreCase("6")) {
+		} else if (act.equalsIgnoreCase("6")) {
 			// TODO: change 3
+			processMediate(status);
 			getResponse().redirectSeeOther("/jUCP/approach/6");
-			return "/jUCP/approach/," + did + "," + status;
+			return "/jUCP/approach/" + act + "/" + status;
 
 		} else {
 			return "";
 
 		}
 
+	}
+
+	private void processMediate(String status) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void processActor(String status) {
+		// TODO 1.2.3.4.5
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+
+		String ruleFile = context.getAttribute("rules").toString()
+				+ "condition_" + status + ".rules";
+		Model model = ModelFactory.createDefaultModel();
+		Resource configuration = model.createResource();
+		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
+		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
+		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
+				configuration);
+
+		String ontology = context.getAttribute("ontology").toString();
+		Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
+
+		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
+		infModel.prepare();
+
+		if (infModel != null) {
+			context.setAttribute("status", "actor");
+			try {
+				// output inferences to file
+				File outFile = new File(ontology + "hess_actor.ttl");
+				Writer writer = new FileWriter(outFile);
+				infModel.write(writer, "TURTLE");
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				System.out.println("Exception caught" + e.getMessage());
+			}
+		}
+
+	}
+
+	private void processLayer(String status) {
+		// TODO 1.2.3
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+
+		String ruleFile = context.getAttribute("rules").toString()
+				+ "abstraction_" + status + ".rules";
+		Model model = ModelFactory.createDefaultModel();
+		Resource configuration = model.createResource();
+		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
+		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
+		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
+				configuration);
+
+		String ontology = context.getAttribute("ontology").toString();
+		Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
+
+		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
+		infModel.prepare();
+
+		if (infModel != null) {
+			context.setAttribute("status", "layer");
+			try {
+				// output inferences to file
+				File outFile = new File(ontology + "hess_layer.ttl");
+				Writer writer = new FileWriter(outFile);
+				infModel.write(writer, "TURTLE");
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				System.out.println("Exception caught" + e.getMessage());
+			}
+			
+		}
 	}
 
 }
