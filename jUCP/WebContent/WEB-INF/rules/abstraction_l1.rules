@@ -5,14 +5,10 @@
 @prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.
 
 
-[jhess1: 
-(jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
-greaterThan(?value,25), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
-noValue(?c jhess:ruleFiredFora jhess:jhessv) 
--> 
-remove(2), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*l1"^^xsd:string ), 
-(?c jhess:ruleFiredFora jhess:jhessv),	
-hide(jhess:ruleFiredFora)
-]
+[jhess1: (?id jhess:hasInputPower ?hip)
+ noValue(?s jhess:ruleFiredFor jhess:SemanticWeb)
+ ->
+ remove(0)
+ (?id jhess:hasInputPower 0) 
+ (?s jhess:ruleFiredFor jhess:SemanticWeb)
+ hide(jhess:ruleFiredFor)]

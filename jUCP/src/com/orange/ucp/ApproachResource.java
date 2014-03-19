@@ -467,13 +467,18 @@ public class ApproachResource extends ServerResource {
 		// TODO Auto-generated method stub
 
 		String queryString = ""
-				+ "PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#>"
-				+ " SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud"
-				+ " WHERE {"
-				+ " ?id jhess:hasDescription ?description. ?id jhess:hasLocation ?location. ?id jhess:hasInputPower ?inputpower. ?id jhess:hasInputPowerUnit  ?unit. ?id jhess:hasCurrentDeviceStatus ?status.?id jhess:hasStatusStartTime ?start. "
-				+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }}"
+				+ " PREFIX jhess: <http://jhess.googlecode.com/files/jhess.owl#> "
+				+ " SELECT ?id ?description ?location ?inputpower ?unit ?status ?start ?datacloud "
+				+ " WHERE { "
+				+ " OPTIONAL {?id jhess:hasDescription ?description } "
+				+ " OPTIONAL {?id jhess:hasLocation ?location } "
+				+ " OPTIONAL {?id jhess:hasInputPower ?inputpower } "
+				+ " OPTIONAL {?id jhess:hasInputPowerUnit  ?unit } "
+				+ " OPTIONAL {?id jhess:hasCurrentDeviceStatus ?status }"
+				+ " OPTIONAL {?id jhess:hasStatusStartTime ?start } "
+				+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }} "
 				+ " ORDER BY ASC(?id)";
-		
+
 		QueryExecution qe = null;
 		List<Device> devices = new ArrayList<Device>();
 		// Query
@@ -499,23 +504,62 @@ public class ApproachResource extends ServerResource {
 			while (rs.hasNext()) {
 				Device result = new Device();
 				QuerySolution binding = rs.nextSolution();
-				result.setId(binding.getResource("id").getLocalName());
-				result.setDescription(binding.getLiteral("description")
-						.getString());
-				result.setLocation(binding.getResource("location")
-						.getLocalName());
-				result.setInputPower(binding.getLiteral("inputpower").getInt());
-				result.setInputPowerUnit(binding.getLiteral("unit").getString());
-				result.setCurrentDeviceStatus(binding.getLiteral("status")
-						.getString());
-				result.setStatusStartTime(binding.getLiteral("start")
-						.getString());
+
+				if (binding.getLiteral("id") != null) {
+					result.setId(binding.getLiteral("id").getString());
+				} else {
+					result.setId(new String(""));
+				}
+				// result.setId(binding.getResource("id").getLocalName());
+				if (binding.getLiteral("description") != null) {
+					result.setDescription(binding.getLiteral("description")
+							.getString());
+				} else {
+					result.setDescription(new String(""));
+				}
+				// result.setDescription(binding.getLiteral("description").getString());
+				if (binding.getLiteral("location") != null) {
+					result.setLocation(binding.getResource("location")
+							.getLocalName());
+				} else {
+					result.setLocation(new String(""));
+				}
+
+				// result.setLocation(binding.getResource("location").getLocalName());
+				if (binding.getLiteral("inputpower") != null) {
+					result.setInputPower(binding.getLiteral("inputpower")
+							.getInt());
+				} else {
+					result.setInputPower(0);
+				}
+
+				// result.setInputPower(binding.getLiteral("inputpower").getInt());
+				if (binding.getLiteral("unit") != null) {
+					result.setInputPowerUnit(binding.getLiteral("unit")
+							.getString());
+				} else {
+					result.setInputPowerUnit(new String(""));
+				}
+				// result.setInputPowerUnit(binding.getLiteral("unit").getString());
+				if (binding.getLiteral("status") != null) {
+					result.setCurrentDeviceStatus(binding.getLiteral("status")
+							.getString());
+				} else {
+					result.setCurrentDeviceStatus(new String(""));
+				}
+				// result.setCurrentDeviceStatus(binding.getLiteral("status").getString());
+				if (binding.getLiteral("start") != null) {
+					result.setStatusStartTime(binding.getLiteral("start")
+							.getString());
+				} else {
+					result.setStatusStartTime(new String(""));
+				}
+				// result.setStatusStartTime(binding.getLiteral("start").getString());
 				if (binding.getLiteral("datacloud") != null) {
 					result.setDataCloud(binding.getLiteral("datacloud")
 							.getString());
 				} else {
 					result.setDataCloud(new String(""));
-
 				}
 
 				devices.add(result);

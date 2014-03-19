@@ -74,23 +74,37 @@ function ucp(did) {
 				<#list devices as device>
 
 				<div class="newsitem">
-					<#if device.currentDeviceStatus == "ON"> <a
-						href="/jUCP/device/${device.id}/off"> <img
-						src="/jUCP/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG"
-						alt="${device.location} " width="113" height="78" class="thumb"
-						border="0" />
-					</a> <#else> <a href="/jUCP/device/${device.id}/on"> <img
-						src="/jUCP/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG"
-						alt="${device.location} " width="113" height="78" class="thumb"
-						border="0" />
-					</a> </#if> <span class="title"> ${device.inputPower}
-						${device.inputPowerUnit} </span> <br /> <#if device.dataCloud != ""><a
-						href="#" onclick="changeValue('${device.id}','${device.dataCloud}');return false">${device.description},
-						value ${device.dataCloud}</a> <#else> ${device.description} </#if> <br />
-					<span class="hl${device.currentDeviceStatus}">(${device.currentDeviceStatus}
-						from ${device.statusStartTime})</span> <br /> <br />						
-						
-						
+					<#if device.currentDeviceStatus != "">
+						<#if device.currentDeviceStatus == "ON"> <a
+							href="/jUCP/device/${device.id}/off"> <img
+							src="/jUCP/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG"
+							alt="${device.location} " width="113" height="78" class="thumb"
+							border="0" />
+						</a> <#else > <a href="/jUCP/device/${device.id}/on"> <img
+							src="/jUCP/view/images/devices/${device.id}_${device.currentDeviceStatus}h.JPG"
+							alt="${device.location} " width="113" height="78" class="thumb"
+							border="0" />
+						</a> </#if>
+					</#if>
+					
+					<#if device.inputPower != 0>
+					<span class="title"> ${device.inputPower} ${device.inputPowerUnit} </span> 
+					</#if> <br /> 
+					
+					<#if device.description != "">
+						<#if device.dataCloud != "">
+						<a href="#" onclick="changeValue('${device.id}','${device.dataCloud}');return false">
+						${device.description}, value ${device.dataCloud}</a>
+						<#else> ${device.description}
+						</#if> 
+					</#if> 
+					<br />
+					
+					<#if device.statusStartTime != "">
+						<span class="hl${device.currentDeviceStatus}">(${device.currentDeviceStatus} from ${device.statusStartTime})</span> 
+					</#if>
+					
+					<br /> <br />
 				</div> 
 				</#list>
 

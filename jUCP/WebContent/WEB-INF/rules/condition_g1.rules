@@ -17,4 +17,18 @@ remove(2),
 hide(jhess:ruleFiredFora)
 ]
 
+[jhess1: 
+(jhess:d01_meter_entrance a jhess:Meter, owl:NamedIndividual),
+	   jhess:hasDescription "Main meter"^^xsd:string;
+       jhess:hasLocation jhess:room_4688_entrance;
+       jhess:hasInputPower 10;
+	   jhess:hasInputPowerUnit "W"^^xsd:string;
+	   jhess:hasCurrentDeviceStatus "ON"^^xsd:string;
+	   jhess:hasStatusStartTime "2013-01-12T21:30:52"^^xsd:dateTime;
+	   
+	   jhess:hasCurrentMeasureValue 100;
+	   jhess:hasMeasureUnit "W"^^xsd:string;
+	   jhess:isMeasuringFor jhess:hess;
+	   
+	   jhess:hasHistoryData jhess:cloud_of_data.
 
