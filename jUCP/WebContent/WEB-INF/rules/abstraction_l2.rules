@@ -6,14 +6,19 @@
 
 
 [jhess1: 
-(jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
-greaterThan(?value,25), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
-noValue(?c jhess:ruleFiredFora jhess:jhessv) 
--> 
-remove(2), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*l2"^^xsd:string ), 
-(?c jhess:ruleFiredFora jhess:jhessv),	
-hide(jhess:ruleFiredFora)
-]
-
+ (jhess:d01_meter_entrance rdf:type ?d01)
+ (jhess:d01_meter_entrance jhess:hasInputPower ?a1)
+ (jhess:d01_meter_entrance jhess:hasDescription ?b1)
+ ->
+ remove(1)
+ remove(2)
+ ]
+ 
+ [jhess2: 
+ (jhess:d02_lightfitting_entrance rdf:type ?d02)
+ (jhess:d02_lightfitting_entrance jhess:hasInputPower ?a2)
+ (jhess:d02_lightfitting_entrance jhess:hasDescription ?b2)
+  ->
+ remove(1)
+ remove(2)
+ ]

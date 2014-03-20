@@ -476,7 +476,9 @@ public class ApproachResource extends ServerResource {
 				+ " OPTIONAL {?id jhess:hasInputPowerUnit  ?unit } "
 				+ " OPTIONAL {?id jhess:hasCurrentDeviceStatus ?status }"
 				+ " OPTIONAL {?id jhess:hasStatusStartTime ?start } "
-				+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }} "
+				+ " OPTIONAL { ?id jhess:hasCurrentMeasureValue ?datacloud } " 
+				+ " OPTIONAL { ?id jhess:hasCurrentTemperatureValue ?datacloud } " 
+				+ " OPTIONAL { ?id jhess:hasCurrentPresenceValue ?datacloud } OPTIONAL { ?id jhess:hasCurrentHumidityValue ?datacloud }} "
 				+ " ORDER BY ASC(?id)";
 
 		QueryExecution qe = null;
@@ -505,8 +507,8 @@ public class ApproachResource extends ServerResource {
 				Device result = new Device();
 				QuerySolution binding = rs.nextSolution();
 
-				if (binding.getLiteral("id") != null) {
-					result.setId(binding.getLiteral("id").getString());
+				if (binding.getResource("id") != null) {
+					result.setId(binding.getResource("id").getLocalName());
 				} else {
 					result.setId(new String(""));
 				}
@@ -518,7 +520,7 @@ public class ApproachResource extends ServerResource {
 					result.setDescription(new String(""));
 				}
 				// result.setDescription(binding.getLiteral("description").getString());
-				if (binding.getLiteral("location") != null) {
+				if (binding.getResource("location") != null) {
 					result.setLocation(binding.getResource("location")
 							.getLocalName());
 				} else {
