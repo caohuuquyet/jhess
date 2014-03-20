@@ -280,6 +280,8 @@ public class ApproachResource extends ServerResource {
 				.get("org.restlet.ext.servlet.ServletContext");
 
 		String ontology = context.getAttribute("ontology").toString();
+		context.setAttribute("status", "*");
+		
 		try {
 
 			Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
