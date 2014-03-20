@@ -47,7 +47,8 @@
  
  [jhess4: 
  (jhess:d04_lightfitting_bathroom rdf:type ?d04)
- (jhess:d04_lightfitting_bathroom jhess:hasInputPower ?hip)
+ (jhess:d04_lightfitting_bathroom jhess:hasInputPower ?a4)
+ (jhess:d04_lightfitting_bathroom jhess:hasDescription ?b4)
  noValue(?s jhess:ruleFiredFor4 jhess:SemanticWeb4)
  ->
  remove(1)  remove(2)
@@ -58,100 +59,120 @@
  
  [jhess5: 
  (jhess:d05_heating_bathroom rdf:type ?d05)
- (jhess:d05_heating_bathroom jhess:hasInputPower ?hip)
+ (jhess:d05_heating_bathroom jhess:hasInputPower ?a5)
+ (jhess:d05_heating_bathroom jhess:hasDescription ?b5)
  noValue(?s jhess:ruleFiredFor5 jhess:SemanticWeb5)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d05_heating_bathroom jhess:hasInputPower 0)
+ (jhess:d05_heating_bathroom jhess:hasDescription "")
  (?s jhess:ruleFiredFor5 jhess:SemanticWeb5)
  hide(jhess:ruleFiredFor5)]
  
  [jhess6: 
  (jhess:d06_iPad_bedroom rdf:type ?d06)
- (jhess:d06_iPad_bedroom jhess:hasInputPower ?hip)
+ (jhess:d06_iPad_bedroom jhess:hasInputPower ?a6)
+ (jhess:d06_iPad_bedroom jhess:hasDescription ?b6)
  noValue(?s jhess:ruleFiredFor6 jhess:SemanticWeb6)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d06_iPad_bedroom jhess:hasInputPower 0)
+ (jhess:d06_iPad_bedroom jhess:hasDescription "")
  (?s jhess:ruleFiredFor6 jhess:SemanticWeb6)
  hide(jhess:ruleFiredFor6)]
  
   [jhess7: 
  (jhess:d07_walllight_bedroom rdf:type ?d07)
- (jhess:d07_walllight_bedroom jhess:hasInputPower ?hip)
+ (jhess:d07_walllight_bedroom jhess:hasInputPower ?a7)
+ (jhess:d07_walllight_bedroom jhess:hasDescription  ?b7)
  noValue(?s jhess:ruleFiredFor7 jhess:SemanticWeb7)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d07_walllight_bedroom jhess:hasInputPower 0)
+ (jhess:d07_walllight_bedroom jhess:hasDescription  "")
  (?s jhess:ruleFiredFor7 jhess:SemanticWeb7)
  hide(jhess:ruleFiredFor7)]
  
   [jhess8: 
  (jhess:d08_laptop_livingroom rdf:type ?d08)
- (jhess:d08_laptop_livingroom jhess:hasInputPower ?hip)
+ (jhess:d08_laptop_livingroom jhess:hasInputPower ?a8)
+ (jhess:d08_laptop_livingroom jhess:hasDescription ?b8)
  noValue(?s jhess:ruleFiredFor8 jhess:SemanticWeb8)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d08_laptop_livingroom jhess:hasInputPower 0)
+ (jhess:d08_laptop_livingroom jhess:hasDescription "") 
  (?s jhess:ruleFiredFor8 jhess:SemanticWeb8)
  hide(jhess:ruleFiredFor8)]
  
    [jhess9: 
  (jhess:d09_desklamp_livingroom rdf:type ?d09)
- (jhess:d09_desklamp_livingroom jhess:hasInputPower ?hip)
+ (jhess:d09_desklamp_livingroom jhess:hasInputPower ?a9)
+ (jhess:d09_desklamp_livingroom jhess:hasDescription ?b9)
  noValue(?s jhess:ruleFiredFor9 jhess:SemanticWeb9)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d09_desklamp_livingroom jhess:hasInputPower 0)
+ (jhess:d09_desklamp_livingroom jhess:hasDescription "")
  (?s jhess:ruleFiredFor9 jhess:SemanticWeb9)
  hide(jhess:ruleFiredFor9)]
  
    [jhess10: 
  (jhess:d10_refrigerator_kitchenette rdf:type ?d10)
- (jhess:d10_refrigerator_kitchenette jhess:hasInputPower ?hip)
+ (jhess:d10_refrigerator_kitchenette jhess:hasInputPower ?a10)
+ (jhess:d10_refrigerator_kitchenette jhess:hasDescription ?b10)
  noValue(?s jhess:ruleFiredFor10 jhess:SemanticWeb10)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d10_refrigerator_kitchenette jhess:hasInputPower 0)
+ (jhess:d10_refrigerator_kitchenette jhess:hasDescription "") 
  (?s jhess:ruleFiredFor10 jhess:SemanticWeb10)
  hide(jhess:ruleFiredFor10)]
  
    [jhess11: 
  (jhess:d11_heating_kitchenette rdf:type ?d11)
- (jhess:d11_heating_kitchenette jhess:hasInputPower ?hip)
+ (jhess:d11_heating_kitchenette jhess:hasInputPower ?a11)
+ (jhess:d11_heating_kitchenette jhess:hasDescription ?b11)
  noValue(?s jhess:ruleFiredFor11 jhess:SemanticWeb11)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d11_heating_kitchenette jhess:hasInputPower 0)
+ (jhess:d11_heating_kitchenette jhess:hasDescription "") 
  (?s jhess:ruleFiredFor11 jhess:SemanticWeb11)
  hide(jhess:ruleFiredFor11)]
  
    [jhess12: 
- (jhess:d12_sensor_temperature rdf:type ?d11)
- (jhess:d12_sensor_temperature jhess:hasInputPower ?hip)
- noValue(?s jhess:ruleFiredFor12 jhess:SemanticWeb11)
+ (jhess:d12_sensor_temperature rdf:type ?d12)
+ (jhess:d12_sensor_temperature jhess:hasInputPower ?a12)
+ (jhess:d12_sensor_temperature jhess:hasDescription ?b12)
+ noValue(?s jhess:ruleFiredFor12 jhess:SemanticWeb12)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d12_sensor_temperature jhess:hasInputPower 0)
+ (jhess:d12_sensor_temperature jhess:hasDescription "") 
  (?s jhess:ruleFiredFor12 jhess:SemanticWeb12)
  hide(jhess:ruleFiredFor12)]
  
    [jhess13: 
  (jhess:d13_sensor_presence rdf:type ?d13)
- (jhess:d13_sensor_presence jhess:hasInputPower ?hip)
+ (jhess:d13_sensor_presence jhess:hasInputPower ?a13)
+ (jhess:d13_sensor_presence jhess:hasDescription ?b13)
  noValue(?s jhess:ruleFiredFor13 jhess:SemanticWeb13)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d13_sensor_presence jhess:hasInputPower 0)
+ (jhess:d13_sensor_presence jhess:hasDescription "")
  (?s jhess:ruleFiredFor13 jhess:SemanticWeb13)
  hide(jhess:ruleFiredFor13)]
  
    [jhess14: 
  (jhess:d14_sensor_humidity rdf:type ?d14)
- (jhess:d14_sensor_humidity jhess:hasInputPower ?hip)
+ (jhess:d14_sensor_humidity jhess:hasInputPower ?a14)
+ (jhess:d14_sensor_humidity jhess:hasDescription ?b14)
  noValue(?s jhess:ruleFiredFor14 jhess:SemanticWeb14)
  ->
- remove(1)
- (?id jhess:hasInputPower 0) 
+ remove(1)  remove(2)
+ (jhess:d14_sensor_humidity jhess:hasInputPower 0)
+ (jhess:d14_sensor_humidity jhess:hasDescription "")
  (?s jhess:ruleFiredFor14 jhess:SemanticWeb14)
  hide(jhess:ruleFiredFor14)]

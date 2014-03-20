@@ -57,7 +57,38 @@ public class ApproachStatusResource extends ServerResource {
 	}
 
 	private void processMediate(String status) {
-		// TODO Auto-generated method stub
+
+		ServletContext context = (ServletContext) getContext().getAttributes()
+				.get("org.restlet.ext.servlet.ServletContext");
+
+		String ruleFile = context.getAttribute("rules").toString()
+				+ "userpolicy_" + status + ".rules";
+		Model model = ModelFactory.createDefaultModel();
+		Resource configuration = model.createResource();
+		configuration.addProperty(ReasonerVocabulary.PROPruleMode, "hybrid");
+		configuration.addProperty(ReasonerVocabulary.PROPruleSet, ruleFile);
+		Reasoner reasoner = GenericRuleReasonerFactory.theInstance().create(
+				configuration);
+
+		String ontology = context.getAttribute("ontology").toString();
+		Model modelRDF = FileManager.get().loadModel(ontology + "hess.ttl");
+
+		InfModel infModel = ModelFactory.createInfModel(reasoner, modelRDF);
+		infModel.prepare();
+
+		if (infModel != null) {
+			context.setAttribute("status", "negociate");
+			try {
+				// output inferences to file
+				File outFile = new File(ontology + "hess_negociate.ttl");
+				Writer writer = new FileWriter(outFile);
+				infModel.write(writer, "TURTLE");
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				System.out.println("Exception caught" + e.getMessage());
+			}
+		}
 
 	}
 
@@ -129,7 +160,7 @@ public class ApproachStatusResource extends ServerResource {
 			} catch (IOException e) {
 				System.out.println("Exception caught" + e.getMessage());
 			}
-			
+
 		}
 	}
 

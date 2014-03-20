@@ -4,16 +4,119 @@
 @prefix owl:	<http://www.w3.org/2002/07/owl#>.
 @prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.
 
+
 [jhess1: 
-(jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
-greaterThan(?value,25), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
-noValue(?c jhess:ruleFiredFora jhess:jhessv) 
--> 
-remove(2), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*g2"^^xsd:string ), 
-(?c jhess:ruleFiredFora jhess:jhessv),	
-hide(jhess:ruleFiredFora)
-]
+ (jhess:d01_meter_entrance rdf:type ?d01)
+ (jhess:d01_meter_entrance jhess:hasInputPower ?a1)
 
+  noValue(?s jhess:ruleFiredFor1 jhess:SemanticWeb1)
+ ->
+ remove(1)
 
+ (jhess:d01_meter_entrance jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor1 jhess:SemanticWeb1)
+ hide(jhess:ruleFiredFor1)
+ ]
+ 
+ [jhess2: 
+ (jhess:d02_lightfitting_entrance rdf:type ?d02)
+ (jhess:d02_lightfitting_entrance jhess:hasInputPower ?a2)
+ (jhess:d02_lightfitting_entrance jhess:hasDescription ?b2)
+ (jhess:d02_lightfitting_entrance jhess:hasStatusStartTime ?c2)
+ noValue(?s jhess:ruleFiredFor2 jhess:SemanticWeb2)
+  ->
+ remove(1)
+ remove(2) remove(3)
+ (jhess:d02_lightfitting_entrance jhess:hasInputPower 0)
+ (jhess:d02_lightfitting_entrance jhess:hasDescription "")
+ (jhess:d02_lightfitting_entrance jhess:hasStatusStartTime "")
+ (?s jhess:ruleFiredFor2 jhess:SemanticWeb2)
+ hide(jhess:ruleFiredFor2)
+ ]
+ 
+  
+ 
+  [jhess8: 
+ (jhess:d08_laptop_livingroom rdf:type ?d08)
+ (jhess:d08_laptop_livingroom jhess:hasInputPower ?a8)
+
+ noValue(?s jhess:ruleFiredFor8 jhess:SemanticWeb8)
+ ->
+ remove(1)  
+ (jhess:d08_laptop_livingroom jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor8 jhess:SemanticWeb8)
+ hide(jhess:ruleFiredFor8)]
+ 
+   [jhess9: 
+ (jhess:d09_desklamp_livingroom rdf:type ?d09)
+ (jhess:d09_desklamp_livingroom jhess:hasInputPower ?a9)
+
+ noValue(?s jhess:ruleFiredFor9 jhess:SemanticWeb9)
+ ->
+ remove(1)  
+ (jhess:d09_desklamp_livingroom jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor9 jhess:SemanticWeb9)
+ hide(jhess:ruleFiredFor9)]
+ 
+   [jhess10: 
+ (jhess:d10_refrigerator_kitchenette rdf:type ?d10)
+ (jhess:d10_refrigerator_kitchenette jhess:hasInputPower ?a10)
+
+ noValue(?s jhess:ruleFiredFor10 jhess:SemanticWeb10)
+ ->
+ remove(1)  
+ (jhess:d10_refrigerator_kitchenette jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor10 jhess:SemanticWeb10)
+ hide(jhess:ruleFiredFor10)]
+ 
+   [jhess11: 
+ (jhess:d11_heating_kitchenette rdf:type ?d11)
+ (jhess:d11_heating_kitchenette jhess:hasInputPower ?a11)
+
+ noValue(?s jhess:ruleFiredFor11 jhess:SemanticWeb11)
+ ->
+ remove(1)  
+ (jhess:d11_heating_kitchenette jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor11 jhess:SemanticWeb11)
+ hide(jhess:ruleFiredFor11)]
+ 
+   [jhess12: 
+ (jhess:d12_sensor_temperature rdf:type ?d12)
+ (jhess:d12_sensor_temperature jhess:hasInputPower ?a12)
+
+ noValue(?s jhess:ruleFiredFor12 jhess:SemanticWeb12)
+ ->
+ remove(1)  
+ (jhess:d12_sensor_temperature jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor12 jhess:SemanticWeb12)
+ hide(jhess:ruleFiredFor12)]
+ 
+   [jhess13: 
+ (jhess:d13_sensor_presence rdf:type ?d13)
+ (jhess:d13_sensor_presence jhess:hasInputPower ?a13)
+
+ noValue(?s jhess:ruleFiredFor13 jhess:SemanticWeb13)
+ ->
+ remove(1)  
+ (jhess:d13_sensor_presence jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor13 jhess:SemanticWeb13)
+ hide(jhess:ruleFiredFor13)]
+ 
+   [jhess14: 
+ (jhess:d14_sensor_humidity rdf:type ?d14)
+ (jhess:d14_sensor_humidity jhess:hasInputPower ?a14)
+
+ noValue(?s jhess:ruleFiredFor14 jhess:SemanticWeb14)
+ ->
+ remove(1)  
+ (jhess:d14_sensor_humidity jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor14 jhess:SemanticWeb14)
+ hide(jhess:ruleFiredFor14)]

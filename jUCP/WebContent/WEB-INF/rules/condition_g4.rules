@@ -4,16 +4,94 @@
 @prefix owl:	<http://www.w3.org/2002/07/owl#>.
 @prefix jhess: <http://jhess.googlecode.com/files/jhess.owl#>.
 
+
 [jhess1: 
-(jhess:d12_sensor_temperature jhess:hasCurrentTemperatureValue ?value ), 
-greaterThan(?value,25), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "ON"^^xsd:string ), 
-noValue(?c jhess:ruleFiredFora jhess:jhessv) 
--> 
-remove(2), 
-(jhess:d11_heating_kitchenette jhess:hasCurrentDeviceStatus "*g4"^^xsd:string ), 
-(?c jhess:ruleFiredFora jhess:jhessv),	
-hide(jhess:ruleFiredFora)
-]
+ (jhess:d01_meter_entrance rdf:type ?d01)
+ (jhess:d01_meter_entrance jhess:hasInputPower ?a1)
 
+  noValue(?s jhess:ruleFiredFor1 jhess:SemanticWeb1)
+ ->
+ remove(1)
 
+ (jhess:d01_meter_entrance jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor1 jhess:SemanticWeb1)
+ hide(jhess:ruleFiredFor1)
+ ]
+ 
+ [jhess2: 
+ (jhess:d02_lightfitting_entrance rdf:type ?d02)
+ (jhess:d02_lightfitting_entrance jhess:hasInputPower ?a2)
+
+ noValue(?s jhess:ruleFiredFor2 jhess:SemanticWeb2)
+  ->
+ remove(1)
+ 
+ (jhess:d02_lightfitting_entrance jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor2 jhess:SemanticWeb2)
+ hide(jhess:ruleFiredFor2)
+ ]
+ 
+  
+ 
+ [jhess5: 
+ (jhess:d05_heating_bathroom rdf:type ?d05)
+ (jhess:d05_heating_bathroom jhess:hasInputPower ?a5)
+
+ noValue(?s jhess:ruleFiredFor5 jhess:SemanticWeb5)
+ ->
+ remove(1)  
+ (jhess:d05_heating_bathroom jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor5 jhess:SemanticWeb5)
+ hide(jhess:ruleFiredFor5)]
+ 
+ 
+  [jhess8: 
+ (jhess:d08_laptop_livingroom rdf:type ?d08)
+ (jhess:d08_laptop_livingroom jhess:hasInputPower ?a8)
+
+ noValue(?s jhess:ruleFiredFor8 jhess:SemanticWeb8)
+ ->
+ remove(1)  
+ (jhess:d08_laptop_livingroom jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor8 jhess:SemanticWeb8)
+ hide(jhess:ruleFiredFor8)]
+ 
+   [jhess9: 
+ (jhess:d09_desklamp_livingroom rdf:type ?d09)
+ (jhess:d09_desklamp_livingroom jhess:hasInputPower ?a9)
+
+ noValue(?s jhess:ruleFiredFor9 jhess:SemanticWeb9)
+ ->
+ remove(1)  
+ (jhess:d09_desklamp_livingroom jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor9 jhess:SemanticWeb9)
+ hide(jhess:ruleFiredFor9)]
+ 
+   [jhess10: 
+ (jhess:d10_refrigerator_kitchenette rdf:type ?d10)
+ (jhess:d10_refrigerator_kitchenette jhess:hasInputPower ?a10)
+
+ noValue(?s jhess:ruleFiredFor10 jhess:SemanticWeb10)
+ ->
+ remove(1)  
+ (jhess:d10_refrigerator_kitchenette jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor10 jhess:SemanticWeb10)
+ hide(jhess:ruleFiredFor10)]
+ 
+   [jhess14: 
+ (jhess:d14_sensor_humidity rdf:type ?d14)
+ (jhess:d14_sensor_humidity jhess:hasInputPower ?a14)
+
+ noValue(?s jhess:ruleFiredFor14 jhess:SemanticWeb14)
+ ->
+ remove(1)  
+ (jhess:d14_sensor_humidity jhess:hasInputPower 0)
+
+ (?s jhess:ruleFiredFor14 jhess:SemanticWeb14)
+ hide(jhess:ruleFiredFor14)]
